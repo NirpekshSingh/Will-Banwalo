@@ -1,0 +1,49 @@
+# =============================================
+# .htaccess — Will Banwalo
+# Place in public_html root
+# =============================================
+
+Options -Indexes
+
+# ── PHP settings ─────────────────────────────
+php_value upload_max_filesize 10M
+php_value post_max_size 12M
+php_value max_execution_time 60
+
+# ── Protect config & uploads directories ────
+<FilesMatch "\.(php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Block direct access to config/ directory
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block direct access to /config/
+    RewriteRule ^config/ - [F,L]
+
+    # Block direct access to /uploads/ (serve via PHP only)
+    RewriteRule ^uploads/ - [F,L]
+
+    # Force HTTPS (uncomment on live server with SSL)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ── Security headers ──────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ── Caching for static assets ─────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css             "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png            "access plus 1 month"
+    ExpiresByType image/jpeg           "access plus 1 month"
+</IfModule>

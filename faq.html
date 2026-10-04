@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>FAQ | Will Banwalo</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: "#0b2016", "ink-2": "#081712", "ink-3": "#122c1f",
+                        parchment: "#f7f3e8", "parchment-2": "#efe7d1", cream: "#fbf9f2",
+                        sage: "#4d6350", "sage-light": "#a9b8a4",
+                        gold: "#c9a227", "gold-light": "#e3c766", rust: "#7a3b2e",
+                    },
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    maxWidth: { site: "1280px" },
+                }
+            }
+        };
+    </script>
+    <style>
+        :root { --ink: #0b2016; --gold: #c9a227; }
+        * { cursor: none; }
+        html { scroll-behavior: auto; }
+        body { background: var(--ink); overflow-x: hidden; margin: 0; }
+
+        #smooth-wrapper { overflow: hidden; position: relative; }
+        #smooth-content { overflow: visible; width: 100%; }
+
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+        .cur-dot, .cur-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; transform: translate(-50%, -50%); }
+        .cur-dot { width: 6px; height: 6px; background: var(--gold); }
+        .cur-ring { width: 34px; height: 34px; border: 1px solid rgba(201,162,39,0.55); transition: width .25s ease, height .25s ease, border-color .25s ease, background .25s ease; }
+        .cur-ring.grow { width: 76px; height: 76px; background: rgba(201,162,39,0.08); border-color: rgba(201,162,39,0.9); }
+        @media (max-width: 900px) { .cur-dot, .cur-ring { display: none; } * { cursor: auto; } }
+
+        .nav-link, .nav-mark { color: #f7f3e8; transition: color .4s ease; }
+        header.scrolled .nav-link, header.scrolled .nav-mark { color: #0b2016; }
+        header.scrolled { background: rgba(247,243,232,0.92); backdrop-filter: blur(20px); box-shadow: 0 10px 40px rgba(11,32,22,0.08); }
+        .nav-link.active { color: var(--gold) !important; }
+        .mobile-panel { height: 0; overflow: hidden; }
+
+        .marquee-track { display: flex; width: max-content; }
+        .marquee-track span { white-space: nowrap; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: 0.28em; font-size: 0.7rem; padding: 0 1.5rem; }
+
+        .faq-content { height: 0; overflow: hidden; }
+        .cat-btn { color: rgba(11,32,22,0.5); transition: background .3s ease, color .3s ease; }
+        .cat-btn.active { background: var(--ink); color: var(--parchment, #f7f3e8); }
+        .glass-dark { background: rgba(247, 243, 232, 0.06); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(247, 243, 232, 0.12); }
+        ::selection { background: rgba(201,162,39,0.35); color: #0b2016; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+    </style>
+</head>
+
+<body class="bg-ink text-ink font-body selection:bg-gold/30">
+
+    <div class="cur-ring" id="curRing"></div>
+    <div class="cur-dot" id="curDot"></div>
+
+    <!-- Nav — same links as original, restyled -->
+    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 transition-colors duration-500">
+        <nav class="max-w-site mx-auto px-6 md:px-10 h-20 md:h-24 flex justify-between items-center">
+            <a href="./index.html" class="nav-mark font-display text-2xl md:text-3xl font-bold tracking-tight">Will Banwalo</a>
+            <div class="hidden lg:flex items-center gap-10">
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./index.html">Home</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./how_it_works.html">How it Works</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./pricing.html">Pricing</a>
+                <a class="nav-link active relative text-sm font-semibold tracking-wide" href="./faq.html">FAQs</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./track_order.html">Track order</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./contact_us.html">Contact Us</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="./order.php" class="magnetic relative overflow-hidden bg-gold text-ink px-6 md:px-8 py-3 rounded-full text-sm font-bold tracking-wide">
+                    <span class="relative z-10">Create My Will</span>
+                </a>
+                <button id="menuBtn" class="lg:hidden nav-mark w-10 h-10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+            </div>
+        </nav>
+        <div class="mobile-panel bg-parchment lg:hidden" id="mobilePanel">
+            <div class="flex flex-col px-6 py-6 gap-5 text-ink font-semibold">
+                <a href="./index.html">Home</a>
+                <a href="./how_it_works.html">How it Works</a>
+                <a href="./pricing.html">Pricing</a>
+                <a href="./faq.html" class="text-rust">FAQs</a>
+                <a href="./track_order.html">Track order</a>
+                <a href="./contact_us.html">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="smooth-wrapper">
+    <div id="smooth-content">
+    <main>
+        <!-- ================= HERO + SEARCH ================= -->
+        <section id="hero" class="relative min-h-[100svh] flex items-center bg-ink overflow-hidden text-center">
+            <video class="absolute inset-0 w-full h-full object-cover" style="filter: grayscale(60%) brightness(0.35) contrast(1.1);"
+                autoplay muted loop playsinline poster="https://assets.mixkit.co/videos/38512/38512-thumb-720-0.jpg">
+                <source src="https://assets.mixkit.co/videos/38512/38512-720.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-ink/70"></div>
+            <div class="absolute inset-0 opacity-[0.06] pointer-events-none"
+                style="background-image: radial-gradient(circle at 2px 2px, #c9a227 1px, transparent 0); background-size: 46px 46px;"></div>
+            <div class="absolute top-1/4 -right-40 w-96 h-96 bg-gold/10 rounded-full blur-[120px]"></div>
+            <div class="max-w-2xl mx-auto px-6 md:px-10 relative z-10">
+                <span class="hero-word block text-gold font-bold tracking-[0.3em] uppercase text-xs mb-6">We're Here to Help</span>
+                <h1 class="hero-word font-display italic font-medium text-parchment text-4xl md:text-6xl leading-[1.08] mb-6">
+                    Frequently asked <span class="text-gold">questions.</span>
+                </h1>
+                <p class="hero-word text-parchment/55 text-lg leading-relaxed max-w-xl mx-auto mb-10">
+                    Find clarity and confidence in securing your legacy. Search below, or browse by category.
+                </p>
+                <div class="hero-word relative max-w-xl mx-auto">
+                    <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-ink/40">search</span>
+                    <input id="faqSearch"
+                        class="w-full pl-14 pr-5 py-4.5 py-4 rounded-full border-0 bg-parchment focus:outline-none focus:ring-2 focus:ring-gold shadow-lg text-ink placeholder:text-ink/35"
+                        placeholder="Search e.g. &lsquo;executor&rsquo;, &lsquo;price&rsquo;, &lsquo;validity&rsquo;" type="text">
+                </div>
+                <p id="searchStatus" class="hero-word text-parchment/35 text-xs mt-4 h-4"></p>
+            </div>
+            <div class="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 scroll-cue opacity-0 z-10">
+                <span class="text-[10px] tracking-[0.3em] uppercase text-parchment/40 font-bold">Scroll</span>
+                <span class="w-px h-10 bg-gradient-to-b from-gold/70 to-transparent scroll-line"></span>
+            </div>
+        </section>
+
+        <!-- Marquee ribbon -->
+        <div class="bg-gold text-ink py-3.5 overflow-hidden border-y border-ink/10">
+            <div class="marquee-track" id="marquee"></div>
+        </div>
+
+        <!-- ================= FAQ CONTENT ================= -->
+        <section id="faqMain" class="relative bg-parchment py-20 md:py-28">
+            <div id="faqGridRow" class="max-w-site mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-12 gap-10">
+                <!-- Category sidebar -->
+                <aside class="md:col-span-3">
+                    <div id="sidebarSticky">
+                        <h3 class="reveal-up text-ink/40 text-xs uppercase tracking-widest font-bold mb-4 px-4">Categories</h3>
+                        <nav class="reveal-up flex flex-col gap-1.5 mb-10" id="catNav">
+                            <button data-target="#cat-getting-started" class="cat-btn active flex items-center gap-3 px-4 py-3.5 rounded-xl font-bold text-sm text-left">
+                                <span class="material-symbols-outlined text-lg">rocket_launch</span> Getting Started
+                            </button>
+                            <button data-target="#cat-legal-security" class="cat-btn flex items-center gap-3 px-4 py-3.5 rounded-xl font-bold text-sm text-left">
+                                <span class="material-symbols-outlined text-lg">gavel</span> Legal &amp; Security
+                            </button>
+                            <button data-target="#cat-pricing" class="cat-btn flex items-center gap-3 px-4 py-3.5 rounded-xl font-bold text-sm text-left">
+                                <span class="material-symbols-outlined text-lg">payments</span> Pricing &amp; Payments
+                            </button>
+                            <button data-target="#cat-drafting" class="cat-btn flex items-center gap-3 px-4 py-3.5 rounded-xl font-bold text-sm text-left">
+                                <span class="material-symbols-outlined text-lg">edit_note</span> Will Drafting
+                            </button>
+                            <button data-target="#cat-executor" class="cat-btn flex items-center gap-3 px-4 py-3.5 rounded-xl font-bold text-sm text-left">
+                                <span class="material-symbols-outlined text-lg">verified_user</span> Executor Roles
+                            </button>
+                        </nav>
+                        <div class="reveal-up p-6 bg-white rounded-2xl border border-ink/8 text-center shadow-sm">
+                            <span class="material-symbols-outlined text-rust text-3xl mb-2 block">shield</span>
+                            <p class="font-bold text-ink text-sm mb-1">Legally Verified</p>
+                            <p class="text-ink/45 text-xs leading-relaxed">All templates are vetted by senior legal experts in Indian law.</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- FAQ accordions by category -->
+                <div class="md:col-span-9 space-y-16" id="faqScroll">
+                    <div id="cat-getting-started" class="cat-section">
+                        <h2 class="reveal-up font-display italic text-2xl md:text-3xl text-ink mb-6">Getting Started</h2>
+                        <div class="space-y-4">
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Is an online Will legally valid in India?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Yes, absolutely. Under the Indian Succession Act, 1925, a Will does not require a specific format or stamp paper. A Will created online is legally binding as long as it is signed by the testator in the presence of two witnesses who also sign the document.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">How long does the whole process take?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Most people finish in around 30 minutes. Enrollment and asset details take the bulk of that; expert review happens after submission and typically completes within 24&ndash;48 hours.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Do I need a lawyer to draft my Will?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">While lawyers are helpful, they are not mandatory for a valid Will. Will Banwalo uses expert-designed frameworks that guide you through every legal requirement. For complex estates, our Standard and Premium plans include a full lawyer review.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cat-legal-security" class="cat-section">
+                        <h2 class="reveal-up font-display italic text-2xl md:text-3xl text-ink mb-6">Legal &amp; Security</h2>
+                        <div class="space-y-4">
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">How do I store my Will securely?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">We provide a digital locker with bank-grade AES-256 encryption for your soft copy. We also recommend keeping the original physical copy somewhere secure and informing your Executor of its location.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Is my personal data really private?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Yes. Your data is stored on servers located in India, compliant with the IT Act, 2000, and is accessible only to you and the advocate assigned to review your file. We never sell or share it with third parties.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">What happens if I die without a Will?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">If you die "intestate" (without a Will), your assets are distributed according to succession laws based on your religion (e.g., the Hindu Succession Act). This often leads to family disputes and assets going to people you might not have intended.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cat-pricing" class="cat-section">
+                        <h2 class="reveal-up font-display italic text-2xl md:text-3xl text-ink mb-6">Pricing &amp; Payments</h2>
+                        <div class="space-y-4">
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">What's included in each pricing plan?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Basic (&#8377;999) covers a single digital Will. Standard (&#8377;2,499) adds lawyer review and hardcopy delivery. Premium (&#8377;4,999) adds joint Wills, asset audits and priority support. Full breakdown is on our <a href="./pricing.html" class="text-rust underline">Pricing page</a>.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Is there a money-back guarantee?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Yes. If you're not satisfied within 7 days of purchase, we refund your entire payment &mdash; no questions asked.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Are the prices inclusive of GST?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Yes, every price shown is a flat rate inclusive of GST &mdash; no additional processing fees or hidden charges, ever.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cat-drafting" class="cat-section">
+                        <h2 class="reveal-up font-display italic text-2xl md:text-3xl text-ink mb-6">Will Drafting</h2>
+                        <div class="space-y-4">
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Can I update my Will later?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Yes, life changes and so should your Will. Log in anytime to create a codicil or a completely new Will. Our Standard and Premium plans include a year of unlimited free edits.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Can I include multiple beneficiaries?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Absolutely. You can add as many beneficiaries as you need and specify exactly how assets should be divided between them, including percentage splits.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">What assets can be included in a Will?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Property, bank accounts, investments, jewellery, vehicles, digital assets, and even sentimental items can all be included, along with clear instructions for each.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cat-executor" class="cat-section">
+                        <h2 class="reveal-up font-display italic text-2xl md:text-3xl text-ink mb-6">Executor Roles</h2>
+                        <div class="space-y-4">
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Who can be my Executor?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Any adult you trust &mdash; a spouse, adult child, sibling, friend, or even a professional advisor. It's wise to name a backup Executor in case your first choice is unavailable.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">What are an Executor's responsibilities?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">They apply for probate if needed, settle outstanding debts, and distribute your assets exactly as your Will instructs. We provide a step-by-step guide they can follow.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-3xl overflow-hidden border border-ink/5 shadow-sm">
+                                <button class="faq-trigger w-full flex justify-between items-center p-7 text-left font-display italic text-lg text-ink">
+                                    <span class="faq-q">Can I change my Executor later?</span>
+                                    <span class="material-symbols-outlined faq-icon text-rust shrink-0 ml-4">add</span>
+                                </button>
+                                <div class="faq-content px-7">
+                                    <p class="pb-7 text-ink/65 leading-relaxed border-t border-ink/5 pt-6">Yes, anytime. Simply log in and update your Will &mdash; if you're on Standard or Premium, this is included at no extra cost within your first year.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p id="noResults" class="hidden text-center text-ink/40 py-16">No questions matched your search. Try a different term, or ask us directly below.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TRUST STATS ================= -->
+        <section id="stats" class="relative bg-ink-2 py-16 md:py-20">
+            <div class="max-w-site mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                    <div class="reveal-up">
+                        <div class="font-display italic text-gold text-3xl md:text-4xl mb-2"><span class="stat-num" data-target="2" data-suffix=" hrs">0</span></div>
+                        <p class="text-parchment/40 text-[11px] uppercase tracking-widest font-bold">Avg Response Time</p>
+                    </div>
+                    <div class="reveal-up">
+                        <div class="font-display italic text-gold text-3xl md:text-4xl mb-2"><span class="stat-num" data-target="98" data-suffix="%">0</span></div>
+                        <p class="text-parchment/40 text-[11px] uppercase tracking-widest font-bold">Satisfaction Rate</p>
+                    </div>
+                    <div class="reveal-up">
+                        <div class="font-display italic text-gold text-3xl md:text-4xl mb-2"><span class="stat-num" data-target="15000" data-suffix="+">0</span></div>
+                        <p class="text-parchment/40 text-[11px] uppercase tracking-widest font-bold">Questions Answered</p>
+                    </div>
+                    <div class="reveal-up">
+                        <div class="font-display italic text-gold text-3xl md:text-4xl mb-2"><span class="stat-num" data-target="24" data-suffix="/7">0</span></div>
+                        <p class="text-parchment/40 text-[11px] uppercase tracking-widest font-bold">WhatsApp Support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= STILL HAVE QUESTIONS? ================= -->
+        <section id="contact-cta" class="relative bg-parchment py-24 md:py-32">
+            <div class="max-w-site mx-auto px-6 md:px-10">
+                <div class="reveal-scale relative bg-ink text-parchment rounded-[2.5rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden">
+                    <div class="absolute -right-20 -top-20 w-72 h-72 bg-gold/10 rounded-full blur-[100px] cta-blob-a"></div>
+                    <div class="relative z-10 max-w-xl text-center md:text-left">
+                        <h2 class="font-display italic text-3xl md:text-4xl mb-4">Still have questions?</h2>
+                        <p class="text-parchment/55 leading-relaxed">Our legal assistants are ready to guide you through any confusion &mdash; technical or legal, we're here to help.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 relative z-10 shrink-0">
+                        <a href="./contact_us.html" class="magnetic bg-gold text-ink font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">chat_bubble</span> Talk to an Expert
+                        </a>
+                        <a href="#" class="magnetic glass-dark text-parchment font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">forum</span> WhatsApp Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TRUST IMAGES ================= -->
+        <section id="trust-images" class="relative bg-parchment pb-24 md:pb-32">
+            <div class="max-w-site mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="reveal-card-l rounded-[2rem] overflow-hidden h-[320px] shadow-lg">
+                        <img alt="Professional legal consultation" class="w-full h-full object-cover"
+                            src="https://images.unsplash.com/photo-1521791055366-0d553872125f?fm=jpg&q=80&w=1000&auto=format&fit=crop">
+                    </div>
+                    <div class="reveal-card-r rounded-[2rem] overflow-hidden h-[320px] shadow-lg">
+                        <img alt="Secure document handling" class="w-full h-full object-cover"
+                            src="https://images.unsplash.com/photo-1562564055-71e051d33c19?fm=jpg&q=80&w=1000&auto=format&fit=crop">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer — same links as original, restyled -->
+    <footer class="bg-ink-2 pt-24 pb-10 border-t border-white/5">
+                <div class="max-w-site mx-auto px-6 md:px-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20 reveal-up">
+                        <div class="lg:col-span-5 space-y-8">
+                            <div class="font-display italic text-2xl font-semibold text-parchment">Will Banwalo</div>
+                            <p class="text-parchment/35 leading-relaxed text-base max-w-sm">
+                                The intersection of legal excellence and digital innovation. Redefining how India plans
+                                its future.
+                            </p>
+                            <!-- <div class="flex gap-5">
+                                <a class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-parchment/50 hover:text-gold hover:border-gold transition-colors"
+                                    href="#">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-parchment/50 hover:text-gold hover:border-gold transition-colors"
+                                    href="#">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 7.837c-2.301 0-4.163 1.862-4.163 4.163S9.699 16.163 12 16.163s4.163-1.862 4.163-4.163S14.301 7.837 12 7.837z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div> -->
+                        </div>
+                        <div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
+                            <div>
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Legal
+                                </h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    <li><a class="hover:text-gold transition-colors" href="./terms_of_use.html">Terms of Use</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./privacy_policy.html">Privacy Policy</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./compliance.html">Compliance</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Company</h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    <li><a class="hover:text-gold transition-colors" href="./about_us.html">About Us</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./faq.html">FAQs</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./contact_us.html">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-span-2 md:col-span-1">
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Support</h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    
+                                    <li><a class="hover:text-gold transition-colors" href="https://wa.me/918797879878" target="_blank">WhatsApp Support</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./php/track_order.php">Track Order</a></li>
+                                    <li><p class="hover:text-gold transition-colors" >Monday-Saturday <br> 9:00AM-7:00PM</p></li>
+                                    <li><a class="hover:text-gold transition-colors" href="tel:+918797879878">+91-8797879878</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class=" pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                        <p class="text-parchment/20 text-sm italic">© 2026 Will Banwalo. A premium legal technology
+                            boutique.</p>
+                        <div class="flex gap-10 items-center text-parchment/20 text-[10px] tracking-widest font-bold">
+                            <span class="flex items-center gap-2 uppercase"><span
+                                    class="material-symbols-outlined text-gold text-sm">verified</span> Verified legal
+                                flow</span>
+                            <span class="flex items-center gap-2 uppercase"><span
+                                    class="material-symbols-outlined text-gold text-sm">shield</span> AES-256
+                                Encrypted</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    </div><!-- #smooth-content -->
+    </div><!-- #smooth-wrapper -->
+
+    <!-- ===================== GSAP ===================== -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+        const smoother = ScrollSmoother.create({
+            wrapper: "#smooth-wrapper",
+            content: "#smooth-content",
+            smooth: 3.2,
+            smoothTouch: 0.1,
+            normalizeScroll: true,
+            ignoreMobileResize: true,
+            preventDefault: true
+        });
+
+        /* ---------------------------------------------------------------
+           Custom cursor
+        ----------------------------------------------------------------*/
+        const dot = document.getElementById('curDot');
+        const ring = document.getElementById('curRing');
+        const dotX = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power3" });
+        const dotY = gsap.quickTo(dot, "y", { duration: 0.1, ease: "power3" });
+        const ringX = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3" });
+        const ringY = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3" });
+        window.addEventListener('mousemove', (e) => {
+            dotX(e.clientX); dotY(e.clientY);
+            ringX(e.clientX); ringY(e.clientY);
+        });
+        document.querySelectorAll('a, button, .magnetic, .faq-trigger, .cat-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => ring.classList.add('grow'));
+            el.addEventListener('mouseleave', () => ring.classList.remove('grow'));
+        });
+
+        /* ---------------------------------------------------------------
+           Magnetic buttons
+        ----------------------------------------------------------------*/
+        document.querySelectorAll('.magnetic').forEach((btn) => {
+            btn.addEventListener('mousemove', (e) => {
+                const r = btn.getBoundingClientRect();
+                const x = e.clientX - r.left - r.width / 2;
+                const y = e.clientY - r.top - r.height / 2;
+                gsap.to(btn, { x: x * 0.3, y: y * 0.45, duration: 0.5, ease: 'power3' });
+            });
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           Marquee
+        ----------------------------------------------------------------*/
+        const marqueeEl = document.getElementById('marquee');
+        const marqueeText = 'REAL HUMAN SUPPORT &nbsp;&#9670;&nbsp; LAWYER VERIFIED &nbsp;&#9670;&nbsp; 2-HOUR RESPONSE &nbsp;&#9670;&nbsp; 15,000+ ANSWERED &nbsp;&#9670;&nbsp; ';
+        marqueeEl.innerHTML = `<span>${marqueeText.repeat(4)}</span><span>${marqueeText.repeat(4)}</span>`;
+        gsap.to(marqueeEl, { xPercent: -50, duration: 22, ease: 'none', repeat: -1 });
+
+        /* ---------------------------------------------------------------
+           Header scroll state + mobile menu
+        ----------------------------------------------------------------*/
+        const header = document.getElementById('siteHeader');
+        ScrollTrigger.create({
+            trigger: '#faqMain', start: 'top top+=80',
+            onEnter: () => header.classList.add('scrolled'),
+            onLeaveBack: () => header.classList.remove('scrolled'),
+        });
+        const menuBtn = document.getElementById('menuBtn');
+        const mobilePanel = document.getElementById('mobilePanel');
+        let menuOpen = false;
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            gsap.to(mobilePanel, { height: menuOpen ? 'auto' : 0, duration: 0.45, ease: 'power2.inOut' });
+        });
+        mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            menuOpen = false;
+            gsap.to(mobilePanel, { height: 0, duration: 0.4 });
+        }));
+
+        /* ---------------------------------------------------------------
+           Hero load-in
+        ----------------------------------------------------------------*/
+        window.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.hero-word', { y: 30, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out', delay: 0.2 });
+            gsap.to('.scroll-cue', { opacity: 1, duration: 0.8, delay: 1.4 });
+            gsap.to('.scroll-line', { scaleY: 0.4, transformOrigin: 'bottom', repeat: -1, yoyo: true, duration: 1.3, ease: 'sine.inOut', delay: 1.4 });
+        });
+
+        /* ---------------------------------------------------------------
+           Sidebar pin — CSS "position: sticky" does not track correctly
+           inside ScrollSmoother's transformed content wrapper, so the
+           sidebar is pinned with ScrollTrigger instead, which is aware
+           of ScrollSmoother's virtual scroll position.
+        ----------------------------------------------------------------*/
+        ScrollTrigger.matchMedia({
+            "(min-width: 768px)": function () {
+                ScrollTrigger.create({
+                    trigger: '#faqGridRow',
+                    start: 'top 112px',
+                    end: 'bottom bottom',
+                    pin: '#sidebarSticky',
+                    pinSpacing: false
+                });
+            }
+        });
+
+        /* ---------------------------------------------------------------
+           In-page anchors go through ScrollSmoother's own scrollTo
+        ----------------------------------------------------------------*/
+        function goTo(targetEl) {
+            if (targetEl) smoother.scrollTo(targetEl, true, 'top 110');
+        }
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', (e) => {
+                const id = link.getAttribute('href');
+                if (id.length > 1) {
+                    const targetEl = document.querySelector(id);
+                    if (targetEl) { e.preventDefault(); goTo(targetEl); }
+                }
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           Category sidebar — click to jump, active state follows scroll
+        ----------------------------------------------------------------*/
+        const catBtns = document.querySelectorAll('.cat-btn');
+        catBtns.forEach((btn) => {
+            btn.addEventListener('click', () => goTo(document.querySelector(btn.dataset.target)));
+        });
+        document.querySelectorAll('.cat-section').forEach((sec) => {
+            ScrollTrigger.create({
+                trigger: sec, start: 'top 40%', end: 'bottom 40%',
+                onEnter: () => setActiveCat(sec.id), onEnterBack: () => setActiveCat(sec.id)
+            });
+        });
+        function setActiveCat(id) {
+            catBtns.forEach((b) => b.classList.toggle('active', b.dataset.target === '#' + id));
+        }
+
+        /* ---------------------------------------------------------------
+           Live search filter
+        ----------------------------------------------------------------*/
+        const searchInput = document.getElementById('faqSearch');
+        const searchStatus = document.getElementById('searchStatus');
+        const noResults = document.getElementById('noResults');
+        searchInput.addEventListener('input', () => {
+            const q = searchInput.value.trim().toLowerCase();
+            let visibleCount = 0;
+            document.querySelectorAll('.cat-section').forEach((sec) => {
+                let sectionHasMatch = false;
+                sec.querySelectorAll('.faq-item').forEach((item) => {
+                    const text = item.querySelector('.faq-q').textContent.toLowerCase();
+                    const matches = q === '' || text.includes(q);
+                    item.style.display = matches ? '' : 'none';
+                    if (matches) { visibleCount++; sectionHasMatch = true; }
+                });
+                sec.style.display = sectionHasMatch ? '' : 'none';
+            });
+            noResults.classList.toggle('hidden', visibleCount !== 0);
+            searchStatus.textContent = q === '' ? '' : `${visibleCount} question${visibleCount === 1 ? '' : 's'} found`;
+        });
+
+        /* ---------------------------------------------------------------
+           Generic scroll reveals
+        ----------------------------------------------------------------*/
+        gsap.utils.toArray('.reveal-up').forEach((el) => {
+            gsap.from(el, { y: 60, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+        });
+        gsap.utils.toArray('.reveal-scale').forEach((el) => {
+            gsap.from(el, { scale: 0.9, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%' } });
+        });
+        gsap.utils.toArray('.reveal-card-l').forEach((el) => {
+            gsap.from(el, { x: -60, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+        });
+        gsap.utils.toArray('.reveal-card-r').forEach((el) => {
+            gsap.from(el, { x: 60, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+        });
+        gsap.to('.cta-blob-a', { scale: 1.2, duration: 5, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+
+        /* ---------------------------------------------------------------
+           ScrollTrigger.batch — FAQ items reveal in batches per category
+        ----------------------------------------------------------------*/
+        ScrollTrigger.batch('.faq-item', {
+            start: 'top 92%',
+            onEnter: (batch) => gsap.from(batch, { opacity: 0, y: 24, stagger: 0.08, duration: 0.6, ease: 'power2.out' }),
+            once: true
+        });
+
+        /* ---------------------------------------------------------------
+           Stats count-up
+        ----------------------------------------------------------------*/
+        gsap.utils.toArray('.stat-num').forEach((el) => {
+            const target = parseFloat(el.dataset.target);
+            const suffix = el.dataset.suffix || '';
+            const counter = { val: 0 };
+            ScrollTrigger.create({
+                trigger: el, start: 'top 90%', once: true,
+                onEnter: () => {
+                    gsap.to(counter, {
+                        val: target, duration: 1.8, ease: 'power2.out',
+                        onUpdate: () => { el.textContent = Math.round(counter.val).toLocaleString('en-IN') + suffix; }
+                    });
+                }
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           FAQ accordion
+        ----------------------------------------------------------------*/
+        document.querySelectorAll('.faq-trigger').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const content = item.querySelector('.faq-content');
+                const icon = item.querySelector('.faq-icon');
+                const isOpen = item.classList.contains('open');
+
+                item.closest('.cat-section').querySelectorAll('.faq-item.open').forEach((openItem) => {
+                    if (openItem !== item) {
+                        openItem.classList.remove('open');
+                        gsap.to(openItem.querySelector('.faq-content'), { height: 0, duration: 0.5, ease: 'power2.inOut' });
+                        gsap.to(openItem.querySelector('.faq-icon'), { rotate: 0, duration: 0.4 });
+                    }
+                });
+
+                if (isOpen) {
+                    item.classList.remove('open');
+                    gsap.to(content, { height: 0, duration: 0.5, ease: 'power2.inOut' });
+                    gsap.to(icon, { rotate: 0, duration: 0.4 });
+                } else {
+                    item.classList.add('open');
+                    gsap.to(content, { height: 'auto', duration: 0.5, ease: 'power2.inOut' });
+                    gsap.to(icon, { rotate: 45, duration: 0.4 });
+                }
+            });
+        });
+        const firstItem = document.querySelector('.faq-item');
+        firstItem.classList.add('open');
+        gsap.set(firstItem.querySelector('.faq-content'), { height: 'auto' });
+        gsap.set(firstItem.querySelector('.faq-icon'), { rotate: 45 });
+
+        window.addEventListener('load', () => ScrollTrigger.refresh());
+    </script>
+</body>
+
+</html>

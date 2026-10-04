@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LegacyWill - Distribution &amp; Special Instructions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8faf5;
+            color: #191c1a;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f2f4ef;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c9bf;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#eba1af",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4ef",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c1c9bf",
+                        "surface-tint": "#3b6846",
+                        "surface-container": "#ecefe9",
+                        "on-background": "#191c1a",
+                        "surface-container-highest": "#e1e3de",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8faf5",
+                        "on-primary-container": "#91c199",
+                        "outline": "#717971",
+                        "on-tertiary-fixed": "#370b17",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dbd6",
+                        "secondary-container": "#d3e8d2",
+                        "tertiary-fixed": "#ffd9de",
+                        "tertiary": "#52202c",
+                        "on-surface-variant": "#414941",
+                        "on-secondary-fixed-variant": "#394b3b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#566958",
+                        "surface-bright": "#f8faf5",
+                        "background": "#f8faf5",
+                        "surface-variant": "#e1e3de",
+                        "primary-fixed-dim": "#a1d2a9",
+                        "on-primary-fixed-variant": "#235030",
+                        "secondary": "#516352",
+                        "secondary-fixed-dim": "#b8ccb7",
+                        "primary-fixed": "#bcefc4",
+                        "inverse-primary": "#a1d2a9",
+                        "on-tertiary-fixed-variant": "#6d3642",
+                        "tertiary-container": "#6d3642",
+                        "inverse-on-surface": "#eff1ec",
+                        "surface-container-high": "#e7e9e4",
+                        "secondary-fixed": "#d3e8d2",
+                        "primary-container": "#235030",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#00210c",
+                        "on-surface": "#191c1a",
+                        "on-secondary-fixed": "#0e1f12",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#08391b",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#feb2bf",
+                        "inverse-surface": "#2e312e"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Playfair Display"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1200px",
+                        "section-gap": "80px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar Navigation -->
+<header class="bg-surface dark:bg-on-background shadow-sm sticky top-0 z-50 w-full">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max-width mx-auto w-full">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">LegacyWill</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md" href="#">Create Will</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md transition-colors duration-200" href="#">Vault</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container p-2 rounded-full transition-all">help_outline</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container p-2 rounded-full transition-all">account_circle</span>
+<button class="hidden lg:block text-primary font-bold px-4 py-2 border border-primary rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all">Save &amp; Exit</button>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max-width mx-auto min-h-screen">
+<!-- SideNavBar - Step Tracking -->
+<aside class="hidden lg:flex flex-col p-6 gap-2 h-screen w-80 sticky top-20 left-0 bg-surface-container-low border-r border-outline-variant">
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-primary">Will Progress</h2>
+<p class="font-label-md text-on-surface-variant opacity-70">Step 5 of 8</p>
+<div class="w-full bg-outline-variant h-1.5 mt-4 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[62.5%]"></div>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<div class="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-60">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Personal Details</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-60">
+<span class="material-symbols-outlined">family_restroom</span>
+<span class="font-label-md">Family Tree</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-60">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md">Beneficiaries</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant px-4 py-3 opacity-60">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-label-md">Asset Portfolio</span>
+</div>
+<div class="flex items-center gap-4 bg-tertiary text-on-tertiary rounded-xl px-4 py-3 shadow-sm scale-105 origin-left">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md">Executors</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all">
+<span class="material-symbols-outlined">supervisor_account</span>
+<span class="font-label-md">Guardians</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md">Review Will</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md">Payment</span>
+</div>
+</nav>
+<div class="mt-auto pt-6">
+<button class="w-full flex items-center justify-center gap-2 bg-secondary text-on-secondary py-3 px-4 rounded-xl hover:opacity-90 transition-all font-label-md">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+                    Get Legal Help
+                </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-6 lg:px-12 py-12 pb-32">
+<div class="max-w-3xl">
+<header class="mb-12">
+<div class="flex items-center gap-2 mb-4">
+<div class="px-2 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded text-[10px] font-bold uppercase tracking-wider">Step 5: Wishes</div>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-4 leading-tight">Special Instructions &amp; Wishes</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Your will is more than just assets; it's your legacy. Define how you wish to be remembered and specify care for your loved ones.</p>
+</header>
+<!-- Section: Distribution Wishes -->
+<section class="mb-section-gap">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">diversity_3</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary">Distribution Wishes</h2>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30">
+<label class="block font-label-md text-on-surface-variant mb-3">General asset distribution notes or specific item legacy</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none font-body-md" placeholder="e.g., 'I wish for my collection of first-edition books to be donated to the city library...'" rows="4"></textarea>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant/60">
+<span class="material-symbols-outlined text-sm">info</span>
+<p class="text-label-sm">Specific items mentioned here should be clearly identifiable.</p>
+</div>
+</div>
+</section>
+<!-- Section: Guardian Appointment -->
+<section class="mb-section-gap">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">child_care</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary">Guardian Appointment</h2>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30">
+<p class="font-body-md text-on-surface-variant mb-6 italic">Required if you have children under the age of 18.</p>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Primary Guardian Name</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-primary outline-none" placeholder="Full Legal Name" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Relationship</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-primary outline-none" placeholder="e.g. Sibling, Friend" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-2">Alternative Guardian (Optional)</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-primary outline-none" placeholder="Backup Guardian Name" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Funeral Wishes -->
+<section class="mb-section-gap">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">church</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary">Funeral Wishes</h2>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<button class="flex flex-col items-center gap-2 p-4 rounded-xl border border-primary bg-primary-container/10 text-primary transition-all">
+<span class="material-symbols-outlined">local_fire_department</span>
+<span class="font-label-md">Cremation</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-xl border border-outline-variant hover:border-primary text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">height</span>
+<span class="font-label-md">Burial</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-xl border border-outline-variant hover:border-primary text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">question_mark</span>
+<span class="font-label-md">Undecided</span>
+</button>
+</div>
+<label class="block font-label-md text-on-surface-variant mb-3">Additional ceremonies or specific location requests</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-4 focus:ring-2 focus:ring-primary outline-none resize-none" placeholder="e.g. Traditional ceremony in my hometown..." rows="3"></textarea>
+</div>
+</section>
+<!-- Section: Charitable Donations -->
+<section class="mb-section-gap">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">volunteer_activism</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary">Charitable Donations</h2>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30">
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-outline-variant/20">
+<div>
+<p class="font-label-md text-primary">Organ Donation</p>
+<p class="text-label-sm text-on-surface-variant">I wish for my organs to be donated after death.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-3">Legacy Gifts to Non-Profits</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-xl p-4 focus:ring-2 focus:ring-primary outline-none resize-none" placeholder="List organization names and percentage or amount..." rows="3"></textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Indicator -->
+<div class="flex items-center justify-center gap-2 py-8 opacity-60">
+<span class="material-symbols-outlined text-tertiary">security</span>
+<p class="font-label-sm uppercase tracking-[0.1em] text-on-surface-variant">Encrypted &amp; Legally Binding Infrastructure</p>
+</div>
+</div>
+</main>
+<!-- Sidebar: Legal Tips -->
+<aside class="hidden xl:block w-80 p-8 border-l border-outline-variant bg-surface-container-lowest">
+<div class="sticky top-28">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">tips_and_updates</span>
+<h3 class="font-label-md text-primary uppercase">Legal Tips</h3>
+</div>
+<div class="space-y-8">
+<div class="group">
+<h4 class="font-label-md text-on-background mb-2 group-hover:text-primary transition-colors">Be Specific</h4>
+<p class="text-label-sm text-on-surface-variant leading-relaxed">Instead of "my car," use "my 2022 Toyota Camry, Registration ABC-1234." This prevents disputes during probate.</p>
+</div>
+<div class="group">
+<h4 class="font-label-md text-on-background mb-2 group-hover:text-primary transition-colors">Guardian Selection</h4>
+<p class="text-label-sm text-on-surface-variant leading-relaxed">Always discuss the role with your chosen guardians first. Ensure they share your values and have the financial capacity to raise children.</p>
+</div>
+<div class="group">
+<h4 class="font-label-md text-on-background mb-2 group-hover:text-primary transition-colors">Funeral Expenses</h4>
+<p class="text-label-sm text-on-surface-variant leading-relaxed">Consider setting aside a specific 'Funeral Fund' in your asset portfolio to ensure your final wishes are carried out without financial burden.</p>
+</div>
+<div class="p-6 bg-primary-container/10 rounded-2xl border border-primary-container/20">
+<p class="font-label-md text-primary mb-3">Professional Review</p>
+<p class="text-label-sm text-on-secondary-container">94% of our users opt for a legal review of these custom clauses to ensure total compliance with Indian Succession laws.</p>
+<button class="mt-4 w-full text-primary font-bold text-label-sm hover:underline">Add Review Service</button>
+</div>
+</div>
+<div class="mt-12">
+<img alt="A professional legal consultant in a well-lit modern office" class="rounded-2xl shadow-md w-full h-48 object-cover" data-alt="A high-quality, professional photograph of a legal consultant in a modern, sun-drenched office. The consultant is sitting at a clean oak desk, reviewing documents with a calm and confident expression. The environment is minimalist and high-end, featuring soft-focus background elements like a library of law books and green indoor plants. The lighting is bright and warm, reflecting a premium light-mode UI aesthetic with soft, natural shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8Q0y8NqbtoHEdmvS1l2n4uEVI6PriXinNopZXtDSpoNVCE0AKlRSPVdRF3XOvWnQFQO9Lft0UPySc1Z5h_-TrYHzAQC3F6aRhX_FAY_LxF4XtTNZzeDt7iffpK1guCPD50Ki4usLjK9rRrohJkNQSl8rRm3Uc1sd8hLPxvdWESUbEbG-vGYcYs6VxW2bxPQvD0QY9maMDvTQwtvT9FXc6oh4aYdLzR0CqPs9AkVo6NCJlhLxHPMKsF0MHgFxFuGqb9DNsL12ZujHR"/>
+</div>
+</div>
+</aside>
+</div>
+<!-- BottomNavBar Navigation -->
+<footer class="bg-surface dark:bg-surface-dim shadow-md fixed bottom-0 w-full z-50 rounded-t-xl lg:hidden">
+<div class="flex justify-around items-center px-4 py-3 pb-safe border-t border-outline-variant">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-label-sm">Previous</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">save</span>
+<span class="font-label-sm">Save</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full p-3 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">arrow_forward</span>
+<span class="font-label-sm">Next</span>
+</button>
+</div>
+</footer>
+<!-- Desktop Floating Action Buttons (Sticky Footer for Web) -->
+<div class="hidden lg:flex fixed bottom-0 left-0 right-0 h-24 bg-surface/80 backdrop-blur-md border-t border-outline-variant/30 items-center justify-center z-40">
+<div class="max-w-container-max-width w-full px-margin-desktop flex justify-between items-center">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-all px-6 py-3 rounded-xl border border-outline-variant">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-label-md">Back to Assets</span>
+</button>
+<div class="flex items-center gap-4">
+<button class="px-8 py-3 rounded-xl border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-all font-label-md">Save Draft</button>
+<button class="px-10 py-3 rounded-xl bg-primary text-on-primary font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all font-label-md">Confirm &amp; Continue</button>
+</div>
+</div>
+</div>
+<script>
+        // Micro-interactions for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.98)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple visibility observer for scroll reveal effects
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

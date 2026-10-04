@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Compliance &amp; Legal Framework | Will Banwalo</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: "#0b2016", "ink-2": "#081712", "ink-3": "#122c1f",
+                        parchment: "#f7f3e8", "parchment-2": "#efe7d1", cream: "#fbf9f2",
+                        sage: "#4d6350", "sage-light": "#a9b8a4",
+                        gold: "#c9a227", "gold-light": "#e3c766", rust: "#7a3b2e",
+                    },
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    maxWidth: { site: "1280px" },
+                }
+            }
+        };
+    </script>
+    <style>
+        :root { --ink: #0b2016; --gold: #c9a227; }
+        * { cursor: none; }
+        html { scroll-behavior: auto; }
+        body { background: var(--ink); overflow-x: hidden; margin: 0; }
+
+        #smooth-wrapper { overflow: hidden; position: relative; }
+        #smooth-content { overflow: visible; width: 100%; }
+
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+        .cur-dot, .cur-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; transform: translate(-50%, -50%); }
+        .cur-dot { width: 6px; height: 6px; background: var(--gold); }
+        .cur-ring { width: 34px; height: 34px; border: 1px solid rgba(201,162,39,0.55); transition: width .25s ease, height .25s ease, border-color .25s ease, background .25s ease; }
+        .cur-ring.grow { width: 76px; height: 76px; background: rgba(201,162,39,0.08); border-color: rgba(201,162,39,0.9); }
+        @media (max-width: 900px) { .cur-dot, .cur-ring { display: none; } * { cursor: auto; } }
+
+        .nav-link, .nav-mark { color: #f7f3e8; transition: color .4s ease; }
+        header.scrolled .nav-link, header.scrolled .nav-mark { color: #0b2016; }
+        header.scrolled { background: rgba(247,243,232,0.92); backdrop-filter: blur(20px); box-shadow: 0 10px 40px rgba(11,32,22,0.08); }
+        .nav-link.active { color: var(--gold) !important; }
+        .mobile-panel { height: 0; overflow: hidden; }
+
+        .marquee-track { display: flex; width: max-content; }
+        .marquee-track span { white-space: nowrap; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: 0.28em; font-size: 0.7rem; padding: 0 1.5rem; }
+
+        .glass-dark { background: rgba(247, 243, 232, 0.06); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(247, 243, 232, 0.12); }
+        .toc-link { color: rgba(11, 32, 22, 0.5); transition: background-color .3s ease, color .3s ease; }
+        .toc-link.active { background: #0b2016; color: #f7f3e8; }
+        ::selection { background: rgba(201,162,39,0.35); color: #0b2016; }
+
+        .policy-section h2 { font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; }
+        .policy-section ul { list-style: none; }
+        .policy-section ul li { position: relative; padding-left: 1.6rem; }
+        .policy-section ul li::before {
+            content: '';
+            position: absolute; left: 0; top: 0.65em;
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #7a3b2e;
+        }
+        .policy-section strong { color: #0b2016; font-weight: 700; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+    </style>
+</head>
+
+<body class="bg-ink text-ink font-body selection:bg-gold/30">
+
+    <div class="cur-ring" id="curRing"></div>
+    <div class="cur-dot" id="curDot"></div>
+
+    <!-- Nav — identical to faq.html -->
+    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 transition-colors duration-500">
+        <nav class="max-w-site mx-auto px-6 md:px-10 h-20 md:h-24 flex justify-between items-center">
+            <a href="./index.html" class="nav-mark font-display text-2xl md:text-3xl font-bold tracking-tight">Will Banwalo</a>
+            <div class="hidden lg:flex items-center gap-10">
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./index.html">Home</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./how_it_works.html">How it Works</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./pricing.html">Pricing</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./faq.html">FAQs</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./track_order.html">Track order</a>
+                <a class="nav-link active relative text-sm font-semibold tracking-wide" href="./contact_us.html">Contact Us</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="./order.php" class="magnetic relative overflow-hidden bg-gold text-ink px-6 md:px-8 py-3 rounded-full text-sm font-bold tracking-wide">
+                    <span class="relative z-10">Create My Will</span>
+                </a>
+                <button id="menuBtn" class="lg:hidden nav-mark w-10 h-10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+            </div>
+        </nav>
+        <div class="mobile-panel bg-parchment lg:hidden" id="mobilePanel">
+            <div class="flex flex-col px-6 py-6 gap-5 text-ink font-semibold">
+                <a href="./index.html">Home</a>
+                <a href="./how_it_works.html">How it Works</a>
+                <a href="./pricing.html">Pricing</a>
+                <a href="./faq.html">FAQs</a>
+                <a href="./track_order.html">Track order</a>
+                <a href="./contact_us.html" class="text-rust">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="smooth-wrapper">
+    <div id="smooth-content">
+    <main>
+        <!-- ================= HERO ================= -->
+        <section id="hero" class="relative min-h-[55svh] flex items-center bg-ink overflow-hidden text-center">
+            <div class="absolute inset-0 opacity-[0.06] pointer-events-none"
+                style="background-image: radial-gradient(circle at 2px 2px, #c9a227 1px, transparent 0); background-size: 46px 46px;"></div>
+            <div class="max-w-3xl mx-auto px-6 md:px-10 relative z-10 pt-16">
+                <span class="hero-word block text-gold font-bold tracking-[0.3em] uppercase text-xs mb-6">Built On Discipline</span>
+                <h1 class="hero-word font-display italic font-medium text-parchment text-4xl md:text-6xl leading-[1.08] mb-6">
+                    Compliance &amp; <span class="text-gold">Legal Framework</span>
+                </h1>
+                <p class="hero-word text-parchment/55 text-lg leading-relaxed">
+                    At Will Banwalo, compliance is not an afterthought &mdash; it is the foundation of everything we build.
+                </p>
+                <p class="hero-word text-parchment/45 leading-relaxed mt-4">
+                    We operate at the intersection of law and technology, ensuring that every Will created on our platform adheres to applicable Indian legal standards while maintaining the highest levels of data protection and user trust.
+                </p>
+            </div>
+        </section>
+
+        <!-- Marquee ribbon -->
+        <div class="bg-gold text-ink py-3.5 overflow-hidden border-y border-ink/10">
+            <div class="marquee-track" id="marquee"></div>
+        </div>
+
+        <!-- ================= COMPLIANCE CONTENT ================= -->
+        <section id="policyMain" class="relative bg-parchment py-20 md:py-28">
+            <div id="policyGridRow" class="max-w-site mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-12 gap-10">
+                <!-- TOC sidebar -->
+                <aside class="md:col-span-3">
+                    <div id="sidebarSticky">
+                        <h3 class="reveal-up text-ink/40 text-xs uppercase tracking-widest font-bold mb-4 px-4">On This Page</h3>
+                        <nav class="reveal-up flex flex-col gap-1" id="tocNav">
+                            <button data-target="#sec-1" class="toc-link active text-left px-4 py-2.5 rounded-lg text-sm font-semibold">1. Legal Compliance</button>
+                            <button data-target="#sec-2" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">2. Lawyer Review Standards</button>
+                            <button data-target="#sec-3" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">3. Data Protection &amp; Privacy</button>
+                            <button data-target="#sec-4" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">4. Digital Security Standards</button>
+                            <button data-target="#sec-5" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">5. Financial Compliance</button>
+                            <button data-target="#sec-6" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">6. Platform Integrity &amp; Ethics</button>
+                            <button data-target="#sec-7" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">7. Limitations of Scope</button>
+                            <button data-target="#sec-8" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">8. Continuous Monitoring</button>
+                            <button data-target="#sec-9" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">9. User Responsibility</button>
+                            <button data-target="#sec-10" class="toc-link text-left px-4 py-2.5 rounded-lg text-sm font-semibold">10. Contact Us</button>
+                        </nav>
+                        <div class="reveal-up mt-8 p-6 bg-white rounded-2xl border border-ink/8 text-center shadow-sm">
+                            <span class="material-symbols-outlined text-rust text-3xl mb-2 block">verified</span>
+                            <p class="font-bold text-ink text-sm mb-1">Indian Succession Act, 1925</p>
+                            <p class="text-ink/45 text-xs leading-relaxed">Every Will format is structured in accordance with this framework.</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Compliance body -->
+                <div class="md:col-span-9 space-y-16" id="policyScroll">
+
+                    <div id="sec-1" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">1. Legal Compliance</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-6">Our platform is designed in alignment with Indian legal frameworks governing Wills and succession.</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed mb-6">
+                            <li>All Will formats are structured in accordance with the <strong>Indian Succession Act, 1925</strong></li>
+                            <li>Users are guided through legally required elements such as testator details, beneficiaries, executors, and asset distribution</li>
+                            <li>Clear instructions are provided for proper execution, including witnessing and signing requirements</li>
+                        </ul>
+                        <p class="reveal-up text-ink/60 leading-relaxed">While registration of a Will is optional under Indian law, we provide guidance to users who choose to register their document.</p>
+                    </div>
+
+                    <div id="sec-2" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">2. Lawyer Review Standards</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-3">To maintain legal integrity:</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed mb-6">
+                            <li>Wills (under applicable plans) are reviewed by qualified legal professionals</li>
+                            <li>Each document is checked for structural accuracy and compliance</li>
+                            <li>Ambiguities or inconsistencies are flagged for correction</li>
+                        </ul>
+                        <p class="reveal-up text-ink/60 leading-relaxed">This ensures that your document meets practical legal standards before finalization.</p>
+                    </div>
+
+                    <div id="sec-3" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">3. Data Protection &amp; Privacy Compliance</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-3">We follow strict data protection practices to safeguard user information:</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed mb-6">
+                            <li>Encryption protocols are applied to sensitive data</li>
+                            <li>Access to user data is restricted and controlled</li>
+                            <li>Systems are designed to prevent unauthorized access or misuse</li>
+                        </ul>
+                        <p class="reveal-up text-ink/60 leading-relaxed">We align our practices with applicable Indian data protection laws and evolving digital privacy standards.</p>
+                    </div>
+
+                    <div id="sec-4" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">4. Digital Security Standards</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-3">Security is built into every layer of our platform:</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed mb-6">
+                            <li>Secure data transmission and storage systems</li>
+                            <li>Controlled authentication and access management</li>
+                            <li>Continuous monitoring to detect and prevent threats</li>
+                        </ul>
+                        <p class="reveal-up text-ink/60 leading-relaxed">Our goal is to ensure that your personal and financial information remains protected at all times.</p>
+                    </div>
+
+                    <div id="sec-5" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">5. Financial &amp; Transaction Compliance</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-3">Where applicable:</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed">
+                            <li>Payments are processed through compliant and secure payment gateways</li>
+                            <li>Transactions follow applicable Indian financial regulations</li>
+                            <li>User payment data is not stored directly on our systems (where third-party gateways are used)</li>
+                        </ul>
+                    </div>
+
+                    <div id="sec-6" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">6. Platform Integrity &amp; Ethical Use</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-3">We maintain strict standards to ensure ethical and lawful use of our platform:</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed">
+                            <li>Users must provide accurate and lawful information</li>
+                            <li>Fraudulent or misleading use of the platform is prohibited</li>
+                            <li>We reserve the right to restrict access in case of misuse or violations</li>
+                        </ul>
+                    </div>
+
+                    <div id="sec-7" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">7. Limitations of Platform Scope</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-3">While we ensure compliance and structured legal workflows:</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed">
+                            <li>Will Banwalo is a technology-enabled platform, not a substitute for full legal representation</li>
+                            <li>Complex legal disputes, inheritance conflicts, or litigation matters may require independent legal advice</li>
+                        </ul>
+                    </div>
+
+                    <div id="sec-8" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">8. Continuous Compliance Monitoring</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-3">We regularly review and update our systems to stay aligned with:</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed">
+                            <li>Changes in Indian laws and regulations</li>
+                            <li>Evolving data protection standards</li>
+                            <li>Industry best practices in legal technology</li>
+                        </ul>
+                    </div>
+
+                    <div id="sec-9" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">9. User Responsibility in Compliance</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-3">Users play an important role in ensuring compliance:</p>
+                        <ul class="reveal-up space-y-2 text-ink/60 leading-relaxed">
+                            <li>Providing accurate and complete information</li>
+                            <li>Following execution guidelines (signatures, witnesses, etc.)</li>
+                            <li>Reviewing their Will periodically as circumstances change</li>
+                        </ul>
+                    </div>
+
+                    <div id="sec-10" class="policy-section">
+                        <h2 class="reveal-up text-2xl md:text-3xl text-ink mb-6">10. Contact for Compliance Queries</h2>
+                        <p class="reveal-up text-ink/60 leading-relaxed mb-6">For any compliance-related questions or concerns, you may contact us:</p>
+                        <div class="reveal-up bg-white rounded-2xl border border-ink/8 p-7 space-y-3 shadow-sm">
+                            <p class="flex items-center gap-3 text-ink/70"><span class="material-symbols-outlined text-rust text-lg">mail</span> Email: [Insert Email]</p>
+                            <p class="flex items-center gap-3 text-ink/70"><span class="material-symbols-outlined text-rust text-lg">call</span> Phone: [Insert Phone Number]</p>
+                            <p class="flex items-center gap-3 text-ink/70"><span class="material-symbols-outlined text-rust text-lg">location_on</span> Address: [Insert Office Address]</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FINAL STATEMENT ================= -->
+        <section id="final-note" class="relative bg-ink py-24 md:py-32 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.06] pointer-events-none"
+                style="background-image: radial-gradient(circle at 2px 2px, #c9a227 1px, transparent 0); background-size: 60px 60px;"></div>
+            <div class="max-w-2xl mx-auto px-6 md:px-10 text-center relative z-10">
+                <span class="reveal-up block text-gold font-bold tracking-[0.3em] uppercase text-xs mb-6">Final Statement</span>
+                <p class="reveal-up font-display italic text-parchment text-2xl md:text-4xl leading-[1.35] mb-6">
+                    Compliance is central to our promise of trust.
+                </p>
+                <p class="reveal-up text-parchment/55 text-lg leading-relaxed">
+                    At Will Banwalo, we combine legal discipline with digital efficiency &mdash; so you can create your Will with confidence, clarity, and peace of mind.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer — identical to faq.html -->
+    <footer class="bg-ink-2 pt-24 pb-10 border-t border-white/5">
+                <div class="max-w-site mx-auto px-6 md:px-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20 reveal-up">
+                        <div class="lg:col-span-5 space-y-8">
+                            <div class="font-display italic text-2xl font-semibold text-parchment">Will Banwalo</div>
+                            <p class="text-parchment/35 leading-relaxed text-base max-w-sm">
+                                The intersection of legal excellence and digital innovation. Redefining how India plans
+                                its future.
+                            </p>
+                            <!-- <div class="flex gap-5">
+                                <a class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-parchment/50 hover:text-gold hover:border-gold transition-colors"
+                                    href="#">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-parchment/50 hover:text-gold hover:border-gold transition-colors"
+                                    href="#">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 7.837c-2.301 0-4.163 1.862-4.163 4.163S9.699 16.163 12 16.163s4.163-1.862 4.163-4.163S14.301 7.837 12 7.837z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div> -->
+                        </div>
+                        <div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
+                            <div>
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Legal
+                                </h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    <li><a class="hover:text-gold transition-colors" href="./terms_of_use.html">Terms of Use</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./privacy_policy.html">Privacy Policy</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./compliance.html">Compliance</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Company</h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    <li><a class="hover:text-gold transition-colors" href="./about_us.html">About Us</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./faq.html">FAQs</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./contact_us.html">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-span-2 md:col-span-1">
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Support</h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    
+                                    <li><a class="hover:text-gold transition-colors" href="https://wa.me/918797879878" target="_blank">WhatsApp Support</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./php/track_order.php">Track Order</a></li>
+                                    <li><p class="hover:text-gold transition-colors" >Monday-Saturday <br> 9:00AM-7:00PM</p></li>
+                                    <li><a class="hover:text-gold transition-colors" href="tel:+918797879878">+91-8797879878</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class=" pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                        <p class="text-parchment/20 text-sm italic">© 2026 Will Banwalo. A premium legal technology
+                            boutique.</p>
+                        <div class="flex gap-10 items-center text-parchment/20 text-[10px] tracking-widest font-bold">
+                            <span class="flex items-center gap-2 uppercase"><span
+                                    class="material-symbols-outlined text-gold text-sm">verified</span> Verified legal
+                                flow</span>
+                            <span class="flex items-center gap-2 uppercase"><span
+                                    class="material-symbols-outlined text-gold text-sm">shield</span> AES-256
+                                Encrypted</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    </div><!-- #smooth-content -->
+    </div><!-- #smooth-wrapper -->
+
+    <!-- ===================== GSAP ===================== -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+        const smoother = ScrollSmoother.create({
+            wrapper: "#smooth-wrapper",
+            content: "#smooth-content",
+            smooth: 3.2,
+            smoothTouch: 0.1,
+            normalizeScroll: true,
+            ignoreMobileResize: true,
+            preventDefault: true
+        });
+
+        /* ---------------------------------------------------------------
+           Custom cursor
+        ----------------------------------------------------------------*/
+        const dot = document.getElementById('curDot');
+        const ring = document.getElementById('curRing');
+        const dotX = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power3" });
+        const dotY = gsap.quickTo(dot, "y", { duration: 0.1, ease: "power3" });
+        const ringX = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3" });
+        const ringY = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3" });
+        window.addEventListener('mousemove', (e) => {
+            dotX(e.clientX); dotY(e.clientY);
+            ringX(e.clientX); ringY(e.clientY);
+        });
+        document.querySelectorAll('a, button, .magnetic, .toc-link').forEach(el => {
+            el.addEventListener('mouseenter', () => ring.classList.add('grow'));
+            el.addEventListener('mouseleave', () => ring.classList.remove('grow'));
+        });
+
+        /* ---------------------------------------------------------------
+           Magnetic buttons
+        ----------------------------------------------------------------*/
+        document.querySelectorAll('.magnetic').forEach((btn) => {
+            btn.addEventListener('mousemove', (e) => {
+                const r = btn.getBoundingClientRect();
+                const x = e.clientX - r.left - r.width / 2;
+                const y = e.clientY - r.top - r.height / 2;
+                gsap.to(btn, { x: x * 0.3, y: y * 0.45, duration: 0.5, ease: 'power3' });
+            });
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           Marquee
+        ----------------------------------------------------------------*/
+        const marqueeEl = document.getElementById('marquee');
+        const marqueeText = 'INDIAN SUCCESSION ACT, 1925 &nbsp;&#9670;&nbsp; LAWYER REVIEWED &nbsp;&#9670;&nbsp; ENCRYPTED &amp; SECURE &nbsp;&#9670;&nbsp; CONTINUOUSLY MONITORED &nbsp;&#9670;&nbsp; ';
+        marqueeEl.innerHTML = `<span>${marqueeText.repeat(4)}</span><span>${marqueeText.repeat(4)}</span>`;
+        gsap.to(marqueeEl, { xPercent: -50, duration: 22, ease: 'none', repeat: -1 });
+
+        /* ---------------------------------------------------------------
+           Header scroll state + mobile menu
+        ----------------------------------------------------------------*/
+        const header = document.getElementById('siteHeader');
+        ScrollTrigger.create({
+            trigger: '#policyMain', start: 'top top+=80',
+            onEnter: () => header.classList.add('scrolled'),
+            onLeaveBack: () => header.classList.remove('scrolled'),
+        });
+        const menuBtn = document.getElementById('menuBtn');
+        const mobilePanel = document.getElementById('mobilePanel');
+        let menuOpen = false;
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            gsap.to(mobilePanel, { height: menuOpen ? 'auto' : 0, duration: 0.45, ease: 'power2.inOut' });
+        });
+        mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            menuOpen = false;
+            gsap.to(mobilePanel, { height: 0, duration: 0.4 });
+        }));
+
+        /* ---------------------------------------------------------------
+           Hero load-in
+        ----------------------------------------------------------------*/
+        window.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.hero-word', { y: 26, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.15 });
+        });
+
+        /* ---------------------------------------------------------------
+           In-page anchors go through ScrollSmoother's own scrollTo
+        ----------------------------------------------------------------*/
+        function goTo(targetEl) {
+            if (targetEl) smoother.scrollTo(targetEl, true, 'top 110');
+        }
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', (e) => {
+                const id = link.getAttribute('href');
+                if (id.length > 1) {
+                    const targetEl = document.querySelector(id);
+                    if (targetEl) { e.preventDefault(); goTo(targetEl); }
+                }
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           TOC sidebar — pinned (ScrollTrigger, not CSS sticky, since
+           ScrollSmoother's transform-based scrolling breaks native
+           position:sticky), click to jump, active state follows scroll
+        ----------------------------------------------------------------*/
+        ScrollTrigger.matchMedia({
+            "(min-width: 768px)": function () {
+                ScrollTrigger.create({
+                    trigger: '#policyGridRow',
+                    start: 'top 112px',
+                    end: 'bottom bottom',
+                    pin: '#sidebarSticky',
+                    pinSpacing: false
+                });
+            }
+        });
+        const tocBtns = document.querySelectorAll('.toc-link');
+        tocBtns.forEach((btn) => {
+            btn.addEventListener('click', () => goTo(document.querySelector(btn.dataset.target)));
+        });
+        document.querySelectorAll('.policy-section').forEach((sec) => {
+            ScrollTrigger.create({
+                trigger: sec, start: 'top 40%', end: 'bottom 40%',
+                onEnter: () => setActiveToc(sec.id), onEnterBack: () => setActiveToc(sec.id)
+            });
+        });
+        function setActiveToc(id) {
+            tocBtns.forEach((b) => b.classList.toggle('active', b.dataset.target === '#' + id));
+        }
+
+        /* ---------------------------------------------------------------
+           Generic scroll reveals (wrapped so one failing element can't
+           abort the loop and silently skip everything after it)
+        ----------------------------------------------------------------*/
+        gsap.utils.toArray('.reveal-up').forEach((el) => {
+            try {
+                gsap.from(el, { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } });
+            } catch (err) { console.error('reveal-up failed for', el, err); }
+        });
+
+        window.addEventListener('load', () => ScrollTrigger.refresh());
+    </script>
+</body>
+
+</html>

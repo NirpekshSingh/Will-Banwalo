@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LegacyWill - Select Will Type</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#eba1af",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4ef",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c1c9bf",
+                        "surface-tint": "#3b6846",
+                        "surface-container": "#ecefe9",
+                        "on-background": "#191c1a",
+                        "surface-container-highest": "#e1e3de",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8faf5",
+                        "on-primary-container": "#91c199",
+                        "outline": "#717971",
+                        "on-tertiary-fixed": "#370b17",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d8dbd6",
+                        "secondary-container": "#d3e8d2",
+                        "tertiary-fixed": "#ffd9de",
+                        "tertiary": "#52202c",
+                        "on-surface-variant": "#414941",
+                        "on-secondary-fixed-variant": "#394b3b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#566958",
+                        "surface-bright": "#f8faf5",
+                        "background": "#f8faf5",
+                        "surface-variant": "#e1e3de",
+                        "primary-fixed-dim": "#a1d2a9",
+                        "on-primary-fixed-variant": "#235030",
+                        "secondary": "#516352",
+                        "secondary-fixed-dim": "#b8ccb7",
+                        "primary-fixed": "#bcefc4",
+                        "inverse-primary": "#a1d2a9",
+                        "on-tertiary-fixed-variant": "#6d3642",
+                        "tertiary-container": "#6d3642",
+                        "inverse-on-surface": "#eff1ec",
+                        "surface-container-high": "#e7e9e4",
+                        "secondary-fixed": "#d3e8d2",
+                        "primary-container": "#235030",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#00210c",
+                        "on-surface": "#191c1a",
+                        "on-secondary-fixed": "#0e1f12",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#08391b",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#feb2bf",
+                        "inverse-surface": "#2e312e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1200px",
+                        "section-gap": "80px",
+                        "unit": "8"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "60px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .card-active {
+            border-color: #08391b !important;
+            background-color: #f2f4ef !important;
+            box-shadow: 0 4px 12px rgba(8, 57, 27, 0.08);
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface overflow-x-hidden">
+    <!-- TopAppBar -->
+    <header class="bg-surface dark:bg-on-background shadow-sm fixed top-0 w-full z-50">
+        <div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max-width mx-auto w-full">
+            <div class="flex items-center gap-4">
+                <span
+                    class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">LegacyWill</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8">
+                <nav class="flex gap-6">
+                    <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md"
+                        href="#">Create Will</a>
+                    <a class="text-on-surface-variant dark:text-outline-variant hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors duration-200 font-label-md text-label-md px-2 rounded"
+                        href="#">My Documents</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <button
+                        class="text-primary font-bold font-label-md text-label-md px-4 py-2 hover:bg-primary/5 rounded-lg transition-all">Save
+                        &amp; Exit</button>
+                    <span class="material-symbols-outlined text-primary cursor-pointer"
+                        data-icon="help_outline">help_outline</span>
+                    <span class="material-symbols-outlined text-primary cursor-pointer"
+                        data-icon="account_circle">account_circle</span>
+                </div>
+            </div>
+            <!-- Mobile Menu Icon (Visual Only) -->
+            <div class="md:hidden">
+                <span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+            </div>
+        </div>
+    </header>
+    <div class="flex min-h-screen pt-20">
+        <!-- SideNavBar (Desktop Only) -->
+        <aside
+            class="hidden lg:flex flex-col p-6 gap-2 h-screen w-80 sticky top-20 left-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant">
+            <div class="mb-8">
+                <h2 class="font-headline-md text-headline-md text-primary">Will Progress</h2>
+                <p class="font-label-md text-label-md text-on-surface-variant opacity-70">Step 1 of 8</p>
+            </div>
+            <nav class="flex flex-col gap-2">
+                <div class="flex items-center gap-4 bg-tertiary text-on-tertiary rounded-xl px-4 py-3 shadow-sm">
+                    <span class="material-symbols-outlined" data-icon="person">person</span>
+                    <span class="font-label-md text-label-md">Personal Details</span>
+                </div>
+                <div
+                    class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="family_restroom">family_restroom</span>
+                    <span class="font-label-md text-label-md">Family Tree</span>
+                </div>
+                <div
+                    class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="group">group</span>
+                    <span class="font-label-md text-label-md">Beneficiaries</span>
+                </div>
+                <div
+                    class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+                    <span class="font-label-md text-label-md">Asset Portfolio</span>
+                </div>
+                <div
+                    class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+                    <span class="font-label-md text-label-md">Executors</span>
+                </div>
+                <div
+                    class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="supervisor_account">supervisor_account</span>
+                    <span class="font-label-md text-label-md">Guardians</span>
+                </div>
+                <div
+                    class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="description">description</span>
+                    <span class="font-label-md text-label-md">Review Will</span>
+                </div>
+                <div
+                    class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="payments">payments</span>
+                    <span class="font-label-md text-label-md">Payment</span>
+                </div>
+            </nav>
+            <div class="mt-auto p-4 bg-secondary-container/30 rounded-2xl border border-outline-variant/30 text-center">
+                <p class="font-label-sm text-label-sm text-on-secondary-container mb-3 uppercase tracking-wider">Expert
+                    Guidance</p>
+                <button
+                    class="w-full bg-primary text-on-primary font-bold py-3 px-4 rounded-xl shadow-sm hover:opacity-90 transition-all">Get
+                    Legal Help</button>
+            </div>
+        </aside>
+        <!-- Main Content Area -->
+        <main class="flex-1 px-4 md:px-margin-desktop py-12 pb-32">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-12">
+                    <span
+                        class="inline-flex items-center gap-2 text-tertiary-container font-label-sm text-label-sm uppercase tracking-widest mb-4">
+                        <span class="material-symbols-outlined text-[16px]"
+                            data-icon="verified_user">verified_user</span>
+                        SECURE LEGAL PLANNING
+                    </span>
+                    <h1 class="font-headline-xl text-headline-xl text-primary mb-4 leading-tight">Select your Will type
+                    </h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Tailor your legacy plan to
+                        your unique family structure and financial goals. Most users complete this step in under 15
+                        minutes.</p>
+                </div>
+                <!-- Will Type Selection Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                    <!-- Individual Will (Recommended) -->
+                    <div class="card-active group relative bg-white p-8 rounded-2xl shadow-sm border-2 border-outline-variant/20 hover:border-primary/50 cursor-pointer transition-all duration-300"
+                        onclick="selectCard(this)">
+                        <div
+                            class="absolute top-4 right-4 bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">
+                            Recommended</div>
+                        <div class="mb-6 h-14 w-14 bg-secondary-container flex items-center justify-center rounded-xl">
+                            <span class="material-symbols-outlined text-primary text-3xl"
+                                data-icon="person">person</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md text-primary mb-2">Individual Will</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6">A comprehensive legal document
+                            outlining asset distribution for a single individual.</p>
+                        <div class="flex items-center gap-2 text-on-surface-variant opacity-60">
+                            <span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                            <span class="font-label-sm text-label-sm">Est. 15 mins</span>
+                        </div>
+                    </div>
+                    <!-- Joint Will -->
+                    <div class="group relative bg-white p-8 rounded-2xl shadow-sm border-2 border-outline-variant/20 hover:border-primary/50 cursor-pointer transition-all duration-300"
+                        onclick="selectCard(this)">
+                        <div
+                            class="mb-6 h-14 w-14 bg-surface-container flex items-center justify-center rounded-xl group-hover:bg-secondary-container transition-colors">
+                            <span class="material-symbols-outlined text-primary text-3xl"
+                                data-icon="favorite">favorite</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md text-primary mb-2">Joint Will</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6">Designed for married couples
+                            or partners wanting to coordinate their legacies together.</p>
+                        <div class="flex items-center gap-2 text-on-surface-variant opacity-60">
+                            <span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                            <span class="font-label-sm text-label-sm">Est. 25 mins</span>
+                        </div>
+                    </div>
+                    <!-- Senior Citizen Will -->
+                    <div class="group relative bg-white p-8 rounded-2xl shadow-sm border-2 border-outline-variant/20 hover:border-primary/50 cursor-pointer transition-all duration-300"
+                        onclick="selectCard(this)">
+                        <div
+                            class="mb-6 h-14 w-14 bg-surface-container flex items-center justify-center rounded-xl group-hover:bg-secondary-container transition-colors">
+                            <span class="material-symbols-outlined text-primary text-3xl"
+                                data-icon="elderly">elderly</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md text-primary mb-2">Senior Citizen Will</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6">Simplified process with
+                            enhanced support for elderly individuals and medical directives.</p>
+                        <div class="flex items-center gap-2 text-on-surface-variant opacity-60">
+                            <span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                            <span class="font-label-sm text-label-sm">Est. 20 mins</span>
+                        </div>
+                    </div>
+                    <!-- Property Will -->
+                    <div class="group relative bg-white p-8 rounded-2xl shadow-sm border-2 border-outline-variant/20 hover:border-primary/50 cursor-pointer transition-all duration-300"
+                        onclick="selectCard(this)">
+                        <div
+                            class="mb-6 h-14 w-14 bg-surface-container flex items-center justify-center rounded-xl group-hover:bg-secondary-container transition-colors">
+                            <span class="material-symbols-outlined text-primary text-3xl"
+                                data-icon="domain">domain</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md text-primary mb-2">Property Will</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-6">Focuses specifically on
+                            complex real estate holdings across multiple jurisdictions.</p>
+                        <div class="flex items-center gap-2 text-on-surface-variant opacity-60">
+                            <span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                            <span class="font-label-sm text-label-sm">Est. 20 mins</span>
+                        </div>
+                    </div>
+                    <!-- Business Asset Will -->
+                    <div class="md:col-span-2 group relative bg-white p-8 rounded-2xl shadow-sm border-2 border-outline-variant/20 hover:border-primary/50 cursor-pointer transition-all duration-300"
+                        onclick="selectCard(this)">
+                        <div class="flex flex-col md:flex-row md:items-center gap-8">
+                            <div
+                                class="h-14 w-14 bg-surface-container flex shrink-0 items-center justify-center rounded-xl group-hover:bg-secondary-container transition-colors">
+                                <span class="material-symbols-outlined text-primary text-3xl"
+                                    data-icon="work">work</span>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-headline-md text-headline-md text-primary mb-2">Business Asset Will</h3>
+                                <p class="font-body-md text-body-md text-on-surface-variant">Strategic planning for
+                                    business owners, covering succession, shares, and intellectual property protection
+                                    for future generations.</p>
+                            </div>
+                            <div class="flex items-center gap-2 text-on-surface-variant opacity-60 shrink-0">
+                                <span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                                <span class="font-label-sm text-label-sm">Est. 30 mins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom Navigation Desktop -->
+                <div class="hidden lg:flex justify-between items-center py-8 border-t border-outline-variant/30">
+                    <button
+                        class="px-8 py-3 text-on-surface-variant font-bold rounded-xl border border-outline hover:bg-surface-container-high transition-all">Cancel</button>
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-full">
+                            <span class="material-symbols-outlined text-primary text-[18px]" data-icon="lock"
+                                style="font-variation-settings: 'FILL' 1;">lock</span>
+                            <span class="font-label-sm text-label-sm text-primary uppercase">Encrypted &amp;
+                                Secure</span>
+                        </div>
+                        <button
+                            class="bg-primary text-on-primary font-bold py-4 px-12 rounded-xl shadow-lg hover:opacity-90 transform active:scale-95 transition-all text-body-lg">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Need Help FAB -->
+    <button
+        class="fixed bottom-24 right-8 lg:bottom-8 lg:right-8 bg-tertiary text-on-tertiary flex items-center gap-3 px-6 py-4 rounded-full shadow-xl hover:scale-105 active:scale-95 transition-all z-40">
+        <span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+        <span class="font-label-md text-label-md">Need Help?</span>
+    </button>
+    <!-- BottomNavBar (Mobile Only) -->
+    <footer
+        class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface dark:bg-surface-dim shadow-md z-50 border-t border-outline-variant">
+        <div
+            class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-all">
+            <span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+            <span class="font-label-sm text-label-sm">Previous</span>
+        </div>
+        <div
+            class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-all">
+            <span class="material-symbols-outlined" data-icon="save">save</span>
+            <span class="font-label-sm text-label-sm">Save</span>
+        </div>
+        <div
+            class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full p-3 transform active:scale-90 transition-transform">
+            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+            <span class="hidden font-label-sm text-label-sm">Next</span>
+        </div>
+    </footer>
+    <script>
+        function selectCard(element) {
+            // Remove active class from all cards
+            const cards = document.querySelectorAll('.grid > div');
+            cards.forEach(card => {
+                card.classList.remove('card-active');
+            });
+            // Add active class to clicked card
+            element.classList.add('card-active');
+        }
+
+        // Add subtle parallax-like effect to background or micro-interactions
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.grid > div');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            cards.forEach(card => {
+                if (!card.classList.contains('card-active')) {
+                    // Very subtle tilt could go here
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Pricing Plans | Will Banwalo</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: "#0b2016", "ink-2": "#081712", "ink-3": "#122c1f",
+                        parchment: "#f7f3e8", "parchment-2": "#efe7d1", cream: "#fbf9f2",
+                        sage: "#4d6350", "sage-light": "#a9b8a4",
+                        gold: "#c9a227", "gold-light": "#e3c766", rust: "#7a3b2e",
+                    },
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    maxWidth: { site: "1280px" },
+                }
+            }
+        };
+    </script>
+    <style>
+        :root { --ink: #0b2016; --gold: #c9a227; }
+        * { cursor: none; }
+        html { scroll-behavior: auto; }
+        body { background: var(--ink); overflow-x: hidden; margin: 0; }
+
+        #smooth-wrapper { overflow: hidden; position: relative; }
+        #smooth-content { overflow: visible; width: 100%; }
+
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+
+        .cur-dot, .cur-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; transform: translate(-50%, -50%); }
+        .cur-dot { width: 6px; height: 6px; background: var(--gold); }
+        .cur-ring { width: 34px; height: 34px; border: 1px solid rgba(201,162,39,0.55); transition: width .25s ease, height .25s ease, border-color .25s ease, background .25s ease; }
+        .cur-ring.grow { width: 76px; height: 76px; background: rgba(201,162,39,0.08); border-color: rgba(201,162,39,0.9); }
+        @media (max-width: 900px) { .cur-dot, .cur-ring { display: none; } * { cursor: auto; } }
+
+        .nav-link, .nav-mark { color: #f7f3e8; transition: color .4s ease; }
+        header.scrolled .nav-link, header.scrolled .nav-mark { color: #0b2016; }
+        header.scrolled { background: rgba(247,243,232,0.92); backdrop-filter: blur(20px); box-shadow: 0 10px 40px rgba(11,32,22,0.08); }
+        .nav-link.active { color: var(--gold) !important; }
+        .mobile-panel { height: 0; overflow: hidden; }
+
+        .marquee-track { display: flex; width: max-content; }
+        .marquee-track span { white-space: nowrap; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: 0.28em; font-size: 0.7rem; padding: 0 1.5rem; }
+
+        /* ---------- motion path icons ---------- */
+        .motion-icon { top: 0; left: 0; will-change: transform; }
+
+        .faq-content { height: 0; overflow: hidden; }
+        .glass-dark { background: rgba(247, 243, 232, 0.06); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(247, 243, 232, 0.12); }
+        ::selection { background: rgba(201,162,39,0.35); color: #0b2016; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+        }
+    </style>
+</head>
+
+<body class="bg-ink text-ink font-body selection:bg-gold/30">
+
+    <div class="cur-ring" id="curRing"></div>
+    <div class="cur-dot" id="curDot"></div>
+
+    <!-- Nav — same links as original, restyled -->
+    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 transition-colors duration-500">
+        <nav class="max-w-site mx-auto px-6 md:px-10 h-20 md:h-24 flex justify-between items-center">
+            <a href="./index.html" class="nav-mark font-display text-2xl md:text-3xl font-bold tracking-tight">Will Banwalo</a>
+            <div class="hidden lg:flex items-center gap-10">
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./index.html">Home</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./how_it_works.html">How it Works</a>
+                <a class="nav-link active relative text-sm font-semibold tracking-wide" href="./pricing.html">Pricing</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./faq.html">FAQs</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./track_order.html">Track order</a>
+                <a class="nav-link relative text-sm font-semibold tracking-wide" href="./contact_us.html">Contact Us</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="./order.php" class="magnetic relative overflow-hidden bg-gold text-ink px-6 md:px-8 py-3 rounded-full text-sm font-bold tracking-wide">
+                    <span class="relative z-10">Create My Will</span>
+                </a>
+                <button id="menuBtn" class="lg:hidden nav-mark w-10 h-10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+            </div>
+        </nav>
+        <div class="mobile-panel bg-parchment lg:hidden" id="mobilePanel">
+            <div class="flex flex-col px-6 py-6 gap-5 text-ink font-semibold">
+                <a href="./index.html">Home</a>
+                <a href="./how_it_works.html">How it Works</a>
+                <a href="./pricing.html" class="text-rust">Pricing</a>
+                <a href="./faq.html">FAQs</a>
+                <a href="./track_order.html">Track order</a>
+                <a href="./contact_us.html">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <div id="smooth-wrapper">
+    <div id="smooth-content">
+    <main>
+        <!-- ================= HERO ================= -->
+        <section id="hero" class="relative min-h-[100svh] flex items-center bg-ink overflow-hidden text-center">
+            <div class="absolute inset-0 opacity-[0.06] pointer-events-none"
+                style="background-image: radial-gradient(circle at 2px 2px, #c9a227 1px, transparent 0); background-size: 46px 46px;"></div>
+
+            <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1200 500" preserveAspectRatio="none">
+                <path id="motionPath" d="M -50,320 C 200,120 380,480 600,300 S 1020,80 1250,300" fill="none" stroke="none"></path>
+            </svg>
+            <div class="motion-icon absolute w-11 h-11 rounded-full bg-gold/15 flex items-center justify-center" id="mIcon1">
+                <span class="material-symbols-outlined text-gold text-xl">currency_rupee</span>
+            </div>
+            <div class="motion-icon absolute w-10 h-10 rounded-full bg-rust/15 flex items-center justify-center" id="mIcon2">
+                <span class="material-symbols-outlined text-rust text-lg">shield</span>
+            </div>
+            <div class="motion-icon absolute w-9 h-9 rounded-full glass-dark flex items-center justify-center" id="mIcon3">
+                <span class="material-symbols-outlined text-sage-light text-base">lock</span>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-6 md:px-10 relative z-10">
+                <span class="hero-word block text-gold font-bold tracking-[0.3em] uppercase text-xs mb-6">Transparent Pricing</span>
+                <h1 class="hero-word font-display italic font-medium text-parchment text-4xl md:text-6xl leading-[1.08] mb-6">
+                    Secure your family's <span class="text-gold">future.</span>
+                </h1>
+                <p class="hero-word text-parchment/55 text-lg leading-relaxed max-w-xl mx-auto mb-10">
+                    No hidden costs, no surprise fees. Choose the plan that best protects your legacy and assets &mdash; every price shown already includes GST.
+                </p>
+                <div class="hero-word inline-flex items-center gap-3 glass-dark px-6 py-3 rounded-full mb-16">
+                    <span class="material-symbols-outlined text-gold text-lg">verified_user</span>
+                    <span class="text-sm text-parchment/80 font-semibold">100% Money-Back Guarantee &bull; No Questions Asked</span>
+                </div>
+
+                <!-- Quick stat strip -->
+                <div class="hero-word flex flex-wrap items-center justify-center gap-8 md:gap-14 mb-14">
+                    <div class="text-center">
+                        <div class="font-display italic text-gold text-3xl md:text-4xl mb-1">&#8377;<span class="stat-num" data-target="999">0</span></div>
+                        <p class="text-parchment/40 text-[11px] uppercase tracking-widest font-bold">Starting At</p>
+                    </div>
+                    <div class="w-px h-10 bg-parchment/10 hidden sm:block"></div>
+                    <div class="text-center">
+                        <div class="font-display italic text-gold text-3xl md:text-4xl mb-1"><span class="stat-num" data-target="50000" data-suffix="+">0</span></div>
+                        <p class="text-parchment/40 text-[11px] uppercase tracking-widest font-bold">Families Protected</p>
+                    </div>
+                    <div class="w-px h-10 bg-parchment/10 hidden sm:block"></div>
+                    <div class="text-center">
+                        <div class="font-display italic text-gold text-3xl md:text-4xl mb-1"><span class="stat-num" data-target="4.9" data-decimal="1" data-suffix="/5">0</span></div>
+                        <p class="text-parchment/40 text-[11px] uppercase tracking-widest font-bold">Average Rating</p>
+                    </div>
+                    <div class="w-px h-10 bg-parchment/10 hidden sm:block"></div>
+                    <div class="text-center">
+                        <div class="font-display italic text-gold text-3xl md:text-4xl mb-1"><span class="stat-num" data-target="7" data-suffix="-day">0</span></div>
+                        <p class="text-parchment/40 text-[11px] uppercase tracking-widest font-bold">Guarantee</p>
+                    </div>
+                </div>
+
+                <!-- Quick jump to a plan
+                <div class="hero-word">
+                    <p class="text-parchment/35 text-xs uppercase tracking-widest font-bold mb-4">Jump straight to a plan</p>
+                    <div class="flex flex-wrap items-center justify-center gap-4">
+                        <a href="#basic-plan" class="magnetic px-6 py-3 rounded-full border border-parchment/15 text-parchment/80 text-sm font-bold hover:border-gold/60 transition-colors">Basic &middot; &#8377;999</a>
+                        <a href="#standard-plan" class="magnetic px-6 py-3 rounded-full bg-gold text-ink text-sm font-bold">Standard &middot; &#8377;2,499</a>
+                        <a href="#premium-plan" class="magnetic px-6 py-3 rounded-full border border-parchment/15 text-parchment/80 text-sm font-bold hover:border-gold/60 transition-colors">Premium &middot; &#8377;4,999</a>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 scroll-cue opacity-0 z-10">
+                <span class="text-[10px] tracking-[0.3em] uppercase text-parchment/40 font-bold">Scroll</span>
+                <span class="w-px h-10 bg-gradient-to-b from-gold/70 to-transparent scroll-line"></span>
+            </div>
+        </section>
+
+        <!-- Marquee ribbon -->
+        <div class="bg-gold text-ink py-3.5 overflow-hidden border-y border-ink/10">
+            <div class="marquee-track" id="marquee"></div>
+        </div>
+
+        <!-- ================= PRICING CARDS ================= -->
+        <section id="plans" class="relative bg-parchment py-24 md:py-32">
+            <div class="max-w-site mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                    <!-- Basic -->
+                    <div id="basic-plan" class="price-card reveal-up bg-white p-9 rounded-[2rem] shadow-md border border-ink/5 flex flex-col items-start text-left">
+                        <span class="text-ink/45 text-[10px] uppercase tracking-widest font-bold mb-2">Essential Protection</span>
+                        <h3 class="font-display italic text-2xl text-ink mb-5">Essential</h3>
+                        <div class="flex items-baseline gap-1 mb-1">
+                            <span class="font-display italic text-lg text-ink">&#8377;</span>
+                            <span class="font-display italic font-semibold text-ink text-5xl">2,499</span>
+                        </div>
+                        <p class="text-ink/40 text-xs font-semibold mb-8">one-time, GST included</p>
+                        <ul class="space-y-4 mb-10 flex-grow text-sm">
+                            <li class="flex items-center gap-3 text-ink/65"><span class="material-symbols-outlined text-rust text-lg">check_circle</span>Single Legal Will</li>
+                            <li class="flex items-center gap-3 text-ink/65"><span class="material-symbols-outlined text-rust text-lg">check_circle</span>Instant Digital Download (PDF)</li>
+                            <li class="flex items-center gap-3 text-ink/65"><span class="material-symbols-outlined text-rust text-lg">check_circle</span>1-Year Access for Edits</li>
+                        </ul>
+                        <a href="./order.php" class="magnetic w-full text-center py-4 rounded-xl border-2 border-ink text-ink font-bold text-sm">Start Basic Will</a>
+                    </div>
+
+                    <!-- Standard (Recommended) -->
+                    <div id="standard-plan" class="price-card reveal-up relative bg-ink text-parchment p-9 rounded-[2rem] shadow-2xl flex flex-col items-start text-left md:-translate-y-4">
+                        <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-ink text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">Recommended</span>
+                        <span class="text-gold/80 text-[10px] uppercase tracking-widest font-bold mb-2">Most Popular Choice</span>
+                        <h3 class="font-display italic text-2xl mb-5">Family</h3>
+                        <div class="flex items-baseline gap-1 mb-1">
+                            <span class="font-display italic text-lg text-gold">&#8377;</span>
+                            <span class="font-display italic font-semibold text-gold text-5xl">5,999</span>
+                        </div>
+                        <p class="text-parchment/45 text-xs font-semibold mb-8">one-time, GST included</p>
+                        <ul class="space-y-4 mb-10 flex-grow text-sm">
+                            <li class="flex items-center gap-3 text-parchment/75"><span class="material-symbols-outlined text-gold text-lg">check_circle</span>Single Will with Professional Review</li>
+                            <li class="flex items-center gap-3 text-parchment/75"><span class="material-symbols-outlined text-gold text-lg">check_circle</span>Expert Lawyer Verification</li>
+                            <li class="flex items-center gap-3 text-parchment/75"><span class="material-symbols-outlined text-gold text-lg">check_circle</span>Physical Will Delivery (Hardcopy)</li>
+                            <li class="flex items-center gap-3 text-parchment/75"><span class="material-symbols-outlined text-gold text-lg">check_circle</span>Step-by-Step Signing Guide</li>
+                        </ul>
+                        <a href="./order.php" class="magnetic w-full text-center py-4 rounded-xl bg-gold text-ink font-bold text-sm">Start Standard Will</a>
+                    </div>
+
+                    <!-- Premium -->
+                    <div id="premium-plan" class="price-card reveal-up bg-white p-9 rounded-[2rem] shadow-md border border-ink/5 flex flex-col items-start text-left">
+                        <span class="text-ink/45 text-[10px] uppercase tracking-widest font-bold mb-2">Maximum Security</span>
+                        <h3 class="font-display italic text-2xl text-ink mb-5">Legacy Concierge</h3>
+                        <div class="flex items-baseline gap-1 mb-1">
+                            <span class="font-display italic text-lg text-ink">&#8377;</span>
+                            <span class="font-display italic font-semibold text-ink text-5xl">14,999</span>
+                        </div>
+                        <p class="text-ink/40 text-xs font-semibold mb-8">one-time, GST included</p>
+                        <ul class="space-y-4 mb-10 flex-grow text-sm">
+                            <li class="flex items-center gap-3 text-ink/65"><span class="material-symbols-outlined text-rust text-lg">check_circle</span>Joint Will for Spouses</li>
+                            <li class="flex items-center gap-3 text-ink/65"><span class="material-symbols-outlined text-rust text-lg">check_circle</span>Comprehensive Asset Audit</li>
+                            <li class="flex items-center gap-3 text-ink/65"><span class="material-symbols-outlined text-rust text-lg">check_circle</span>Priority Lawyer Support</li>
+                            <li class="flex items-center gap-3 text-ink/65"><span class="material-symbols-outlined text-rust text-lg">check_circle</span>Printed, Framed &amp; Doorstep Delivery</li>
+                        </ul>
+                        <a href="./order.php" class="magnetic w-full text-center py-4 rounded-xl border-2 border-ink text-ink font-bold text-sm">Start Premium Will</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= EVERY PLAN INCLUDES ================= -->
+        <section id="included" class="relative bg-ink-2 py-24 md:py-32 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.05] pointer-events-none"
+                style="background-image: radial-gradient(circle at 2px 2px, #c9a227 1px, transparent 0); background-size: 56px 56px;"></div>
+            <div class="max-w-site mx-auto px-6 md:px-10 relative z-10">
+                <div class="text-center mb-16 max-w-xl mx-auto">
+                    <span class="reveal-up block text-gold font-bold tracking-[0.3em] uppercase text-xs mb-5">No Fine Print</span>
+                    <h2 class="reveal-up font-display italic font-medium text-parchment text-4xl md:text-5xl">Every plan includes this, always.</h2>
+                </div>
+                <div class="flip-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" style="perspective: 1200px;">
+                    <div class="flip-item glass-dark rounded-[2rem] p-8 flex flex-col items-start" style="transform-style: preserve-3d;">
+                        <div class="w-14 h-14 rounded-2xl bg-gold/15 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-gold text-2xl">gavel</span>
+                        </div>
+                        <h4 class="font-bold text-parchment mb-2">Lawyer Reviewed</h4>
+                        <p class="text-parchment/45 text-sm leading-relaxed">Every clause checked by a senior advocate before it reaches you.</p>
+                    </div>
+                    <div class="flip-item glass-dark rounded-[2rem] p-8 flex flex-col items-start" style="transform-style: preserve-3d;">
+                        <div class="w-14 h-14 rounded-2xl bg-gold/15 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-gold text-2xl">encrypted</span>
+                        </div>
+                        <h4 class="font-bold text-parchment mb-2">256-bit Encryption</h4>
+                        <p class="text-parchment/45 text-sm leading-relaxed">Bank-grade security on every document and payment, always.</p>
+                    </div>
+                    <div class="flip-item glass-dark rounded-[2rem] p-8 flex flex-col items-start" style="transform-style: preserve-3d;">
+                        <div class="w-14 h-14 rounded-2xl bg-gold/15 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-gold text-2xl">receipt_long</span>
+                        </div>
+                        <h4 class="font-bold text-parchment mb-2">GST Inclusive</h4>
+                        <p class="text-parchment/45 text-sm leading-relaxed">The price you see is the price you pay. No processing fees, ever.</p>
+                    </div>
+                    <div class="flip-item glass-dark rounded-[2rem] p-8 flex flex-col items-start" style="transform-style: preserve-3d;">
+                        <div class="w-14 h-14 rounded-2xl bg-gold/15 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-gold text-2xl">verified_user</span>
+                        </div>
+                        <h4 class="font-bold text-parchment mb-2">7-Day Guarantee</h4>
+                        <p class="text-parchment/45 text-sm leading-relaxed">Not satisfied within a week? Full refund, no questions asked.</p>
+                    </div>
+                    <div class="flip-item glass-dark rounded-[2rem] p-8 flex flex-col items-start" style="transform-style: preserve-3d;">
+                        <div class="w-14 h-14 rounded-2xl bg-gold/15 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-gold text-2xl">edit_document</span>
+                        </div>
+                        <h4 class="font-bold text-parchment mb-2">Free Edits, 1 Year</h4>
+                        <p class="text-parchment/45 text-sm leading-relaxed">Life changes. Update beneficiaries or assets anytime, at no cost.</p>
+                    </div>
+                    <div class="flip-item glass-dark rounded-[2rem] p-8 flex flex-col items-start" style="transform-style: preserve-3d;">
+                        <div class="w-14 h-14 rounded-2xl bg-gold/15 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-gold text-2xl">chat_bubble</span>
+                        </div>
+                        <h4 class="font-bold text-parchment mb-2">Real Human Support</h4>
+                        <p class="text-parchment/45 text-sm leading-relaxed">WhatsApp a real person, not a bot, whenever you're stuck.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= COMPARISON TABLE ================= -->
+        <section id="compare" class="relative bg-parchment py-24 md:py-32">
+            <div class="max-w-site mx-auto px-6 md:px-10">
+                <div class="text-center mb-16 max-w-xl mx-auto">
+                    <span class="reveal-up block text-rust font-bold tracking-[0.3em] uppercase text-xs mb-5">Side by Side</span>
+                    <h2 class="reveal-up font-display italic font-medium text-ink text-4xl md:text-5xl">Compare all features.</h2>
+                </div>
+                <div class="reveal-up overflow-x-auto rounded-[2rem] border border-ink/10 shadow-lg">
+                    <table class="w-full border-collapse min-w-[640px]">
+                        <thead>
+                            <tr class="bg-ink text-parchment">
+                                <th class="py-6 px-4 text-left font-display italic text-lg font-medium w-1/4">Features</th>
+                                <th class="py-6 px-4 text-center font-display italic text-lg font-medium w-1/4">Essential</th>
+                                <th class="py-6 px-4 text-center font-display italic text-lg font-medium text-gold w-1/4">Family</th>
+                                <th class="py-6 px-4 text-center font-display italic text-lg font-medium w-1/4">Legacy Concierge</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr class="compare-row border-t border-ink/8">
+                                <td class="py-6 px-4 font-semibold text-ink">Legally Valid Will (PDF)</td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                            </tr>
+                            <tr class="compare-row border-t border-ink/8">
+                                <td class="py-6 px-4 font-semibold text-ink">Lawyer Review</td>
+                                <td class="py-6 px-4 text-center text-ink/25">&mdash;</td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                            </tr>
+                            <tr class="compare-row border-t border-ink/8">
+                                <td class="py-6 px-4 font-semibold text-ink">Physical Delivery</td>
+                                <td class="py-6 px-4 text-center text-ink/25">&mdash;</td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                            </tr>
+                            <tr class="compare-row border-t border-ink/8">
+                                <td class="py-6 px-4 font-semibold text-ink">Joint Will (Spouse)</td>
+                                <td class="py-6 px-4 text-center text-ink/25">&mdash;</td>
+                                <td class="py-6 px-4 text-center text-ink/25">&mdash;</td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                            </tr>
+                            <tr class="compare-row border-t border-ink/8">
+                                <td class="py-6 px-4 font-semibold text-ink">Asset Audit Assistance</td>
+                                <td class="py-6 px-4 text-center text-ink/25">&mdash;</td>
+                                <td class="py-6 px-4 text-center text-ink/25">&mdash;</td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                            </tr>
+                            <tr class="compare-row border-t border-ink/8">
+                                <td class="py-6 px-4 font-semibold text-ink">Priority Support</td>
+                                <td class="py-6 px-4 text-center text-ink/25">&mdash;</td>
+                                <td class="py-6 px-4 text-center text-ink/25">&mdash;</td>
+                                <td class="py-6 px-4 text-center"><span class="material-symbols-outlined text-rust">check</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TRUST BANNER ================= -->
+        <section id="trust" class="relative bg-ink py-24 md:py-32 overflow-hidden">
+            <div class="absolute top-0 right-0 w-1/3 h-full bg-gold/5 -skew-x-12 translate-x-20"></div>
+            <div class="max-w-site mx-auto px-6 md:px-10 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-16">
+                    <div>
+                        <span class="reveal-up block text-gold font-bold tracking-[0.3em] uppercase text-xs mb-6">Proven Track Record</span>
+                        <h2 class="reveal-up font-display italic font-medium text-parchment text-4xl md:text-5xl mb-6 leading-[1.1]">Trusted by 50,000+ Indian families.</h2>
+                        <p class="reveal-up text-parchment/50 text-lg mb-10 leading-relaxed">
+                            Our legal framework is designed by senior advocates specializing in Indian succession law. We ensure your assets reach your loved ones without legal hurdles.
+                        </p>
+                        <div class="reveal-up grid grid-cols-3 gap-6">
+                            <div>
+                                <div class="font-display italic text-3xl text-gold mb-1"><span class="stat-num" data-target="50000" data-suffix="+">0</span></div>
+                                <p class="text-parchment/40 text-xs uppercase tracking-widest font-bold">Families</p>
+                            </div>
+                            <div>
+                                <div class="font-display italic text-3xl text-gold mb-1"><span class="stat-num" data-target="4.9" data-decimal="1" data-suffix="/5">0</span></div>
+                                <p class="text-parchment/40 text-xs uppercase tracking-widest font-bold">Avg Rating</p>
+                            </div>
+                            <div>
+                                <div class="font-display italic text-3xl text-gold mb-1"><span class="stat-num" data-target="7" data-suffix="-day">0</span></div>
+                                <p class="text-parchment/40 text-xs uppercase tracking-widest font-bold">Guarantee</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal-scale rounded-[2.5rem] overflow-hidden shadow-2xl rotate-1">
+                        <img alt="Fountain pen resting on a legal document"
+                            class="w-full h-full object-cover aspect-[4/3]"
+                            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?fm=jpg&q=80&w=1200&auto=format&fit=crop">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TESTIMONIALS ================= -->
+        <section id="testimonials" class="py-24 md:py-36 bg-parchment overflow-hidden">
+            <div class="max-w-site mx-auto px-6 md:px-10">
+                <div class="text-center mb-16 max-w-xl mx-auto">
+                    <span class="reveal-up block text-rust font-bold tracking-[0.3em] uppercase text-xs mb-5">Worth Every Rupee</span>
+                    <h2 class="reveal-up font-display italic font-medium text-ink text-4xl md:text-5xl">Families on the value they got.</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="reveal-card-l bg-white p-9 rounded-[2.5rem] shadow-xl border border-ink/5">
+                        <div class="flex gap-1 text-gold mb-5">
+                            <span class="material-symbols-outlined text-base">star</span><span class="material-symbols-outlined text-base">star</span><span class="material-symbols-outlined text-base">star</span><span class="material-symbols-outlined text-base">star</span><span class="material-symbols-outlined text-base">star</span>
+                        </div>
+                        <p class="text-ink/75 italic text-lg mb-7 leading-relaxed">"The Standard plan felt like getting a lawyer's office for a fraction of the cost. The hardcopy delivery was a nice touch too."</p>
+                        <div class="flex items-center gap-4">
+                            <img alt="Ramesh Deshmukh" class="w-12 h-12 rounded-2xl object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQMl-HRRIXsrlMkjy_uS7S2yNqbpfoKiEb-ixUPb78Bacs72oMnRYMcbHjZkKSK9y-2NjU4A5UQgef5tNw6PlIFYz3vdnmiDfNBnkTryPdZu_tJDcUGAe3FZxB-AvIUCz3do52LqAKsayY5P2rHOkxNjBhm0S-CI8EwABN8HnU_MQ90eq4aLRBUw6Ynr9CEuiO_fIuAu-KcTRQ0WnITZmr-aQGVT8NqK5iOqKipd7DAvQLK6LYgYPQvZKo694xG29Ubg_UqSSOlO0r">
+                            <div>
+                                <h5 class="font-bold text-ink text-sm">Ramesh Deshmukh</h5>
+                                <p class="text-[10px] text-rust font-bold tracking-widest uppercase mt-1">Standard Plan</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal-card-r bg-ink text-parchment p-9 rounded-[2.5rem] shadow-xl">
+                        <div class="flex gap-1 text-gold mb-5">
+                            <span class="material-symbols-outlined text-base">star</span><span class="material-symbols-outlined text-base">star</span><span class="material-symbols-outlined text-base">star</span><span class="material-symbols-outlined text-base">star</span><span class="material-symbols-outlined text-base">star</span>
+                        </div>
+                        <p class="text-parchment/80 italic text-lg mb-7 leading-relaxed">"We needed a joint Will and an asset audit &mdash; Premium covered both, and priority support answered every question same-day."</p>
+                        <div class="flex items-center gap-4">
+                            <img alt="Priya Iyer" class="w-12 h-12 rounded-2xl object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9IfZ8XzjVYawRooxF2k1cageGEDlxgoYzoaGjtVUEicgmrhPugojRk69-MSTTXKc3uYyvr1HyA0yLFfYwxYkHLJiwo_y7ZbN0GONtYrJqY4xu9ot7cijHbI7yWLtC3uYzUaDKDslxyZMSfnMABnwL8nTm6vN6KgguhRnQL9CBEeHIyWU-tIFbcrDKLrK6M-BmCgluor8jk4htLkl4KmDLR7BqdcfxKYNFExgZMQuOSN5pED0ROY3XtE0rY-8YZDQKHTXsHuJrYS2Y">
+                            <div>
+                                <h5 class="font-bold text-parchment text-sm">Priya Iyer</h5>
+                                <p class="text-[10px] text-gold font-bold tracking-widest uppercase mt-1">Premium Plan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FAQ ================= -->
+        <section id="faq" class="relative bg-ink-2 py-24 md:py-36">
+            <div class="max-w-3xl mx-auto px-6 md:px-10">
+                <div class="text-center mb-14">
+                    <span class="reveal-up block text-gold font-bold tracking-[0.3em] uppercase text-xs mb-5">Common Questions</span>
+                    <h2 class="reveal-up font-display italic font-medium text-parchment text-4xl md:text-5xl">Pricing, clarified.</h2>
+                </div>
+                <div class="space-y-4" id="faqList">
+                    <div class="faq-item glass-dark rounded-3xl overflow-hidden">
+                        <button class="faq-trigger w-full flex justify-between items-center p-7 md:p-8 text-left font-display italic text-lg md:text-xl text-parchment">
+                            Can I upgrade my plan later?
+                            <span class="material-symbols-outlined faq-icon text-gold shrink-0 ml-4">add</span>
+                        </button>
+                        <div class="faq-content px-7 md:px-8">
+                            <p class="pb-8 text-parchment/55 leading-relaxed border-t border-white/10 pt-6">Yes, absolutely. You can upgrade from Basic to Standard or Premium at any time by paying the difference. Your data is preserved and a lawyer is assigned immediately if required.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-dark rounded-3xl overflow-hidden">
+                        <button class="faq-trigger w-full flex justify-between items-center p-7 md:p-8 text-left font-display italic text-lg md:text-xl text-parchment">
+                            What is the Money-Back Guarantee?
+                            <span class="material-symbols-outlined faq-icon text-gold shrink-0 ml-4">add</span>
+                        </button>
+                        <div class="faq-content px-7 md:px-8">
+                            <p class="pb-8 text-parchment/55 leading-relaxed border-t border-white/10 pt-6">If you're not satisfied with the quality of your Will or our service within 7 days of purchase, we refund your entire payment &mdash; no questions asked.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-dark rounded-3xl overflow-hidden">
+                        <button class="faq-trigger w-full flex justify-between items-center p-7 md:p-8 text-left font-display italic text-lg md:text-xl text-parchment">
+                            How long does physical delivery take?
+                            <span class="material-symbols-outlined faq-icon text-gold shrink-0 ml-4">add</span>
+                        </button>
+                        <div class="faq-content px-7 md:px-8">
+                            <p class="pb-8 text-parchment/55 leading-relaxed border-t border-white/10 pt-6">For Standard and Premium plans, physical copies are dispatched within 48 hours of lawyer approval, typically arriving in 3&ndash;5 business days depending on your location in India.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-dark rounded-3xl overflow-hidden">
+                        <button class="faq-trigger w-full flex justify-between items-center p-7 md:p-8 text-left font-display italic text-lg md:text-xl text-parchment">
+                            Are these prices inclusive of taxes?
+                            <span class="material-symbols-outlined faq-icon text-gold shrink-0 ml-4">add</span>
+                        </button>
+                        <div class="faq-content px-7 md:px-8">
+                            <p class="pb-8 text-parchment/55 leading-relaxed border-t border-white/10 pt-6">Yes, every price shown is a flat rate inclusive of GST &mdash; no additional processing fees or hidden charges, ever.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-dark rounded-3xl overflow-hidden">
+                        <button class="faq-trigger w-full flex justify-between items-center p-7 md:p-8 text-left font-display italic text-lg md:text-xl text-parchment">
+                            Is the 3-month EMI interest-free?
+                            <span class="material-symbols-outlined faq-icon text-gold shrink-0 ml-4">add</span>
+                        </button>
+                        <div class="faq-content px-7 md:px-8">
+                            <p class="pb-8 text-parchment/55 leading-relaxed border-t border-white/10 pt-6">Yes. Splitting any plan into 3 monthly instalments carries zero interest and no processing fee &mdash; the total you pay is identical to the one-time price.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FINAL CTA ================= -->
+        <section id="cta" class="relative py-24 md:py-32 px-4 md:px-6 bg-parchment overflow-hidden text-center">
+            <div class="max-w-3xl mx-auto relative z-10">
+                <h2 class="reveal-scale font-display italic font-medium text-ink text-4xl md:text-6xl mb-8 leading-[1.05]">
+                    Pick a plan. Protect your family.
+                </h2>
+                <p class="reveal-up text-ink/55 text-lg mb-12 max-w-xl mx-auto leading-relaxed">
+                    Every plan is backed by our 7-day money-back guarantee &mdash; there's no risk in getting started today.
+                </p>
+                <a href="#plans" class="magnetic reveal-up inline-block bg-ink text-parchment px-10 py-5 rounded-2xl font-bold text-base">View Plans Above</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer — same links as original, restyled -->
+    <footer class="bg-ink-2 pt-24 pb-10 border-t border-white/5">
+                <div class="max-w-site mx-auto px-6 md:px-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20 reveal-up">
+                        <div class="lg:col-span-5 space-y-8">
+                            <div class="font-display italic text-2xl font-semibold text-parchment">Will Banwalo</div>
+                            <p class="text-parchment/35 leading-relaxed text-base max-w-sm">
+                                The intersection of legal excellence and digital innovation. Redefining how India plans
+                                its future.
+                            </p>
+                            <!-- <div class="flex gap-5">
+                                <a class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-parchment/50 hover:text-gold hover:border-gold transition-colors"
+                                    href="#">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z">
+                                        </path>
+                                    </svg>
+                                </a>
+                                <a class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-parchment/50 hover:text-gold hover:border-gold transition-colors"
+                                    href="#">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 7.837c-2.301 0-4.163 1.862-4.163 4.163S9.699 16.163 12 16.163s4.163-1.862 4.163-4.163S14.301 7.837 12 7.837z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div> -->
+                        </div>
+                        <div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
+                            <div>
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Legal
+                                </h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    <li><a class="hover:text-gold transition-colors" href="./terms_of_use.html">Terms of Use</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./privacy_policy.html">Privacy Policy</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./compliance.html">Compliance</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Company</h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    <li><a class="hover:text-gold transition-colors" href="./about_us.html">About Us</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./faq.html">FAQs</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./contact_us.html">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-span-2 md:col-span-1">
+                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Support</h4>
+                                <ul class="space-y-3 text-parchment/35 text-sm">
+                                    
+                                    <li><a class="hover:text-gold transition-colors" href="https://wa.me/918797879878" target="_blank">WhatsApp Support</a></li>
+                                    <li><a class="hover:text-gold transition-colors" href="./php/track_order.php">Track Order</a></li>
+                                    <li><p class="hover:text-gold transition-colors" >Monday-Saturday <br> 9:00AM-7:00PM</p></li>
+                                    <li><a class="hover:text-gold transition-colors" href="tel:+918797879878">+91-8797879878</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class=" pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                        <p class="text-parchment/20 text-sm italic">© 2026 Will Banwalo. A premium legal technology
+                            boutique.</p>
+                        <div class="flex gap-10 items-center text-parchment/20 text-[10px] tracking-widest font-bold">
+                            <span class="flex items-center gap-2 uppercase"><span
+                                    class="material-symbols-outlined text-gold text-sm">verified</span> Verified legal
+                                flow</span>
+                            <span class="flex items-center gap-2 uppercase"><span
+                                    class="material-symbols-outlined text-gold text-sm">shield</span> AES-256
+                                Encrypted</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    </div><!-- #smooth-content -->
+    </div><!-- #smooth-wrapper -->
+
+    <!-- ===================== GSAP ===================== -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger, ScrollSmoother, MotionPathPlugin);
+
+        const smoother = ScrollSmoother.create({
+            wrapper: "#smooth-wrapper",
+            content: "#smooth-content",
+            smooth: 3.2,
+            smoothTouch: 0.1,
+            normalizeScroll: true,
+            ignoreMobileResize: true,
+            preventDefault: true
+        });
+
+        /* ---------------------------------------------------------------
+           Custom cursor
+        ----------------------------------------------------------------*/
+        const dot = document.getElementById('curDot');
+        const ring = document.getElementById('curRing');
+        const dotX = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power3" });
+        const dotY = gsap.quickTo(dot, "y", { duration: 0.1, ease: "power3" });
+        const ringX = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3" });
+        const ringY = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3" });
+        window.addEventListener('mousemove', (e) => {
+            dotX(e.clientX); dotY(e.clientY);
+            ringX(e.clientX); ringY(e.clientY);
+        });
+        document.querySelectorAll('a, button, .magnetic, .faq-trigger').forEach(el => {
+            el.addEventListener('mouseenter', () => ring.classList.add('grow'));
+            el.addEventListener('mouseleave', () => ring.classList.remove('grow'));
+        });
+
+        /* ---------------------------------------------------------------
+           Magnetic buttons
+        ----------------------------------------------------------------*/
+        document.querySelectorAll('.magnetic').forEach((btn) => {
+            btn.addEventListener('mousemove', (e) => {
+                const r = btn.getBoundingClientRect();
+                const x = e.clientX - r.left - r.width / 2;
+                const y = e.clientY - r.top - r.height / 2;
+                gsap.to(btn, { x: x * 0.3, y: y * 0.45, duration: 0.5, ease: 'power3' });
+            });
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           Marquee
+        ----------------------------------------------------------------*/
+        const marqueeEl = document.getElementById('marquee');
+        const marqueeText = 'TRANSPARENT PRICING &nbsp;&#9670;&nbsp; NO HIDDEN COSTS &nbsp;&#9670;&nbsp; MONEY-BACK GUARANTEE &nbsp;&#9670;&nbsp; GST INCLUDED &nbsp;&#9670;&nbsp; ';
+        marqueeEl.innerHTML = `<span>${marqueeText.repeat(4)}</span><span>${marqueeText.repeat(4)}</span>`;
+        gsap.to(marqueeEl, { xPercent: -50, duration: 22, ease: 'none', repeat: -1 });
+
+        /* ---------------------------------------------------------------
+           Header scroll state + mobile menu
+        ----------------------------------------------------------------*/
+        const header = document.getElementById('siteHeader');
+        ScrollTrigger.create({
+            trigger: '#plans', start: 'top top+=80',
+            onEnter: () => header.classList.add('scrolled'),
+            onLeaveBack: () => header.classList.remove('scrolled'),
+        });
+        const menuBtn = document.getElementById('menuBtn');
+        const mobilePanel = document.getElementById('mobilePanel');
+        let menuOpen = false;
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            gsap.to(mobilePanel, { height: menuOpen ? 'auto' : 0, duration: 0.45, ease: 'power2.inOut' });
+        });
+        mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            menuOpen = false;
+            gsap.to(mobilePanel, { height: 0, duration: 0.4 });
+        }));
+
+        /* ---------------------------------------------------------------
+           Hero load-in
+        ----------------------------------------------------------------*/
+        window.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.hero-word', { y: 30, opacity: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out', delay: 0.2 });
+            gsap.to('.scroll-cue', { opacity: 1, duration: 0.8, delay: 1.4 });
+            gsap.to('.scroll-line', { scaleY: 0.4, transformOrigin: 'bottom', repeat: -1, yoyo: true, duration: 1.3, ease: 'sine.inOut', delay: 1.4 });
+        });
+
+        /* ---------------------------------------------------------------
+           MotionPathPlugin — decorative icons drifting along a curve
+        ----------------------------------------------------------------*/
+        [['#mIcon1', 0], ['#mIcon2', -4.6], ['#mIcon3', -9.2]].forEach(([sel, delay]) => {
+            gsap.to(sel, {
+                motionPath: { path: '#motionPath', align: '#motionPath', alignOrigin: [0.5, 0.5], autoRotate: false },
+                duration: 14, repeat: -1, ease: 'none', delay
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           3D flip-in reveal — "Every plan includes" strip. Each badge
+           rotates in like a coin flipping face-up (new technique, not
+           used anywhere else on this page).
+        ----------------------------------------------------------------*/
+        gsap.from('.flip-item', {
+            rotateY: -100, opacity: 0, transformOrigin: 'left center',
+            duration: 0.9, stagger: 0.15, ease: 'power3.out',
+            scrollTrigger: { trigger: '#included', start: 'top 85%' }
+        });
+
+        /* ---------------------------------------------------------------
+           Generic scroll reveals
+        ----------------------------------------------------------------*/
+        gsap.utils.toArray('.reveal-up').forEach((el) => {
+            gsap.from(el, { y: 60, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+        });
+        gsap.utils.toArray('.reveal-scale').forEach((el) => {
+            gsap.from(el, { scale: 0.85, opacity: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%' } });
+        });
+        gsap.utils.toArray('.reveal-card-l').forEach((el) => {
+            gsap.from(el, { x: -60, opacity: 0, rotate: -2, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+        });
+        gsap.utils.toArray('.reveal-card-r').forEach((el) => {
+            gsap.from(el, { x: 60, opacity: 0, rotate: 2, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+        });
+
+        /* ---------------------------------------------------------------
+           ScrollTrigger.batch — comparison table rows reveal in batches
+        ----------------------------------------------------------------*/
+        ScrollTrigger.batch('.compare-row', {
+            start: 'top 92%',
+            onEnter: (batch) => gsap.from(batch, { opacity: 0, y: 24, stagger: 0.08, duration: 0.6, ease: 'power2.out' }),
+            once: true
+        });
+        ScrollTrigger.batch('.faq-item', {
+            start: 'top 92%',
+            onEnter: (batch) => gsap.from(batch, { opacity: 0, y: 24, stagger: 0.08, duration: 0.6, ease: 'power2.out' }),
+            once: true
+        });
+
+        /* ---------------------------------------------------------------
+           Stats count-up
+        ----------------------------------------------------------------*/
+        gsap.utils.toArray('.stat-num').forEach((el) => {
+            const target = parseFloat(el.dataset.target);
+            const suffix = el.dataset.suffix || '';
+            const decimals = parseInt(el.dataset.decimal || '0');
+            const counter = { val: 0 };
+            ScrollTrigger.create({
+                trigger: el, start: 'top 90%', once: true,
+                onEnter: () => {
+                    gsap.to(counter, {
+                        val: target, duration: 1.8, ease: 'power2.out',
+                        onUpdate: () => {
+                            el.textContent = decimals ? counter.val.toFixed(decimals) + suffix : Math.round(counter.val).toLocaleString('en-IN') + suffix;
+                        }
+                    });
+                }
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           FAQ accordion
+        ----------------------------------------------------------------*/
+        document.querySelectorAll('.faq-trigger').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const content = item.querySelector('.faq-content');
+                const icon = item.querySelector('.faq-icon');
+                const isOpen = item.classList.contains('open');
+
+                document.querySelectorAll('.faq-item.open').forEach((openItem) => {
+                    if (openItem !== item) {
+                        openItem.classList.remove('open');
+                        gsap.to(openItem.querySelector('.faq-content'), { height: 0, duration: 0.5, ease: 'power2.inOut' });
+                        gsap.to(openItem.querySelector('.faq-icon'), { rotate: 0, duration: 0.4 });
+                    }
+                });
+
+                if (isOpen) {
+                    item.classList.remove('open');
+                    gsap.to(content, { height: 0, duration: 0.5, ease: 'power2.inOut' });
+                    gsap.to(icon, { rotate: 0, duration: 0.4 });
+                } else {
+                    item.classList.add('open');
+                    gsap.to(content, { height: 'auto', duration: 0.5, ease: 'power2.inOut' });
+                    gsap.to(icon, { rotate: 45, duration: 0.4 });
+                }
+            });
+        });
+
+        /* ---------------------------------------------------------------
+           In-page anchor links must go through ScrollSmoother's own
+           scrollTo — a plain native "#hash" jump doesn't account for
+           ScrollSmoother's virtual scroll mapping and silently fails.
+        ----------------------------------------------------------------*/
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', (e) => {
+                const id = link.getAttribute('href');
+                if (id.length > 1) {
+                    const targetEl = document.querySelector(id);
+                    if (targetEl) {
+                        e.preventDefault();
+                        smoother.scrollTo(targetEl, true, 'top top');
+                    }
+                }
+            });
+        });
+
+        window.addEventListener('load', () => ScrollTrigger.refresh());
+    </script>
+</body>
+
+</html>

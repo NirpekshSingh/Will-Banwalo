@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-tertiary-container": "#eba1af",
+                  "error": "#ba1a1a",
+                  "surface-container-low": "#f2f4ef",
+                  "on-primary": "#ffffff",
+                  "outline-variant": "#c1c9bf",
+                  "surface-tint": "#3b6846",
+                  "surface-container": "#ecefe9",
+                  "on-background": "#191c1a",
+                  "surface-container-highest": "#e1e3de",
+                  "surface-container-lowest": "#ffffff",
+                  "surface": "#f8faf5",
+                  "on-primary-container": "#91c199",
+                  "outline": "#717971",
+                  "on-tertiary-fixed": "#370b17",
+                  "on-error": "#ffffff",
+                  "surface-dim": "#d8dbd6",
+                  "secondary-container": "#d3e8d2",
+                  "tertiary-fixed": "#ffd9de",
+                  "tertiary": "#52202c",
+                  "on-surface-variant": "#414941",
+                  "on-secondary-fixed-variant": "#394b3b",
+                  "on-error-container": "#93000a",
+                  "on-secondary-container": "#566958",
+                  "surface-bright": "#f8faf5",
+                  "background": "#f8faf5",
+                  "surface-variant": "#e1e3de",
+                  "primary-fixed-dim": "#a1d2a9",
+                  "on-primary-fixed-variant": "#235030",
+                  "secondary": "#516352",
+                  "secondary-fixed-dim": "#b8ccb7",
+                  "primary-fixed": "#bcefc4",
+                  "inverse-primary": "#a1d2a9",
+                  "on-tertiary-fixed-variant": "#6d3642",
+                  "tertiary-container": "#6d3642",
+                  "inverse-on-surface": "#eff1ec",
+                  "surface-container-high": "#e7e9e4",
+                  "secondary-fixed": "#d3e8d2",
+                  "primary-container": "#235030",
+                  "on-secondary": "#ffffff",
+                  "on-primary-fixed": "#00210c",
+                  "on-surface": "#191c1a",
+                  "on-secondary-fixed": "#0e1f12",
+                  "on-tertiary": "#ffffff",
+                  "primary": "#08391b",
+                  "error-container": "#ffdad6",
+                  "tertiary-fixed-dim": "#feb2bf",
+                  "inverse-surface": "#2e312e"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "2xl": "1.5rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "margin-desktop": "40px",
+                  "gutter": "24px",
+                  "margin-mobile": "16px",
+                  "container-max-width": "1200px",
+                  "section-gap": "80px",
+                  "unit": "8"
+          },
+          "fontFamily": {
+                  "headline-lg": ["Playfair Display"],
+                  "body-lg": ["Plus Jakarta Sans"],
+                  "label-md": ["Plus Jakarta Sans"],
+                  "headline-lg-mobile": ["Playfair Display"],
+                  "headline-xl": ["Playfair Display"],
+                  "headline-md": ["Playfair Display"],
+                  "label-sm": ["Plus Jakarta Sans"],
+                  "body-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+                  "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                  "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                  "headline-xl": ["48px", {"lineHeight": "60px", "fontWeight": "700"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c1c9bf;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary/20">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-background shadow-sm docked full-width top-0 z-40 sticky">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max-width mx-auto w-full">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">LegacyWill</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-full">help_outline</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-full">account_circle</button>
+<button class="font-label-md text-label-md bg-primary text-on-primary px-6 py-2 rounded-lg hover:opacity-80 active:scale-95 transition-all">Save &amp; Exit</button>
+</div>
+</div>
+</header>
+<div class="max-w-container-max-width mx-auto flex min-h-screen">
+<!-- SideNavBar (Progress Tracking) -->
+<aside class="hidden lg:flex flex-col p-6 gap-2 h-screen w-80 sticky top-20 left-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant shrink-0">
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-primary">Will Progress</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Step 3 of 8</p>
+</div>
+<nav class="flex flex-col gap-1 overflow-y-auto custom-scrollbar pr-2">
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Personal Details</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined">family_restroom</span>
+<span class="font-label-md text-label-md">Family Tree</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-4 bg-tertiary text-on-tertiary rounded-xl px-4 py-3 shadow-sm transition-all scale-98" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Beneficiaries</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-label-md text-label-md">Asset Portfolio</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">Executors</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined">supervisor_account</span>
+<span class="font-label-md text-label-md">Guardians</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Review Will</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-secondary-container/20 rounded-xl transition-all opacity-50 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Payment</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant">
+<button class="w-full flex items-center justify-center gap-2 bg-secondary text-on-secondary px-4 py-4 rounded-xl font-label-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">support_agent</span>
+          Get Legal Help
+        </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-4 md:px-12 py-10 pb-32">
+<div class="max-w-3xl mx-auto space-y-section-gap">
+<!-- Header Section -->
+<section class="space-y-4">
+<h1 class="font-headline-xl text-headline-xl text-on-background">Beneficiaries &amp; Executors</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Define who will inherit your assets and who will ensure your wishes are carried out with precision and care.</p>
+</section>
+<!-- Beneficiary Dynamic Cards -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-primary">Family &amp; Beneficiaries</h2>
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-fixed px-3 py-1 rounded-full">TOTAL ALLOCATION: 100%</span>
+</div>
+<div class="space-y-4" id="beneficiary-list">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30 group hover:shadow-md transition-shadow relative">
+<button class="absolute top-6 right-6 text-error opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">delete</span>
+</button>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Full Legal Name</label>
+<input class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="text" value="Priya Sharma"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Relationship</label>
+<select class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
+<option>Spouse</option>
+<option>Child</option>
+<option>Parent</option>
+<option>Other</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Date of Birth</label>
+<input class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="date" value="1985-06-15"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">% Share of Estate</label>
+<div class="relative">
+<input class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="number" value="60"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold">%</span>
+</div>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Current Address</label>
+<textarea class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" rows="2">12A, Heritage Heights, MG Road, Bangalore 560001</textarea>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30 group hover:shadow-md transition-shadow relative">
+<button class="absolute top-6 right-6 text-error opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">delete</span>
+</button>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Full Legal Name</label>
+<input class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="Enter Name" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Relationship</label>
+<select class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
+<option disabled="" selected="">Select Relationship</option>
+<option>Spouse</option>
+<option>Child</option>
+<option>Parent</option>
+<option>Other</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Date of Birth</label>
+<input class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" type="date"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">% Share of Estate</label>
+<div class="relative">
+<input class="w-full bg-surface-container border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="0" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold">%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 py-6 border-2 border-dashed border-outline-variant rounded-2xl text-primary font-label-md hover:bg-primary/5 transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">add_circle</span>
+            Add Another Beneficiary
+          </button>
+</section>
+<!-- Executor Section -->
+<section class="space-y-6">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-md text-headline-md text-primary">Executor Information</h2>
+<div class="group relative">
+<span class="material-symbols-outlined text-outline cursor-help text-sm">info</span>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-inverse-surface text-inverse-on-surface text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl">
+                The Executor is responsible for managing your estate and distributing assets as per the Will.
+              </div>
+</div>
+</div>
+<div class="bg-secondary-container/20 p-8 rounded-2xl border border-secondary/20">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Executor's Full Name</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary outline-none" placeholder="Typically a trusted lawyer or relative" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Phone Number</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary outline-none" placeholder="+91 00000 00000" type="tel"/>
+</div>
+</div>
+<div class="mt-4 flex items-start gap-3 p-4 bg-surface-container-lowest/50 rounded-xl">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">security</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                Choose someone you trust implicitly. It’s advisable to inform them beforehand that they are being named as an executor in your Will.
+              </p>
+</div>
+</div>
+</section>
+<!-- Trust Indicators -->
+<div class="flex flex-wrap items-center gap-8 py-8 border-y border-outline-variant/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">SSL Encrypted</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Legally Compliant</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Private &amp; Secure</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Sidebar Summary (Floating Desktop) -->
+<aside class="hidden xl:block w-72 pt-10 pr-margin-desktop">
+<div class="sticky top-32 space-y-6">
+<div class="bg-surface-container-high p-6 rounded-2xl shadow-sm border border-outline-variant/30">
+<h3 class="font-label-md text-label-md text-primary mb-4">Summary</h3>
+<ul class="space-y-4">
+<li class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Beneficiaries</span>
+<span class="font-bold">02</span>
+</li>
+<li class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Allocated</span>
+<span class="font-bold text-primary">60%</span>
+</li>
+<li class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Remaining</span>
+<span class="font-bold text-tertiary">40%</span>
+</li>
+</ul>
+<div class="mt-6 pt-6 border-t border-outline-variant/30">
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full transition-all duration-700" style="width: 37%"></div>
+</div>
+<p class="text-[10px] uppercase font-bold text-outline mt-2 tracking-widest">Global Progress: 37%</p>
+</div>
+</div>
+<div class="rounded-2xl overflow-hidden relative aspect-video shadow-lg group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A high-quality, professional photograph of a traditional fountain pen resting on premium cream-colored paper. The setting is a minimalist, modern law office with soft, natural lighting entering from a large window. The color palette is composed of sage greens, earthy browns, and crisp whites, evoking a mood of heritage and security. The depth of field is shallow, focusing on the fine nib of the pen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABFWK4YV3rzEYKiAxQfQ8K9lQFLyOByUtK_j6-QZBTdibAgn1ProUiB260HVuAzEB-JEgYAaRqlJJkNmoZLUYUFjxp_GFngu9IAGOR9LY9WxgzPy8hD9Yec6VfVMmu4L__5x7HVK4yJSTe-irvRqYze3itcZAtASKacPyB_1yQcSZmADOHOLhn1o74H2vHk-VaTQPkZdnoCTfPUUeLNp8cRmB6SCYtx6FeyFaIPoC-_Pc0ffq0p0e_kH0fzGC4TK-EX4ytAVq65vYi"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+<p class="text-white text-xs font-label-md">"Planning for the future is the ultimate act of love for your family."</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- BottomNavBar (Mobile & Navigation) -->
+<footer class="fixed bottom-0 left-0 w-full bg-surface dark:bg-surface-dim shadow-md z-50 border-t border-outline-variant px-4 py-3 pb-safe lg:px-margin-desktop">
+<div class="max-w-container-max-width mx-auto flex justify-between items-center">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label-md">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="hidden sm:inline">Previous Step</span>
+</button>
+<div class="flex items-center gap-4">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-primary transition-colors lg:hidden">
+<span class="material-symbols-outlined">save</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Save</span>
+</button>
+<button class="bg-primary text-on-primary px-10 py-4 rounded-xl font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg">
+          Save &amp; Continue
+          <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- Micro-interactions & Visual Effects Script -->
+<script>
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+      el.addEventListener('focus', () => {
+        el.parentElement.querySelector('label')?.classList.add('text-primary');
+      });
+      el.addEventListener('blur', () => {
+        el.parentElement.querySelector('label')?.classList.remove('text-primary');
+      });
+    });
+
+    // Add another beneficiary card logic (visual simulation)
+    const addBtn = document.querySelector('button.border-dashed');
+    const container = document.getElementById('beneficiary-list');
+    
+    addBtn.addEventListener('click', () => {
+      const newCard = container.children[1].cloneNode(true);
+      newCard.style.opacity = '0';
+      newCard.style.transform = 'translateY(20px)';
+      container.appendChild(newCard);
+      
+      setTimeout(() => {
+        newCard.style.transition = 'all 0.5s ease-out';
+        newCard.style.opacity = '1';
+        newCard.style.transform = 'translateY(0)';
+      }, 50);
+    });
+  </script>
+</body></html>
