@@ -32,7 +32,7 @@ if ($step === 1) {
     }
 
     $stmt = $db->prepare('INSERT INTO orders (order_ref, will_type, plan, plan_amount, gst_amount, total_amount, ip_address)
-                           VALUES (?, ?, "standard", 4499.00, 809.82, 5308.82, ?)');
+                           VALUES (?, ?, "standard", 5999.00, 0.00, 5999.00, ?)');
     $stmt->execute([$ref, $willType, $_SERVER['REMOTE_ADDR'] ?? null]);
     $orderId = (int)$db->lastInsertId();
 
@@ -216,8 +216,8 @@ if ($step === 7) {
         jsonError('Invalid plan.');
     }
     $amount = planPrice($plan);
-    $gst    = round($amount * 0.18, 2);
-    $total  = $amount + $gst;
+    $gst    = 0.00;            // prices are GST-inclusive
+    $total  = $amount;
 
     $db->prepare('UPDATE orders SET plan=?, plan_amount=?, gst_amount=?, total_amount=? WHERE id=?')
        ->execute([$plan, $amount, $gst, $total, $orderId]);

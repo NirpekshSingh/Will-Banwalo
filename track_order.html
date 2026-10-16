@@ -1,413 +1,665 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link href="./img/favicon.png" rel="icon" type="image/png">
+    <link href="./img/favicon.png" rel="shortcut icon">
   <title>Track Order | Will Banwalo</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-  <script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{primary:"#0b2016",secondary:"#c9a227","on-primary":"#f7f3e8",surface:"#f7f3e8","surface-variant":"#efe7d1",outline:"#0b2016","outline-variant":"#0b2016","accent-gold":"#c9a227","surface-bright":"#fbf9f2","on-primary-fixed":"#f7f3e8","on-surface-variant":"#0b2016",tertiary:"#7a3b2e","surface-tint":"#0b2016","error-container":"#f3ddd8","surface-dim":"#efe7d1","on-primary-fixed-variant":"#e3c766","on-background":"#0b2016",error:"#93000a","on-error":"#ffffff","tertiary-container":"#7a3b2e","inverse-surface":"#0b2016",background:"#f7f3e8","primary-fixed":"#122c1f","on-tertiary":"#ffffff","surface-container":"#efe7d1","on-surface":"#0b2016","on-secondary-fixed":"#0b2016","on-secondary-container":"#0b2016","primary-fixed-dim":"#081712","on-error-container":"#93000a","inverse-primary":"#c9a227","primary-container":"#122c1f","inverse-on-surface":"#f7f3e8","surface-container-low":"#fbf9f2","on-primary-container":"#e3c766","surface-container-highest":"#efe7d1","surface-container-high":"#efe7d1","secondary-container":"#f3e9c9","surface-container-lowest":"#ffffff","secondary-fixed":"#f3e9c9","on-secondary":"#0b2016"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"margin-mobile":"16px",unit:"8px","margin-desktop":"40px","section-gap":"140px",gutter:"24px","container-max-width":"1280px"},fontFamily:{"body-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-xl":["Fraunces"],"headline-lg":["Fraunces"],"headline-md":["Fraunces"],headline:["Fraunces"],display:["Fraunces"],body:["Plus Jakarta Sans"],label:["Plus Jakarta Sans"]}}}}</script>
+  <link rel="stylesheet" href="./css/output.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+  
   <style>
-    * { cursor: none; }
-    html { scroll-behavior: auto; }
-    #smooth-wrapper { overflow: hidden; position: relative; }
-    #smooth-content { overflow: visible; width: 100%; }
-    .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
-    .ms-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
-    .glass-card{background:rgba(255,255,255,.65);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.45)}
-    .hero-gradient{background:radial-gradient(circle at top right,rgba(201,162,39,.10),transparent 40%),radial-gradient(circle at bottom left,rgba(11,32,22,.05),transparent 40%)}
-    .organic-shape{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}
-    .track-input:focus{outline:none;box-shadow:0 0 0 3px rgba(201,162,39,.25)}
+    * {
+      cursor: none;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    #smooth-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+
+    #smooth-content {
+      overflow: visible;
+      width: 100%;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24
+    }
+
+    .ms-fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, .65);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, .45)
+    }
+
+    .hero-gradient {
+      background: radial-gradient(circle at top right, rgba(201, 162, 39, .10), transparent 40%), radial-gradient(circle at bottom left, rgba(11, 32, 22, .05), transparent 40%)
+    }
+
+    .organic-shape {
+      border-radius: 60% 40% 30% 70%/60% 30% 70% 40%
+    }
+
+    .track-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(201, 162, 39, .25)
+    }
+
     /* ---------- custom cursor ---------- */
-    .cur-dot, .cur-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; transform: translate(-50%, -50%); }
-    .cur-dot { width: 6px; height: 6px; background: #c9a227; }
-    .cur-ring { width: 34px; height: 34px; border: 1px solid rgba(201,162,39,0.55); transition: width .25s ease, height .25s ease, border-color .25s ease, background .25s ease; }
-    .cur-ring.grow { width: 76px; height: 76px; background: rgba(201,162,39,0.08); border-color: rgba(201,162,39,0.9); }
-    @media (max-width: 900px) { .cur-dot, .cur-ring { display: none; } * { cursor: auto; } }
+    .cur-dot,
+    .cur-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cur-dot {
+      width: 6px;
+      height: 6px;
+      background: #c9a227;
+    }
+
+    .cur-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(201, 162, 39, 0.55);
+      transition: width .25s ease, height .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .cur-ring.grow {
+      width: 76px;
+      height: 76px;
+      background: rgba(201, 162, 39, 0.08);
+      border-color: rgba(201, 162, 39, 0.9);
+    }
+
+    @media (max-width: 900px) {
+
+      .cur-dot,
+      .cur-ring {
+        display: none;
+      }
+
+      * {
+        cursor: auto;
+      }
+    }
+
     /* ---------- marquee ---------- */
-    .marquee-track { display: flex; width: max-content; }
-    .marquee-track span { white-space: nowrap; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; letter-spacing: 0.28em; font-size: 0.7rem; padding: 0 1.5rem; }
-    .mobile-panel { height: 0; overflow: hidden; }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+    }
+
+    .marquee-track span {
+      white-space: nowrap;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      font-size: 0.7rem;
+      padding: 0 1.5rem;
+    }
+
+    .mobile-panel {
+      height: 0;
+      overflow: hidden;
+    }
+
     /* ---------- nav ---------- */
-    .nav-link, .nav-mark { color: #0b2016; }
-    header.scrolled { box-shadow: 0 10px 40px rgba(11,32,22,0.1); }
-    .nav-link.active { color: #c9a227 !important; }
+    .nav-link,
+    .nav-mark {
+      color: #0b2016;
+    }
+
+    header.scrolled {
+      box-shadow: 0 10px 40px rgba(11, 32, 22, 0.1);
+    }
+
+    .nav-link.active {
+      color: #c9a227 !important;
+    }
+
     /* Status badges */
-    .sb-draft{background:#efe7d1;color:#0b2016}
-    .sb-submitted{background:#f3e9c9;color:#0b2016}
-    .sb-under_review{background:#fff3cd;color:#7a5a00}
-    .sb-completed{background:#d8ecd0;color:#0b2016}
-    .sb-cancelled{background:#f3ddd8;color:#93000a}
-    .pb-pending{background:#fff3cd;color:#7a5a00}
-    .pb-paid{background:#d8ecd0;color:#0b2016}
-    .pb-failed{background:#f3ddd8;color:#93000a}
-    .pb-refunded{background:#efe7d1;color:#0b2016}
+    .sb-draft {
+      background: #efe7d1;
+      color: #0b2016
+    }
+
+    .sb-submitted {
+      background: #f3e9c9;
+      color: #0b2016
+    }
+
+    .sb-under_review {
+      background: #fff3cd;
+      color: #7a5a00
+    }
+
+    .sb-completed {
+      background: #d8ecd0;
+      color: #0b2016
+    }
+
+    .sb-cancelled {
+      background: #f3ddd8;
+      color: #93000a
+    }
+
+    .pb-pending {
+      background: #fff3cd;
+      color: #7a5a00
+    }
+
+    .pb-paid {
+      background: #d8ecd0;
+      color: #0b2016
+    }
+
+    .pb-failed {
+      background: #f3ddd8;
+      color: #93000a
+    }
+
+    .pb-refunded {
+      background: #efe7d1;
+      color: #0b2016
+    }
+
     /* Doc card hover */
-    .doc-card .doc-actions{opacity:0;transform:translateX(6px);transition:all .2s ease}
-    .doc-card:hover .doc-actions{opacity:1;transform:translateX(0)}
+    .doc-card .doc-actions {
+      opacity: 0;
+      transform: translateX(6px);
+      transition: all .2s ease
+    }
+
+    .doc-card:hover .doc-actions {
+      opacity: 1;
+      transform: translateX(0)
+    }
+
     /* Log dot colours */
-    .ldot-green{background:#4c9a5b}
-    .ldot-blue{background:#60a5fa}
-    .ldot-red{background:#c0453a}
-    .ldot-amber{background:#c9a227}
-    .ldot-purple{background:#7a3b2e}
+    .ldot-green {
+      background: #4c9a5b
+    }
+
+    .ldot-blue {
+      background: #60a5fa
+    }
+
+    .ldot-red {
+      background: #c0453a
+    }
+
+    .ldot-amber {
+      background: #c9a227
+    }
+
+    .ldot-purple {
+      background: #7a3b2e
+    }
+
     /* Section reveal — GSAP owns the actual animation; this just hides
        elements before their reveal timeline runs. */
-    .reveal{opacity:0}
+    .reveal {
+      opacity: 0
+    }
   </style>
 </head>
+
 <body class="bg-surface text-primary font-body-md selection:bg-secondary/30 selection:text-primary">
 
-<div class="cur-ring" id="curRing"></div>
-<div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+  <div class="cur-dot" id="curDot"></div>
 
-<!-- ════════════════════════ NAV — same links as original, restyled ════════════════════════ -->
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-xl border-b border-outline-variant/10 transition-shadow duration-500" id="nav">
-  <nav class="max-w-container-max-width mx-auto px-margin-desktop h-20 md:h-24 flex justify-between items-center">
-    <div class="nav-mark font-headline-md text-2xl md:text-3xl font-bold tracking-tight">Will Banwalo</div>
-    <div class="hidden lg:flex items-center gap-10">
-      <a class="nav-link font-bold text-sm" href="./index.html">Home</a>
-      <a class="nav-link font-bold text-sm" href="./how_it_works.html">How it Works</a>
-      <a class="nav-link font-bold text-sm" href="./pricing.html">Pricing</a>
-      <a class="nav-link font-bold text-sm" href="./faq.html">FAQs</a>
-      <a class="nav-link active font-bold text-sm" href="./track_order.html">Track Order</a>
-      <a class="nav-link font-bold text-sm" href="./contact_us.html">Contact Us</a>
-    </div>
-    <div class="flex items-center gap-4">
-      <a href="./order.php" class="magnetic relative overflow-hidden bg-secondary text-primary px-6 md:px-8 py-3 rounded-full text-sm font-bold tracking-wide">
-        <span class="relative z-10">Create My Will</span>
-      </a>
-      <button id="menuBtn" class="lg:hidden nav-mark w-10 h-10 flex items-center justify-center">
-        <span class="material-symbols-outlined text-2xl">menu</span>
-      </button>
-    </div>
-  </nav>
-  <div class="mobile-panel bg-surface lg:hidden" id="mobilePanel">
-    <div class="flex flex-col px-6 py-6 gap-5 text-primary font-semibold">
-      <a href="./index.html">Home</a>
-      <a href="./how_it_works.html">How it Works</a>
-      <a href="./pricing.html">Pricing</a>
-      <a href="./faq.html">FAQs</a>
-      <a href="./track_order.html" class="text-secondary">Track Order</a>
-      <a href="./contact_us.html">Contact Us</a>
-    </div>
-  </div>
-</header>
-
-<div id="smooth-wrapper">
-<div id="smooth-content">
-<main class="pt-24">
-
-  <!-- ════════════════════════ HERO / SEARCH ════════════════════════ -->
-  <section class="relative hero-gradient overflow-hidden min-h-[70svh] flex items-center">
-    <div class="absolute -top-32 -left-32 w-[500px] h-[500px] organic-shape bg-secondary/8 blur-[100px] -z-10 hero-blob-a"></div>
-    <div class="absolute bottom-0 right-0 w-[360px] h-[360px] organic-shape bg-primary/5 blur-[80px] -z-10 translate-x-1/3 hero-blob-b"></div>
-    <div class="max-w-container-max-width mx-auto px-margin-desktop w-full py-20 text-center relative z-10">
-      <div class="hero-word inline-flex items-center gap-3 px-5 py-2.5 bg-white shadow-sm border border-outline-variant/20 rounded-full mb-8">
-        <span class="w-2 h-2 rounded-full bg-secondary pulse-dot"></span>
-        <span class="tracking-widest uppercase text-[10px] font-bold text-primary/60">Real-Time Order Status</span>
+  <!-- ════════════════════════ NAV — same links as original, restyled ════════════════════════ -->
+  <header
+    class="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-xl border-b border-outline-variant/10 transition-shadow duration-500"
+    id="nav">
+    <nav class="max-w-container-max-width mx-auto px-margin-desktop h-20 md:h-24 flex justify-between items-center">
+      <div class="nav-mark font-headline-md text-2xl md:text-3xl font-bold tracking-tight">Will Banwalo</div>
+      <div class="hidden lg:flex items-center gap-10">
+        <a class="nav-link font-bold text-sm" href="./index.html">Home</a>
+        <a class="nav-link font-bold text-sm" href="./how_it_works.html">How it Works</a>
+        <a class="nav-link font-bold text-sm" href="./pricing.html">Pricing</a>
+        <a class="nav-link font-bold text-sm" href="./faq.html">FAQs</a>
+        <a class="nav-link active font-bold text-sm" href="./track_order.html">Track Order</a>
+        <a class="nav-link font-bold text-sm" href="./contact_us.html">Contact Us</a>
       </div>
-      <h1 class="hero-word font-headline-xl text-primary text-5xl md:text-6xl font-bold leading-tight mb-5">
-        Track Your <span class="italic text-secondary">Will Order</span>
-      </h1>
-      <p class="hero-word text-primary/50 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-        Enter your unique order reference to view your complete order status, documents, and delivery details.
-      </p>
-      <!-- Search bar -->
-      <form id="search-form" onsubmit="handleSearch(event)" class="hero-word max-w-2xl mx-auto">
-        <div class="flex items-center gap-3 bg-white rounded-full shadow-2xl shadow-primary/10 border border-outline-variant/20 p-2 pl-6">
-          <span class="material-symbols-outlined text-secondary text-xl flex-shrink-0">manage_search</span>
-          <input id="ref-input" type="text" placeholder="e.g. LW-2025-8842-BNW"
-            class="track-input flex-1 bg-transparent font-label-md text-primary placeholder-primary/30 py-2 border-none focus:ring-0 text-base tracking-wider"
-            autocomplete="off" spellcheck="false">
-          <button type="submit" id="search-btn"
-            class="magnetic bg-primary text-on-primary px-8 py-3.5 rounded-full font-label-md font-bold whitespace-nowrap flex items-center gap-2">
-            <span class="material-symbols-outlined text-base" id="search-icon">search</span>
-            <span id="search-label">Track Order</span>
-          </button>
-        </div>
-        <p class="text-primary/30 text-xs mt-3 tracking-wide">Your order reference was sent to your registered email after payment.</p>
-      </form>
-    </div>
-  </section>
-
-  <!-- Marquee ribbon -->
-  <div class="bg-secondary text-primary py-3 overflow-hidden">
-    <div class="marquee-track" id="marquee"></div>
-  </div>
-
-  <!-- ════════════════════════ RESULTS ════════════════════════ -->
-  <div class="max-w-container-max-width mx-auto px-margin-desktop py-14 space-y-6" id="results-root" style="display:none">
-
-    <!-- Error -->
-    <div id="err-panel" style="display:none" class="text-center py-20">
-      <div class="w-20 h-20 rounded-full bg-error-container flex items-center justify-center mx-auto mb-6">
-        <span class="material-symbols-outlined text-4xl ms-fill" style="color:#7a3b2e">search_off</span>
-      </div>
-      <h2 class="font-headline-md text-primary text-2xl font-bold mb-3">Order Not Found</h2>
-      <p class="text-primary/50 mb-8 max-w-sm mx-auto" id="err-msg">We couldn't find that order reference. Please check and try again.</p>
-      <button onclick="resetSearch()" class="magnetic bg-primary text-on-primary px-8 py-3.5 rounded-full font-label-md">Try Again</button>
-    </div>
-
-    <!-- Main results panel -->
-    <div id="results-panel" style="display:none" class="space-y-6">
-
-      <!-- ── 1. ORDER HEADER ROW ── -->
-      <div class="glass-card rounded-2xl p-8 reveal">
-        <div class="flex flex-wrap items-start justify-between gap-5 mb-8">
-          <div>
-            <p class="text-primary/40 text-xs tracking-widest uppercase font-bold mb-1">Order Reference</p>
-            <h2 class="font-headline-md text-primary text-3xl font-bold tracking-wider" id="d-ref">—</h2>
-          </div>
-          <div class="flex flex-wrap gap-3 items-center">
-            <span id="d-status-badge" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">—</span>
-            <span id="d-pay-badge"    class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">—</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-          <div><p class="label-xs">Will Type</p><p class="val" id="d-will-type">—</p></div>
-          <div><p class="label-xs">Plan</p><p class="val capitalize" id="d-plan">—</p></div>
-          <div><p class="label-xs">Placed On</p><p class="val" id="d-date">—</p></div>
-          <div><p class="label-xs">Plan Amount</p><p class="val" id="d-plan-amt">—</p></div>
-          <div><p class="label-xs">GST (18%)</p><p class="val" id="d-gst">—</p></div>
-          <div><p class="label-xs">Total Paid</p><p class="text-primary text-xl font-bold mt-1" id="d-total">—</p></div>
-        </div>
-      </div>
-
-      <!-- ── 2. ACCOUNT HOLDER ── -->
-      <div class="glass-card rounded-2xl p-8 reveal">
-        <p class="section-title mb-6">Account Holder</p>
-        <div class="flex flex-wrap gap-8 items-start">
-          <div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-secondary text-2xl ms-fill">person</span>
-          </div>
-          <div class="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-6">
-            <div class="sm:col-span-2"><p class="label-xs">Full Name</p><p class="text-primary text-lg font-bold" id="d-name">—</p></div>
-            <div><p class="label-xs">Mobile</p><p class="val" id="d-mobile">—</p></div>
-            <div><p class="label-xs">Email</p><p class="val break-all" id="d-email">—</p></div>
-            <div><p class="label-xs">Date of Birth</p><p class="val" id="d-dob">—</p></div>
-            <div><p class="label-xs">Gender</p><p class="val capitalize" id="d-gender">—</p></div>
-            <div class="sm:col-span-2"><p class="label-xs">Location</p><p class="val" id="d-location">—</p></div>
-            <div id="d-executor-wrap" class="sm:col-span-2" style="display:none">
-              <p class="label-xs">Executor</p><p class="val" id="d-executor">—</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 3. PROGRESS TRACKER ── -->
-      <div class="glass-card rounded-2xl p-8 reveal">
-        <p class="section-title mb-8">Order Progress</p>
-        <div class="relative flex items-start justify-between" id="progress-track"></div>
-      </div>
-
-      <!-- ── 4. FINAL WILL (admin-uploaded) ── -->
-      <div id="final-will-card" class="rounded-2xl p-8 reveal" style="display:none;background:linear-gradient(135deg,rgba(8,57,27,.04),rgba(188,239,195,.15));border:1.5px solid rgba(8,57,27,.18)">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="material-symbols-outlined text-primary text-2xl ms-fill">history_edu</span>
-          <p class="section-title">Final Will Document</p>
-          <span class="ml-auto px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-primary/10 text-primary">Admin Uploaded</span>
-        </div>
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-          <div class="w-14 h-14 rounded-xl bg-primary flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-on-primary text-2xl ms-fill">picture_as_pdf</span>
-          </div>
-          <div class="flex-1 min-w-0">
-            <p class="font-bold text-primary text-lg mb-0.5" id="fw-name">—</p>
-            <p class="text-primary/40 text-sm" id="fw-size">—</p>
-            <p class="text-secondary text-xs font-bold mt-1 flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm ms-fill">verified</span> Legally reviewed &amp; ready to download
-            </p>
-          </div>
-          <div class="flex gap-3 flex-shrink-0">
-            <a id="fw-view-btn" href="#" target="_blank"
-              class="magnetic flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-on-primary text-sm font-bold">
-              <span class="material-symbols-outlined text-base">open_in_new</span> View
-            </a>
-            <a id="fw-dl-btn" href="#" download
-              class="magnetic flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary text-primary text-sm font-bold">
-              <span class="material-symbols-outlined text-base">download</span> Download
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- final will NOT uploaded yet -->
-      <div id="final-will-pending" class="glass-card rounded-2xl p-8 reveal" style="display:none">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="material-symbols-outlined text-primary/30 text-2xl">history_edu</span>
-          <p class="section-title text-primary/50">Final Will Document</p>
-        </div>
-        <div class="flex items-center gap-4 bg-surface-container rounded-xl p-5">
-          <div class="w-12 h-12 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center flex-shrink-0">
-            <span class="material-symbols-outlined text-primary/30 text-xl">schedule</span>
-          </div>
-          <div>
-            <p class="font-semibold text-primary/60">Awaiting admin upload</p>
-            <p class="text-primary/40 text-sm mt-0.5">Our legal team is reviewing your will. You'll receive an email when it's ready.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 5. CUSTOMER DOCUMENTS ── -->
-      <div class="glass-card rounded-2xl p-8 reveal">
-        <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
-          <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-secondary text-2xl">folder_open</span>
-            <p class="section-title">Your Uploaded Documents</p>
-          </div>
-          <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-surface-container text-primary/50 uppercase tracking-widest" id="d-doc-count">0 Documents</span>
-        </div>
-        <div id="doc-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-        <div id="doc-empty" style="display:none" class="text-center py-12">
-          <span class="material-symbols-outlined text-4xl text-primary/20 block mb-3">folder_off</span>
-          <p class="text-primary/40 text-sm">No documents uploaded yet.</p>
-        </div>
-      </div>
-
-      <!-- ── 6. BENEFICIARIES ── -->
-      <div id="bene-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="material-symbols-outlined text-secondary text-2xl">group</span>
-          <p class="section-title">Beneficiaries</p>
-        </div>
-        <div id="bene-list" class="space-y-3"></div>
-      </div>
-
-      <!-- ── 7. ASSETS ── -->
-      <div id="assets-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
-        <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
-          <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-secondary text-2xl">account_balance</span>
-            <p class="section-title">Assets</p>
-          </div>
-          <span class="px-4 py-1.5 rounded-full text-xs font-bold bg-surface-container text-primary/50 uppercase tracking-widest" id="d-asset-count">0 Assets</span>
-        </div>
-        <!-- Table layout matching admin panel -->
-        <div class="overflow-x-auto rounded-xl border border-outline-variant/30">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="bg-surface-container border-b border-outline-variant/30">
-                <th class="label-xs px-5 py-3 text-left font-bold">Type</th>
-                <th class="label-xs px-5 py-3 text-left font-bold">Description</th>
-                <th class="label-xs px-5 py-3 text-right font-bold">Est. Value</th>
-              </tr>
-            </thead>
-            <tbody id="assets-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ── 8. SPECIAL INSTRUCTIONS ── -->
-      <div id="special-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="material-symbols-outlined text-secondary text-2xl">volunteer_activism</span>
-          <p class="section-title">Special Instructions</p>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-5" id="special-grid"></div>
-      </div>
-
-      <!-- ── 11. DISPATCH (standard / premium) ── -->
-      <div id="dispatch-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="material-symbols-outlined text-secondary text-2xl">local_shipping</span>
-          <p class="section-title">Physical Dispatch</p>
-          <span class="ml-auto px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-secondary/10 text-secondary" id="d-plan-badge">STANDARD</span>
-        </div>
-
-        <!-- Not yet dispatched -->
-        <div id="dispatch-pending-msg" style="display:none"
-          class="flex items-center gap-4 bg-amber-50 border border-amber-200 rounded-xl p-5 mb-5">
-          <span class="material-symbols-outlined text-amber-500 text-2xl">schedule</span>
-          <div>
-            <p class="font-semibold text-amber-800">Preparing for dispatch</p>
-            <p class="text-amber-700 text-sm mt-0.5">Your physical copy is being processed and will be dispatched soon.</p>
-          </div>
-        </div>
-
-        <!-- Dispatched -->
-        <div id="dispatch-done-msg" style="display:none"
-          class="flex items-center gap-4 bg-primary/5 border border-primary/20 rounded-xl p-5 mb-5">
-          <span class="material-symbols-outlined text-primary text-2xl ms-fill">check_circle</span>
-          <div class="flex-1">
-            <p class="font-bold text-primary">Dispatched</p>
-            <p class="text-primary/50 text-sm" id="d-dispatched-on">—</p>
-          </div>
-          <div id="d-track-chip" style="display:none"
-            class="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-outline-variant/30 text-primary text-sm font-bold">
-            <span class="material-symbols-outlined text-base text-secondary">pin_drop</span>
-            <span id="d-tracking-no">—</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-          <div><p class="label-xs">Tracking No.</p><p class="val font-mono" id="d-dispatch-tracking">—</p></div>
-          <div><p class="label-xs">Dispatch Date</p><p class="val" id="d-dispatch-date">—</p></div>
-          <div class="md:col-span-2"><p class="label-xs">Courier Note (from Admin)</p><p class="val" id="d-dispatch-notes">—</p></div>
-        </div>
-      </div>
-
-      <!-- ── 8. ADMIN NOTES ── -->
-      <div id="admin-notes-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="material-symbols-outlined text-secondary text-2xl">sticky_note_2</span>
-          <p class="section-title">Notes from Our Team</p>
-        </div>
-        <div id="admin-notes-list" class="space-y-3"></div>
-      </div>
-
-      <!-- ── 9. ACTIVITY LOG ── -->
-      <div id="log-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="material-symbols-outlined text-secondary text-2xl">timeline</span>
-          <p class="section-title">Activity Log</p>
-        </div>
-        <div id="log-list" class="relative pl-5">
-          <!-- vertical line -->
-          <div class="absolute left-[7px] top-2 bottom-2 w-px bg-outline-variant/40"></div>
-        </div>
-      </div>
-
-      <!-- ── 10. SUPPORT CTA ── -->
-      <div class="rounded-2xl bg-primary p-8 flex flex-col md:flex-row items-center justify-between gap-6 reveal">
-        <div>
-          <p class="text-accent-gold text-xs tracking-widest uppercase font-bold mb-2">Need Assistance?</p>
-          <h3 class="font-headline-md text-on-primary text-xl font-bold">Our legal experts are here to help</h3>
-          <p class="text-white/40 text-sm mt-1">Questions about your order or will? Reach out anytime.</p>
-        </div>
-        <a href="./contact_us.html">
-          <button class="magnetic bg-accent-gold text-primary px-8 py-3.5 rounded-full font-label-md font-bold whitespace-nowrap flex items-center gap-2">
-            <span class="material-symbols-outlined text-base">headset_mic</span>Contact Support
-          </button>
+      <div class="flex items-center gap-4">
+        <a href="./order.php"
+          class="magnetic relative overflow-hidden bg-secondary text-primary px-6 md:px-8 py-3 rounded-full text-sm font-bold tracking-wide">
+          <span class="relative z-10">Create My Will</span>
         </a>
+        <button id="menuBtn" class="lg:hidden nav-mark w-10 h-10 flex items-center justify-center">
+          <span class="material-symbols-outlined text-2xl">menu</span>
+        </button>
       </div>
-
-    </div><!-- /results-panel -->
-  </div><!-- /results-root -->
-
-  <!-- ════════════════════════ TRUST STRIP ════════════════════════ -->
-  <section class="border-t border-outline-variant/20 bg-surface-container-low py-10 mt-8">
-    <div class="max-w-container-max-width mx-auto px-margin-desktop flex flex-wrap justify-center gap-12 text-primary/40">
-      <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest"><span class="material-symbols-outlined text-secondary text-lg ms-fill">verified</span> Verified Legal Flow</span>
-      <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest"><span class="material-symbols-outlined text-secondary text-lg ms-fill">shield</span> AES-256 Encrypted</span>
-      <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest"><span class="material-symbols-outlined text-secondary text-lg ms-fill">history_edu</span> Lawyer Reviewed</span>
-      <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest"><span class="material-symbols-outlined text-secondary text-lg ms-fill">lock</span> Secure Downloads</span>
+    </nav>
+    <div class="mobile-panel bg-surface lg:hidden" id="mobilePanel">
+      <div class="flex flex-col px-6 py-6 gap-5 text-primary font-semibold">
+        <a href="./index.html">Home</a>
+        <a href="./how_it_works.html">How it Works</a>
+        <a href="./pricing.html">Pricing</a>
+        <a href="./faq.html">FAQs</a>
+        <a href="./track_order.html" class="text-secondary">Track Order</a>
+        <a href="./contact_us.html">Contact Us</a>
+      </div>
     </div>
-  </section>
-</main>
+  </header>
 
-<!-- ════════════════════════ FOOTER ════════════════════════ -->
- <footer class="bg-ink-2 pt-24 pb-10 border-t border-white/5">
-                <div class="max-w-site mx-auto px-6 md:px-10">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20 reveal-up">
-                        <div class="lg:col-span-5 space-y-8">
-                            <div class="font-display italic text-2xl font-semibold text-parchment">Will Banwalo</div>
-                            <p class="text-parchment/35 leading-relaxed text-base max-w-sm">
-                                The intersection of legal excellence and digital innovation. Redefining how India plans
-                                its future.
-                            </p>
-                            <!-- <div class="flex gap-5">
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main class="pt-24">
+
+        <!-- ════════════════════════ HERO / SEARCH ════════════════════════ -->
+        <section class="relative hero-gradient overflow-hidden min-h-[70svh] flex items-center">
+          <div
+            class="absolute -top-32 -left-32 w-[500px] h-[500px] organic-shape bg-secondary/8 blur-[100px] -z-10 hero-blob-a">
+          </div>
+          <div
+            class="absolute bottom-0 right-0 w-[360px] h-[360px] organic-shape bg-primary/5 blur-[80px] -z-10 translate-x-1/3 hero-blob-b">
+          </div>
+          <div class="max-w-container-max-width mx-auto px-margin-desktop w-full py-20 text-center relative z-10">
+            <div
+              class="hero-word inline-flex items-center gap-3 px-5 py-2.5 bg-white shadow-sm border border-outline-variant/20 rounded-full mb-8">
+              <span class="w-2 h-2 rounded-full bg-secondary pulse-dot"></span>
+              <span class="tracking-widest uppercase text-[10px] font-bold text-primary/60">Real-Time Order
+                Status</span>
+            </div>
+            <h1 class="hero-word font-headline-xl text-primary text-5xl md:text-6xl font-bold leading-tight mb-5">
+              Track Your <span class="italic text-secondary">Will Order</span>
+            </h1>
+            <p class="hero-word text-primary/50 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
+              Enter your unique order reference to view your complete order status, documents, and delivery details.
+            </p>
+            <!-- Search bar -->
+            <form id="search-form" onsubmit="handleSearch(event)" class="hero-word max-w-2xl mx-auto">
+              <div
+                class="flex items-center gap-3 bg-white rounded-full shadow-2xl shadow-primary/10 border border-outline-variant/20 p-2 pl-6">
+                <span class="material-symbols-outlined text-secondary text-xl flex-shrink-0">manage_search</span>
+                <input id="ref-input" type="text" placeholder="e.g. LW-2025-8842-BNW"
+                  class="track-input flex-1 bg-transparent font-label-md text-primary placeholder-primary/30 py-2 border-none focus:ring-0 text-base tracking-wider"
+                  autocomplete="off" spellcheck="false">
+                <button type="submit" id="search-btn"
+                  class="magnetic bg-primary text-on-primary px-8 py-3.5 rounded-full font-label-md font-bold whitespace-nowrap flex items-center gap-2">
+                  <span class="material-symbols-outlined text-base" id="search-icon">search</span>
+                  <span id="search-label">Track Order</span>
+                </button>
+              </div>
+              <p class="text-primary/30 text-xs mt-3 tracking-wide">Your order reference was sent to your registered
+                email after payment.</p>
+            </form>
+          </div>
+        </section>
+
+        <!-- Marquee ribbon -->
+        <div class="bg-secondary text-primary py-3 overflow-hidden">
+          <div class="marquee-track" id="marquee"></div>
+        </div>
+
+        <!-- ════════════════════════ RESULTS ════════════════════════ -->
+        <div class="max-w-container-max-width mx-auto px-margin-desktop py-14 space-y-6" id="results-root"
+          style="display:none">
+
+          <!-- Error -->
+          <div id="err-panel" style="display:none" class="text-center py-20">
+            <div class="w-20 h-20 rounded-full bg-error-container flex items-center justify-center mx-auto mb-6">
+              <span class="material-symbols-outlined text-4xl ms-fill" style="color:#7a3b2e">search_off</span>
+            </div>
+            <h2 class="font-headline-md text-primary text-2xl font-bold mb-3">Order Not Found</h2>
+            <p class="text-primary/50 mb-8 max-w-sm mx-auto" id="err-msg">We couldn't find that order reference. Please
+              check and try again.</p>
+            <button onclick="resetSearch()"
+              class="magnetic bg-primary text-on-primary px-8 py-3.5 rounded-full font-label-md">Try Again</button>
+          </div>
+
+          <!-- Main results panel -->
+          <div id="results-panel" style="display:none" class="space-y-6">
+
+            <!-- ── 1. ORDER HEADER ROW ── -->
+            <div class="glass-card rounded-2xl p-8 reveal">
+              <div class="flex flex-wrap items-start justify-between gap-5 mb-8">
+                <div>
+                  <p class="text-primary/40 text-xs tracking-widest uppercase font-bold mb-1">Order Reference</p>
+                  <h2 class="font-headline-md text-primary text-3xl font-bold tracking-wider" id="d-ref">—</h2>
+                </div>
+                <div class="flex flex-wrap gap-3 items-center">
+                  <span id="d-status-badge"
+                    class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">—</span>
+                  <span id="d-pay-badge"
+                    class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">—</span>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div>
+                  <p class="label-xs">Will Type</p>
+                  <p class="val" id="d-will-type">—</p>
+                </div>
+                <div>
+                  <p class="label-xs">Plan</p>
+                  <p class="val capitalize" id="d-plan">—</p>
+                </div>
+                <div>
+                  <p class="label-xs">Placed On</p>
+                  <p class="val" id="d-date">—</p>
+                </div>
+                <div>
+                  <p class="label-xs">Plan Amount</p>
+                  <p class="val" id="d-plan-amt">—</p>
+                </div>
+                <div>
+                  <p class="label-xs">GST (18%)</p>
+                  <p class="val" id="d-gst">—</p>
+                </div>
+                <div>
+                  <p class="label-xs">Total Paid</p>
+                  <p class="text-primary text-xl font-bold mt-1" id="d-total">—</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── 2. ACCOUNT HOLDER ── -->
+            <div class="glass-card rounded-2xl p-8 reveal">
+              <p class="section-title mb-6">Account Holder</p>
+              <div class="flex flex-wrap gap-8 items-start">
+                <div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-secondary text-2xl ms-fill">person</span>
+                </div>
+                <div class="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-6">
+                  <div class="sm:col-span-2">
+                    <p class="label-xs">Full Name</p>
+                    <p class="text-primary text-lg font-bold" id="d-name">—</p>
+                  </div>
+                  <div>
+                    <p class="label-xs">Mobile</p>
+                    <p class="val" id="d-mobile">—</p>
+                  </div>
+                  <div>
+                    <p class="label-xs">Email</p>
+                    <p class="val break-all" id="d-email">—</p>
+                  </div>
+                  <div>
+                    <p class="label-xs">Date of Birth</p>
+                    <p class="val" id="d-dob">—</p>
+                  </div>
+                  <div>
+                    <p class="label-xs">Gender</p>
+                    <p class="val capitalize" id="d-gender">—</p>
+                  </div>
+                  <div class="sm:col-span-2">
+                    <p class="label-xs">Location</p>
+                    <p class="val" id="d-location">—</p>
+                  </div>
+                  <div id="d-executor-wrap" class="sm:col-span-2" style="display:none">
+                    <p class="label-xs">Executor</p>
+                    <p class="val" id="d-executor">—</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── 3. PROGRESS TRACKER ── -->
+            <div class="glass-card rounded-2xl p-8 reveal">
+              <p class="section-title mb-8">Order Progress</p>
+              <div class="relative flex items-start justify-between" id="progress-track"></div>
+            </div>
+
+            <!-- ── 4. FINAL WILL (admin-uploaded) ── -->
+            <div id="final-will-card" class="rounded-2xl p-8 reveal"
+              style="display:none;background:linear-gradient(135deg,rgba(8,57,27,.04),rgba(188,239,195,.15));border:1.5px solid rgba(8,57,27,.18)">
+              <div class="flex items-center gap-3 mb-5">
+                <span class="material-symbols-outlined text-primary text-2xl ms-fill">history_edu</span>
+                <p class="section-title">Final Will Document</p>
+                <span
+                  class="ml-auto px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-primary/10 text-primary">Admin
+                  Uploaded</span>
+              </div>
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                <div class="w-14 h-14 rounded-xl bg-primary flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-on-primary text-2xl ms-fill">picture_as_pdf</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-bold text-primary text-lg mb-0.5" id="fw-name">—</p>
+                  <p class="text-primary/40 text-sm" id="fw-size">—</p>
+                  <p class="text-secondary text-xs font-bold mt-1 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm ms-fill">verified</span> Legally reviewed &amp; ready
+                    to download
+                  </p>
+                </div>
+                <div class="flex gap-3 flex-shrink-0">
+                  <a id="fw-view-btn" href="#" target="_blank"
+                    class="magnetic flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-on-primary text-sm font-bold">
+                    <span class="material-symbols-outlined text-base">open_in_new</span> View
+                  </a>
+                  <a id="fw-dl-btn" href="#" download
+                    class="magnetic flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary text-primary text-sm font-bold">
+                    <span class="material-symbols-outlined text-base">download</span> Download
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- final will NOT uploaded yet -->
+            <div id="final-will-pending" class="glass-card rounded-2xl p-8 reveal" style="display:none">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="material-symbols-outlined text-primary/30 text-2xl">history_edu</span>
+                <p class="section-title text-primary/50">Final Will Document</p>
+              </div>
+              <div class="flex items-center gap-4 bg-surface-container rounded-xl p-5">
+                <div
+                  class="w-12 h-12 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center flex-shrink-0">
+                  <span class="material-symbols-outlined text-primary/30 text-xl">schedule</span>
+                </div>
+                <div>
+                  <p class="font-semibold text-primary/60">Awaiting admin upload</p>
+                  <p class="text-primary/40 text-sm mt-0.5">Our legal team is reviewing your will. You'll receive an
+                    email when it's ready.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── 5. CUSTOMER DOCUMENTS ── -->
+            <div class="glass-card rounded-2xl p-8 reveal">
+              <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-secondary text-2xl">folder_open</span>
+                  <p class="section-title">Your Uploaded Documents</p>
+                </div>
+                <span
+                  class="px-4 py-1.5 rounded-full text-xs font-bold bg-surface-container text-primary/50 uppercase tracking-widest"
+                  id="d-doc-count">0 Documents</span>
+              </div>
+              <div id="doc-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+              <div id="doc-empty" style="display:none" class="text-center py-12">
+                <span class="material-symbols-outlined text-4xl text-primary/20 block mb-3">folder_off</span>
+                <p class="text-primary/40 text-sm">No documents uploaded yet.</p>
+              </div>
+            </div>
+
+            <!-- ── 6. BENEFICIARIES ── -->
+            <div id="bene-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
+              <div class="flex items-center gap-3 mb-6">
+                <span class="material-symbols-outlined text-secondary text-2xl">group</span>
+                <p class="section-title">Beneficiaries</p>
+              </div>
+              <div id="bene-list" class="space-y-3"></div>
+            </div>
+
+            <!-- ── 7. ASSETS ── -->
+            <div id="assets-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
+              <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-secondary text-2xl">account_balance</span>
+                  <p class="section-title">Assets</p>
+                </div>
+                <span
+                  class="px-4 py-1.5 rounded-full text-xs font-bold bg-surface-container text-primary/50 uppercase tracking-widest"
+                  id="d-asset-count">0 Assets</span>
+              </div>
+              <!-- Table layout matching admin panel -->
+              <div class="overflow-x-auto rounded-xl border border-outline-variant/30">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="bg-surface-container border-b border-outline-variant/30">
+                      <th class="label-xs px-5 py-3 text-left font-bold">Type</th>
+                      <th class="label-xs px-5 py-3 text-left font-bold">Description</th>
+                      <th class="label-xs px-5 py-3 text-right font-bold">Est. Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="assets-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- ── 8. SPECIAL INSTRUCTIONS ── -->
+            <div id="special-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
+              <div class="flex items-center gap-3 mb-6">
+                <span class="material-symbols-outlined text-secondary text-2xl">volunteer_activism</span>
+                <p class="section-title">Special Instructions</p>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-5" id="special-grid"></div>
+            </div>
+
+            <!-- ── 11. DISPATCH (standard / premium) ── -->
+            <div id="dispatch-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
+              <div class="flex items-center gap-3 mb-6">
+                <span class="material-symbols-outlined text-secondary text-2xl">local_shipping</span>
+                <p class="section-title">Physical Dispatch</p>
+                <span
+                  class="ml-auto px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-secondary/10 text-secondary"
+                  id="d-plan-badge">STANDARD</span>
+              </div>
+
+              <!-- Not yet dispatched -->
+              <div id="dispatch-pending-msg" style="display:none"
+                class="flex items-center gap-4 bg-amber-50 border border-amber-200 rounded-xl p-5 mb-5">
+                <span class="material-symbols-outlined text-amber-500 text-2xl">schedule</span>
+                <div>
+                  <p class="font-semibold text-amber-800">Preparing for dispatch</p>
+                  <p class="text-amber-700 text-sm mt-0.5">Your physical copy is being processed and will be dispatched
+                    soon.</p>
+                </div>
+              </div>
+
+              <!-- Dispatched -->
+              <div id="dispatch-done-msg" style="display:none"
+                class="flex items-center gap-4 bg-primary/5 border border-primary/20 rounded-xl p-5 mb-5">
+                <span class="material-symbols-outlined text-primary text-2xl ms-fill">check_circle</span>
+                <div class="flex-1">
+                  <p class="font-bold text-primary">Dispatched</p>
+                  <p class="text-primary/50 text-sm" id="d-dispatched-on">—</p>
+                </div>
+                <div id="d-track-chip" style="display:none"
+                  class="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-outline-variant/30 text-primary text-sm font-bold">
+                  <span class="material-symbols-outlined text-base text-secondary">pin_drop</span>
+                  <span id="d-tracking-no">—</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+                <div>
+                  <p class="label-xs">Tracking No.</p>
+                  <p class="val font-mono" id="d-dispatch-tracking">—</p>
+                </div>
+                <div>
+                  <p class="label-xs">Dispatch Date</p>
+                  <p class="val" id="d-dispatch-date">—</p>
+                </div>
+                <div class="md:col-span-2">
+                  <p class="label-xs">Courier Note (from Admin)</p>
+                  <p class="val" id="d-dispatch-notes">—</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── 8. ADMIN NOTES ── -->
+            <div id="admin-notes-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
+              <div class="flex items-center gap-3 mb-5">
+                <span class="material-symbols-outlined text-secondary text-2xl">sticky_note_2</span>
+                <p class="section-title">Notes from Our Team</p>
+              </div>
+              <div id="admin-notes-list" class="space-y-3"></div>
+            </div>
+
+            <!-- ── 9. ACTIVITY LOG ── -->
+            <div id="log-card" class="glass-card rounded-2xl p-8 reveal" style="display:none">
+              <div class="flex items-center gap-3 mb-5">
+                <span class="material-symbols-outlined text-secondary text-2xl">timeline</span>
+                <p class="section-title">Activity Log</p>
+              </div>
+              <div id="log-list" class="relative pl-5">
+                <!-- vertical line -->
+                <div class="absolute left-[7px] top-2 bottom-2 w-px bg-outline-variant/40"></div>
+              </div>
+            </div>
+
+            <!-- ── 10. SUPPORT CTA ── -->
+            <div class="rounded-2xl bg-primary p-8 flex flex-col md:flex-row items-center justify-between gap-6 reveal">
+              <div>
+                <p class="text-accent-gold text-xs tracking-widest uppercase font-bold mb-2">Need Assistance?</p>
+                <h3 class="font-headline-md text-on-primary text-xl font-bold">Our legal experts are here to help</h3>
+                <p class="text-white/40 text-sm mt-1">Questions about your order or will? Reach out anytime.</p>
+              </div>
+              <a href="./contact_us.html">
+                <button
+                  class="magnetic bg-accent-gold text-primary px-8 py-3.5 rounded-full font-label-md font-bold whitespace-nowrap flex items-center gap-2">
+                  <span class="material-symbols-outlined text-base">headset_mic</span>Contact Support
+                </button>
+              </a>
+            </div>
+
+          </div><!-- /results-panel -->
+        </div><!-- /results-root -->
+
+        <!-- ════════════════════════ TRUST STRIP ════════════════════════ -->
+        <section class="border-t border-outline-variant/20 bg-surface-container-low py-10 mt-8">
+          <div
+            class="max-w-container-max-width mx-auto px-margin-desktop flex flex-wrap justify-center gap-12 text-primary/40">
+            <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest"><span
+                class="material-symbols-outlined text-secondary text-lg ms-fill">verified</span> Verified Legal
+              Flow</span>
+            <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest"><span
+                class="material-symbols-outlined text-secondary text-lg ms-fill">shield</span> AES-256 Encrypted</span>
+            <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest"><span
+                class="material-symbols-outlined text-secondary text-lg ms-fill">history_edu</span> Lawyer
+              Reviewed</span>
+            <span class="flex items-center gap-2 text-sm font-bold uppercase tracking-widest"><span
+                class="material-symbols-outlined text-secondary text-lg ms-fill">lock</span> Secure Downloads</span>
+          </div>
+        </section>
+      </main>
+
+      <!-- ════════════════════════ FOOTER ════════════════════════ -->
+      <footer class="bg-ink-2 pt-24 pb-10 border-t border-white/5">
+        <div class="max-w-site mx-auto px-6 md:px-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20 reveal-up">
+            <div class="lg:col-span-5 space-y-8">
+              <div class="font-display italic text-2xl font-semibold text-parchment">Will Banwalo</div>
+              <p class="text-parchment/35 leading-relaxed text-base max-w-sm">
+                The intersection of legal excellence and digital innovation. Redefining how India plans
+                its future.
+              </p>
+              <!-- <div class="flex gap-5">
                                 <a class="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-parchment/50 hover:text-gold hover:border-gold transition-colors"
                                     href="#">
                                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -425,54 +677,56 @@
                                     </svg>
                                 </a>
                             </div> -->
-                        </div>
-                        <div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
-                            <div>
-                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Legal
-                                </h4>
-                                <ul class="space-y-3 text-parchment/35 text-sm">
-                                    <li><a class="hover:text-gold transition-colors" href="./terms_of_use.html">Terms of Use</a></li>
-                                    <li><a class="hover:text-gold transition-colors" href="./privacy_policy.html">Privacy Policy</a></li>
-                                    <li><a class="hover:text-gold transition-colors" href="./compliance.html">Compliance</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Company</h4>
-                                <ul class="space-y-3 text-parchment/35 text-sm">
-                                    <li><a class="hover:text-gold transition-colors" href="./about_us.html">About Us</a></li>
-                                    <li><a class="hover:text-gold transition-colors" href="./faq.html">FAQs</a></li>
-                                    <li><a class="hover:text-gold transition-colors" href="./contact_us.html">Contact</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-span-2 md:col-span-1">
-                                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Support</h4>
-                                <ul class="space-y-3 text-parchment/35 text-sm">
-                                    
-                                    <li><a class="hover:text-gold transition-colors" href="https://wa.me/918797879878" target="_blank">WhatsApp Support</a></li>
-                                    <li><a class="hover:text-gold transition-colors" href="./php/track_order.php">Track Order</a></li>
-                                    <li><p class="hover:text-gold transition-colors" >Monday-Saturday <br> 9:00AM-7:00PM</p></li>
-                                    <li><a class="hover:text-gold transition-colors" href="tel:+918797879878">+91-8797879878</a></li>
-                                    
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class=" pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                        <p class="text-parchment/20 text-sm italic">© 2026 Will Banwalo. A premium legal technology
-                            boutique.</p>
-                        <div class="flex gap-10 items-center text-parchment/20 text-[10px] tracking-widest font-bold">
-                            <span class="flex items-center gap-2 uppercase"><span
-                                    class="material-symbols-outlined text-gold text-sm">verified</span> Verified legal
-                                flow</span>
-                            <span class="flex items-center gap-2 uppercase"><span
-                                    class="material-symbols-outlined text-gold text-sm">shield</span> AES-256
-                                Encrypted</span>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-<!-- <footer class="bg-primary pt-section-gap pb-12">
+            </div>
+            <div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
+              <div>
+                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Legal
+                </h4>
+                <ul class="space-y-3 text-parchment/35 text-sm">
+                  <li><a class="hover:text-gold transition-colors" href="./terms_of_use.html">Terms of Use</a></li>
+                  <li><a class="hover:text-gold transition-colors" href="./privacy_policy.html">Privacy Policy</a></li>
+                  <li><a class="hover:text-gold transition-colors" href="./compliance.html">Compliance</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Company</h4>
+                <ul class="space-y-3 text-parchment/35 text-sm">
+                  <li><a class="hover:text-gold transition-colors" href="./about_us.html">About Us</a></li>
+                  <li><a class="hover:text-gold transition-colors" href="./faq.html">FAQs</a></li>
+                  <li><a class="hover:text-gold transition-colors" href="./contact_us.html">Contact</a></li>
+                </ul>
+              </div>
+              <div class="col-span-2 md:col-span-1">
+                <h4 class="text-parchment font-bold mb-6 text-xs uppercase tracking-widest">Support</h4>
+                <ul class="space-y-3 text-parchment/35 text-sm">
+
+                  <li><a class="hover:text-gold transition-colors" href="https://wa.me/918797879878"
+                      target="_blank">WhatsApp Support</a></li>
+                  <li><a class="hover:text-gold transition-colors" href="./php/track_order.php">Track Order</a></li>
+                  <li>
+                    <p class="hover:text-gold transition-colors">Monday-Saturday <br> 9:00AM-7:00PM</p>
+                  </li>
+                  <li><a class="hover:text-gold transition-colors" href="tel:+918797879878">+91-8797879878</a></li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class=" pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-parchment/20 text-sm italic">© 2026 Will Banwalo. A premium legal technology
+              boutique.</p>
+            <div class="flex gap-10 items-center text-parchment/20 text-[10px] tracking-widest font-bold">
+              <span class="flex items-center gap-2 uppercase"><span
+                  class="material-symbols-outlined text-gold text-sm">verified</span> Verified legal
+                flow</span>
+              <span class="flex items-center gap-2 uppercase"><span
+                  class="material-symbols-outlined text-gold text-sm">shield</span> AES-256
+                Encrypted</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- <footer class="bg-primary pt-section-gap pb-12">
   <div class="max-w-container-max-width mx-auto px-margin-desktop">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-20 mb-28">
       <div class="lg:col-span-5 space-y-12">
@@ -508,245 +762,265 @@
     </div>
   </div>
 </footer> -->
-</div><!-- #smooth-content -->
-</div><!-- #smooth-wrapper -->
+    </div><!-- #smooth-content -->
+  </div><!-- #smooth-wrapper -->
 
-<!-- ════════════════════════ INLINE STYLES (reusable classes) ════════════════════════ -->
-<style>
-  .label-xs{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(11,32,22,.4);margin-bottom:3px}
-  .val{font-size:.9rem;font-weight:600;color:#0b2016;margin-top:2px}
-  .section-title{font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;font-weight:600;color:#0b2016}
-</style>
+  <!-- ════════════════════════ INLINE STYLES (reusable classes) ════════════════════════ -->
+  <style>
+    .label-xs {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(11, 32, 22, .4);
+      margin-bottom: 3px
+    }
 
-<!-- ════════════════════════ GSAP ════════════════════════ -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    .val {
+      font-size: .9rem;
+      font-weight: 600;
+      color: #0b2016;
+      margin-top: 2px
+    }
 
-<!-- ════════════════════════ SCRIPT ════════════════════════ -->
-<script>
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #0b2016
+    }
+  </style>
 
-const smoother = ScrollSmoother.create({
-    wrapper: "#smooth-wrapper",
-    content: "#smooth-content",
-    smooth: 2.4,
-    smoothTouch: 0.1,
-    normalizeScroll: true,
-    ignoreMobileResize: true,
-    preventDefault: true
-});
+  <!-- ════════════════════════ GSAP ════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
 
-// ── Custom cursor ────────────────────────────────────────────────
-const curDot = document.getElementById('curDot');
-const curRing = document.getElementById('curRing');
-const dotX = gsap.quickTo(curDot, "x", { duration: 0.1, ease: "power3" });
-const dotY = gsap.quickTo(curDot, "y", { duration: 0.1, ease: "power3" });
-const ringX = gsap.quickTo(curRing, "x", { duration: 0.45, ease: "power3" });
-const ringY = gsap.quickTo(curRing, "y", { duration: 0.45, ease: "power3" });
-window.addEventListener('mousemove', (e) => {
-    dotX(e.clientX); dotY(e.clientY);
-    ringX(e.clientX); ringY(e.clientY);
-});
-document.querySelectorAll('a, button, .magnetic').forEach(el => {
-    el.addEventListener('mouseenter', () => curRing.classList.add('grow'));
-    el.addEventListener('mouseleave', () => curRing.classList.remove('grow'));
-});
+  <!-- ════════════════════════ SCRIPT ════════════════════════ -->
+  <script>
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-// ── Magnetic buttons ─────────────────────────────────────────────
-document.querySelectorAll('.magnetic').forEach((btn) => {
-    btn.addEventListener('mousemove', (e) => {
+    const smoother = ScrollSmoother.create({
+      wrapper: "#smooth-wrapper",
+      content: "#smooth-content",
+      smooth: 2.4,
+      smoothTouch: 0.1,
+      normalizeScroll: true,
+      ignoreMobileResize: true,
+      preventDefault: true
+    });
+
+    // ── Custom cursor ────────────────────────────────────────────────
+    const curDot = document.getElementById('curDot');
+    const curRing = document.getElementById('curRing');
+    const dotX = gsap.quickTo(curDot, "x", { duration: 0.1, ease: "power3" });
+    const dotY = gsap.quickTo(curDot, "y", { duration: 0.1, ease: "power3" });
+    const ringX = gsap.quickTo(curRing, "x", { duration: 0.45, ease: "power3" });
+    const ringY = gsap.quickTo(curRing, "y", { duration: 0.45, ease: "power3" });
+    window.addEventListener('mousemove', (e) => {
+      dotX(e.clientX); dotY(e.clientY);
+      ringX(e.clientX); ringY(e.clientY);
+    });
+    document.querySelectorAll('a, button, .magnetic').forEach(el => {
+      el.addEventListener('mouseenter', () => curRing.classList.add('grow'));
+      el.addEventListener('mouseleave', () => curRing.classList.remove('grow'));
+    });
+
+    // ── Magnetic buttons ─────────────────────────────────────────────
+    document.querySelectorAll('.magnetic').forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
         const r = btn.getBoundingClientRect();
         const x = e.clientX - r.left - r.width / 2;
         const y = e.clientY - r.top - r.height / 2;
         gsap.to(btn, { x: x * 0.3, y: y * 0.4, duration: 0.5, ease: 'power3' });
-    });
-    btn.addEventListener('mouseleave', () => {
+      });
+      btn.addEventListener('mouseleave', () => {
         gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+      });
     });
-});
 
-// ── Marquee ribbon ───────────────────────────────────────────────
-const marqueeEl = document.getElementById('marquee');
-if (marqueeEl) {
-    const marqueeText = 'SECURE TRACKING &nbsp;&#9670;&nbsp; REAL-TIME STATUS &nbsp;&#9670;&nbsp; ENCRYPTED DOCUMENTS &nbsp;&#9670;&nbsp; LAWYER REVIEWED &nbsp;&#9670;&nbsp; ';
-    marqueeEl.innerHTML = `<span>${marqueeText.repeat(4)}</span><span>${marqueeText.repeat(4)}</span>`;
-    gsap.to(marqueeEl, { xPercent: -50, duration: 22, ease: 'none', repeat: -1 });
-}
+    // ── Marquee ribbon ───────────────────────────────────────────────
+    const marqueeEl = document.getElementById('marquee');
+    if (marqueeEl) {
+      const marqueeText = 'SECURE TRACKING &nbsp;&#9670;&nbsp; REAL-TIME STATUS &nbsp;&#9670;&nbsp; ENCRYPTED DOCUMENTS &nbsp;&#9670;&nbsp; LAWYER REVIEWED &nbsp;&#9670;&nbsp; ';
+      marqueeEl.innerHTML = `<span>${marqueeText.repeat(4)}</span><span>${marqueeText.repeat(4)}</span>`;
+      gsap.to(marqueeEl, { xPercent: -50, duration: 22, ease: 'none', repeat: -1 });
+    }
 
-// ── Hero load-in + ambient blobs + pulse dot ────────────────────
-window.addEventListener('DOMContentLoaded', () => {
-    gsap.from('.hero-word', { y: 24, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.1 });
-});
-gsap.to('.hero-blob-a', { x: 30, y: 20, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-gsap.to('.hero-blob-b', { x: -30, y: -15, duration: 9, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-gsap.to('.pulse-dot', { scale: 1.8, opacity: 0.35, duration: 1, repeat: -1, ease: 'sine.out', transformOrigin: 'center' });
+    // ── Hero load-in + ambient blobs + pulse dot ────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      gsap.from('.hero-word', { y: 24, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', delay: 0.1 });
+    });
+    gsap.to('.hero-blob-a', { x: 30, y: 20, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.hero-blob-b', { x: -30, y: -15, duration: 9, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.pulse-dot', { scale: 1.8, opacity: 0.35, duration: 1, repeat: -1, ease: 'sine.out', transformOrigin: 'center' });
 
-// ── Header shadow on scroll (ScrollTrigger, not raw window scroll —
-//    accurate under ScrollSmoother's transform-based scrolling) ──
-ScrollTrigger.create({
-    trigger: '#results-root',
-    start: 'top top+=80',
-    onEnter: () => document.getElementById('nav').classList.add('scrolled'),
-    onLeaveBack: () => document.getElementById('nav').classList.remove('scrolled'),
-});
-ScrollTrigger.create({
-    trigger: document.body,
-    start: 'top -80',
-    onEnter: () => document.getElementById('nav').classList.add('scrolled'),
-    onLeaveBack: () => document.getElementById('nav').classList.remove('scrolled'),
-});
+    // ── Header shadow on scroll (ScrollTrigger, not raw window scroll —
+    //    accurate under ScrollSmoother's transform-based scrolling) ──
+    ScrollTrigger.create({
+      trigger: '#results-root',
+      start: 'top top+=80',
+      onEnter: () => document.getElementById('nav').classList.add('scrolled'),
+      onLeaveBack: () => document.getElementById('nav').classList.remove('scrolled'),
+    });
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top -80',
+      onEnter: () => document.getElementById('nav').classList.add('scrolled'),
+      onLeaveBack: () => document.getElementById('nav').classList.remove('scrolled'),
+    });
 
-// ── Mobile menu ──────────────────────────────────────────────────
-const menuBtn = document.getElementById('menuBtn');
-const mobilePanel = document.getElementById('mobilePanel');
-let menuOpen = false;
-if (menuBtn) {
-    menuBtn.addEventListener('click', () => {
+    // ── Mobile menu ──────────────────────────────────────────────────
+    const menuBtn = document.getElementById('menuBtn');
+    const mobilePanel = document.getElementById('mobilePanel');
+    let menuOpen = false;
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
         menuOpen = !menuOpen;
         gsap.to(mobilePanel, { height: menuOpen ? 'auto' : 0, duration: 0.45, ease: 'power2.inOut' });
-    });
-    mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      });
+      mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
         menuOpen = false;
         gsap.to(mobilePanel, { height: 0, duration: 0.4 });
-    }));
-}
+      }));
+    }
 
-// ── Helpers ───────────────────────────────────────────────────────
-const fmt = v => '₹'+parseFloat(v||0).toLocaleString('en-IN',{minimumFractionDigits:2});
-const fmtDate = d => d ? new Date(d).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : '—';
-const fmtDateTime = d => d ? new Date(d).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
-const setText = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v||'—'; };
-const show = id => { const el=document.getElementById(id); if(el) el.style.display=''; };
-const hide = id => { const el=document.getElementById(id); if(el) el.style.display='none'; };
+    // ── Helpers ───────────────────────────────────────────────────────
+    const fmt = v => '₹' + parseFloat(v || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 });
+    const fmtDate = d => d ? new Date(d).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+    const fmtDateTime = d => d ? new Date(d).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
+    const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v || '—'; };
+    const show = id => { const el = document.getElementById(id); if (el) el.style.display = ''; };
+    const hide = id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; };
 
-// File size friendly label
-function fmtSize(bytes){
-  if(!bytes) return '';
-  if(bytes>1024*1024) return (bytes/1024/1024).toFixed(1)+' MB';
-  return Math.round(bytes/1024)+' KB';
-}
+    // File size friendly label
+    function fmtSize(bytes) {
+      if (!bytes) return '';
+      if (bytes > 1024 * 1024) return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+      return Math.round(bytes / 1024) + ' KB';
+    }
 
-// ── Document icons by type ────────────────────────────────────────
-const DOC_META = {
-  aadhaar:       {icon:'badge',      label:'Aadhaar Card'},
-  pan:           {icon:'credit_card',label:'PAN Card'},
-  photo:         {icon:'photo_camera',label:'Photograph'},
-  property_deed: {icon:'home',       label:'Property Deed'},
-  other:         {icon:'attach_file',label:'Document'},
-};
-function docMeta(type){
-  return DOC_META[type]||{icon:'description',label:type.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())};
-}
+    // ── Document icons by type ────────────────────────────────────────
+    const DOC_META = {
+      aadhaar: { icon: 'badge', label: 'Aadhaar Card' },
+      pan: { icon: 'credit_card', label: 'PAN Card' },
+      photo: { icon: 'photo_camera', label: 'Photograph' },
+      property_deed: { icon: 'home', label: 'Property Deed' },
+      other: { icon: 'attach_file', label: 'Document' },
+    };
+    function docMeta(type) {
+      return DOC_META[type] || { icon: 'description', label: type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) };
+    }
 
-// ── Progress steps ────────────────────────────────────────────────
-const STEPS=['draft','submitted','under_review','completed'];
-const STEP_LABELS={draft:'Draft',submitted:'Submitted',under_review:'Under Review',completed:'Completed'};
-const STEP_ICONS ={draft:'edit_note',submitted:'send',under_review:'rate_review',completed:'task_alt'};
+    // ── Progress steps ────────────────────────────────────────────────
+    const STEPS = ['draft', 'submitted', 'under_review', 'completed'];
+    const STEP_LABELS = { draft: 'Draft', submitted: 'Submitted', under_review: 'Under Review', completed: 'Completed' };
+    const STEP_ICONS = { draft: 'edit_note', submitted: 'send', under_review: 'rate_review', completed: 'task_alt' };
 
-function renderProgress(status){
-  const track=document.getElementById('progress-track');
-  track.innerHTML='';
-  if(status==='cancelled'){
-    track.innerHTML=`<div class="flex items-center gap-4 text-red-600">
+    function renderProgress(status) {
+      const track = document.getElementById('progress-track');
+      track.innerHTML = '';
+      if (status === 'cancelled') {
+        track.innerHTML = `<div class="flex items-center gap-4 text-red-600">
       <span class="material-symbols-outlined text-3xl ms-fill">cancel</span>
       <div><p class="font-bold text-lg">Order Cancelled</p>
       <p class="text-primary/40 text-sm mt-1">This order has been cancelled. Please contact support for help.</p></div></div>`;
-    return;
-  }
-  const active=STEPS.indexOf(status);
-  STEPS.forEach((step,i)=>{
-    const done=i<active, cur=i===active, pend=i>active;
-    const div=document.createElement('div');
-    div.className='flex flex-col items-center flex-1 relative';
-    const line=i<STEPS.length-1?`<div class="absolute top-6 left-1/2 w-full h-0.5 ${done?'bg-secondary':'bg-outline-variant/30'} -z-0"></div>` :'';
-    let cc=pend?'bg-surface-container text-primary/30':cur?'bg-primary text-on-primary ring-4 ring-primary/20':'bg-secondary text-on-secondary';
-    div.innerHTML=`${line}
+        return;
+      }
+      const active = STEPS.indexOf(status);
+      STEPS.forEach((step, i) => {
+        const done = i < active, cur = i === active, pend = i > active;
+        const div = document.createElement('div');
+        div.className = 'flex flex-col items-center flex-1 relative';
+        const line = i < STEPS.length - 1 ? `<div class="absolute top-6 left-1/2 w-full h-0.5 ${done ? 'bg-secondary' : 'bg-outline-variant/30'} -z-0"></div>` : '';
+        let cc = pend ? 'bg-surface-container text-primary/30' : cur ? 'bg-primary text-on-primary ring-4 ring-primary/20' : 'bg-secondary text-on-secondary';
+        div.innerHTML = `${line}
       <div class="w-12 h-12 rounded-full flex items-center justify-center z-10 ${cc}">
-        <span class="material-symbols-outlined text-xl ${!pend?'ms-fill':''}">${done?'check_circle':STEP_ICONS[step]}</span>
+        <span class="material-symbols-outlined text-xl ${!pend ? 'ms-fill' : ''}">${done ? 'check_circle' : STEP_ICONS[step]}</span>
       </div>
-      <p class="text-xs font-bold uppercase tracking-widest mt-3 ${cur?'text-primary':pend?'text-primary/30':'text-secondary'}">${STEP_LABELS[step]}</p>`;
-    track.appendChild(div);
-  });
-}
+      <p class="text-xs font-bold uppercase tracking-widest mt-3 ${cur ? 'text-primary' : pend ? 'text-primary/30' : 'text-secondary'}">${STEP_LABELS[step]}</p>`;
+        track.appendChild(div);
+      });
+    }
 
-// ── Render customer documents ─────────────────────────────────────
-function renderDocs(docs){
-  const grid=document.getElementById('doc-grid');
-  const empty=document.getElementById('doc-empty');
-  const count=document.getElementById('d-doc-count');
-  grid.innerHTML='';
-  // Filter out final_will — shown separately
-  const userDocs=docs.filter(d=>d.doc_type!=='final_will');
-  count.textContent=userDocs.length+' Document'+(userDocs.length!==1?'s':'');
-  if(!userDocs.length){empty.style.display='';return;}
-  empty.style.display='none';
-  userDocs.forEach(doc=>{
-    const m=docMeta(doc.doc_type);
-    const isPdf=(doc.mime_type||'').includes('pdf');
-    const isImg=(doc.mime_type||'').startsWith('image/');
-    const viewUrl =`./php/serve_file.php?doc_id=${doc.id}`;
-    const dlUrl   =`./php/serve_file.php?doc_id=${doc.id}&dl=1`;
-    const card=document.createElement('div');
-    card.className='doc-card group relative flex items-start gap-4 p-5 rounded-xl border border-outline-variant/30 bg-white hover:border-secondary/40 hover:bg-surface-container-low transition-all';
-    card.innerHTML=`
+    // ── Render customer documents ─────────────────────────────────────
+    function renderDocs(docs) {
+      const grid = document.getElementById('doc-grid');
+      const empty = document.getElementById('doc-empty');
+      const count = document.getElementById('d-doc-count');
+      grid.innerHTML = '';
+      // Filter out final_will — shown separately
+      const userDocs = docs.filter(d => d.doc_type !== 'final_will');
+      count.textContent = userDocs.length + ' Document' + (userDocs.length !== 1 ? 's' : '');
+      if (!userDocs.length) { empty.style.display = ''; return; }
+      empty.style.display = 'none';
+      userDocs.forEach(doc => {
+        const m = docMeta(doc.doc_type);
+        const isPdf = (doc.mime_type || '').includes('pdf');
+        const isImg = (doc.mime_type || '').startsWith('image/');
+        const viewUrl = `./php/serve_file.php?doc_id=${doc.id}`;
+        const dlUrl = `./php/serve_file.php?doc_id=${doc.id}&dl=1`;
+        const card = document.createElement('div');
+        card.className = 'doc-card group relative flex items-start gap-4 p-5 rounded-xl border border-outline-variant/30 bg-white hover:border-secondary/40 hover:bg-surface-container-low transition-all';
+        card.innerHTML = `
       <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-secondary/10 text-secondary">
         <span class="material-symbols-outlined text-xl ms-fill">${m.icon}</span>
       </div>
       <div class="flex-1 min-w-0">
         <p class="font-bold text-sm text-primary mb-0.5">${m.label}</p>
-        <p class="text-primary/40 text-xs truncate" title="${doc.original_name||''}">${doc.original_name||'—'}</p>
-        ${doc.mime_type?`<p class="text-primary/30 text-xs mt-0.5">${isPdf?'PDF':isImg?'Image':'File'}${doc.file_size?' · '+fmtSize(doc.file_size):''}</p>`:''}
+        <p class="text-primary/40 text-xs truncate" title="${doc.original_name || ''}">${doc.original_name || '—'}</p>
+        ${doc.mime_type ? `<p class="text-primary/30 text-xs mt-0.5">${isPdf ? 'PDF' : isImg ? 'Image' : 'File'}${doc.file_size ? ' · ' + fmtSize(doc.file_size) : ''}</p>` : ''}
       </div>
       <div class="doc-actions flex flex-col gap-2">
         <a href="${viewUrl}" target="_blank"
           class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/10 text-secondary text-xs font-bold hover:bg-secondary/20 transition-all whitespace-nowrap">
           <span class="material-symbols-outlined text-sm">open_in_new</span>View
         </a>
-        <a href="${dlUrl}" download="${doc.original_name||'document'}"
+        <a href="${dlUrl}" download="${doc.original_name || 'document'}"
           class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-primary/60 text-xs font-bold hover:bg-surface-container-high transition-all whitespace-nowrap">
           <span class="material-symbols-outlined text-sm">download</span>Save
         </a>
       </div>`;
-    grid.appendChild(card);
-  });
-}
+        grid.appendChild(card);
+      });
+    }
 
-// ── Render final will ─────────────────────────────────────────────
-function renderFinalWill(docs){
-  const fw=docs.find(d=>d.doc_type==='final_will');
-  if(fw && fw.doc_token){
-    show('final-will-card');
-    hide('final-will-pending');
-    setText('fw-name', fw.original_name || 'Final Will');
-    setText('fw-size', fmtSize(fw.file_size));
+    // ── Render final will ─────────────────────────────────────────────
+    function renderFinalWill(docs) {
+      const fw = docs.find(d => d.doc_type === 'final_will');
+      if (fw && fw.doc_token) {
+        show('final-will-card');
+        hide('final-will-pending');
+        setText('fw-name', fw.original_name || 'Final Will');
+        setText('fw-size', fmtSize(fw.file_size));
 
-    const viewUrl = `php/serve_file.php?token=${encodeURIComponent(fw.doc_token)}&view=1`;
-    const dlUrl   = `php/serve_file.php?token=${encodeURIComponent(fw.doc_token)}&dl=1`;
+        const viewUrl = `php/serve_file.php?token=${encodeURIComponent(fw.doc_token)}&view=1`;
+        const dlUrl = `php/serve_file.php?token=${encodeURIComponent(fw.doc_token)}&dl=1`;
 
-    const viewBtn = document.getElementById('fw-view-btn');
-    const dlBtn   = document.getElementById('fw-dl-btn');
+        const viewBtn = document.getElementById('fw-view-btn');
+        const dlBtn = document.getElementById('fw-dl-btn');
 
-    viewBtn.href = viewUrl;
-    dlBtn.href   = dlUrl;
-    dlBtn.setAttribute('download', fw.original_name || 'final-will.pdf');
+        viewBtn.href = viewUrl;
+        dlBtn.href = dlUrl;
+        dlBtn.setAttribute('download', fw.original_name || 'final-will.pdf');
 
-  } else if(fw && !fw.doc_token){
-    // File exists but token not generated yet
-    hide('final-will-card');
-    show('final-will-pending');
-  } else {
-    hide('final-will-card');
-    show('final-will-pending');
-  }
-}
+      } else if (fw && !fw.doc_token) {
+        // File exists but token not generated yet
+        hide('final-will-card');
+        show('final-will-pending');
+      } else {
+        hide('final-will-card');
+        show('final-will-pending');
+      }
+    }
 
-// ── Render beneficiaries ──────────────────────────────────────────
-function renderBenes(benes){
-  if(!benes||!benes.length){hide('bene-card');return;}
-  show('bene-card');
-  const list=document.getElementById('bene-list');
-  list.innerHTML=benes.map(b=>`
+    // ── Render beneficiaries ──────────────────────────────────────────
+    function renderBenes(benes) {
+      if (!benes || !benes.length) { hide('bene-card'); return; }
+      show('bene-card');
+      const list = document.getElementById('bene-list');
+      list.innerHTML = benes.map(b => `
     <div class="flex items-center justify-between px-5 py-4 rounded-xl bg-white border border-outline-variant/30">
       <div class="flex items-center gap-4">
         <div class="w-9 h-9 rounded-full bg-secondary/10 flex items-center justify-center">
@@ -754,66 +1028,66 @@ function renderBenes(benes){
         </div>
         <div>
           <p class="font-bold text-primary text-sm">${esc(b.full_name)}</p>
-          <p class="text-primary/40 text-xs">${esc(b.relationship)}${b.dob?' · DOB '+fmtDate(b.dob):''}</p>
+          <p class="text-primary/40 text-xs">${esc(b.relationship)}${b.dob ? ' · DOB ' + fmtDate(b.dob) : ''}</p>
         </div>
       </div>
       <div class="text-right">
-        <p class="font-bold text-primary text-sm">${b.share_pct>0?b.share_pct+'%':'—'}</p>
+        <p class="font-bold text-primary text-sm">${b.share_pct > 0 ? b.share_pct + '%' : '—'}</p>
         <p class="text-primary/30 text-xs">Share</p>
       </div>
     </div>`).join('');
-}
+    }
 
-// ── Asset type labels & icons ─────────────────────────────────────
-const ASSET_META = {
-  real_estate:  {icon:'home',           label:'Real Estate',  color:'bg-blue-50 text-blue-700 border-blue-200'},
-  bank:         {icon:'account_balance',label:'Bank Account', color:'bg-green-50 text-green-700 border-green-200'},
-  investments:  {icon:'trending_up',    label:'Investments',  color:'bg-purple-50 text-purple-700 border-purple-200'},
-  vehicles:     {icon:'directions_car', label:'Vehicle',      color:'bg-orange-50 text-orange-700 border-orange-200'},
-  jewellery:    {icon:'diamond',        label:'Jewellery',    color:'bg-pink-50 text-pink-700 border-pink-200'},
-  digital:      {icon:'devices',        label:'Digital Asset',color:'bg-cyan-50 text-cyan-700 border-cyan-200'},
-  business:     {icon:'business',       label:'Business',     color:'bg-amber-50 text-amber-700 border-amber-200'},
-  other:        {icon:'inventory_2',    label:'Other',        color:'bg-surface-container text-primary/60 border-outline-variant/30'},
-};
-function assetMeta(type){ return ASSET_META[type]||{icon:'inventory_2',label:type.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()),color:'bg-surface-container text-primary/60 border-outline-variant/30'}; }
+    // ── Asset type labels & icons ─────────────────────────────────────
+    const ASSET_META = {
+      real_estate: { icon: 'home', label: 'Real Estate', color: 'bg-blue-50 text-blue-700 border-blue-200' },
+      bank: { icon: 'account_balance', label: 'Bank Account', color: 'bg-green-50 text-green-700 border-green-200' },
+      investments: { icon: 'trending_up', label: 'Investments', color: 'bg-purple-50 text-purple-700 border-purple-200' },
+      vehicles: { icon: 'directions_car', label: 'Vehicle', color: 'bg-orange-50 text-orange-700 border-orange-200' },
+      jewellery: { icon: 'diamond', label: 'Jewellery', color: 'bg-pink-50 text-pink-700 border-pink-200' },
+      digital: { icon: 'devices', label: 'Digital Asset', color: 'bg-cyan-50 text-cyan-700 border-cyan-200' },
+      business: { icon: 'business', label: 'Business', color: 'bg-amber-50 text-amber-700 border-amber-200' },
+      other: { icon: 'inventory_2', label: 'Other', color: 'bg-surface-container text-primary/60 border-outline-variant/30' },
+    };
+    function assetMeta(type) { return ASSET_META[type] || { icon: 'inventory_2', label: type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), color: 'bg-surface-container text-primary/60 border-outline-variant/30' }; }
 
-// ── Render assets ─────────────────────────────────────────────────
-function renderAssets(assets){
-  if(!assets||!assets.length){hide('assets-card');return;}
-  show('assets-card');
-  setText('d-asset-count', assets.length+' Asset'+(assets.length!==1?'s':''));
-  const tbody=document.getElementById('assets-tbody');
-  tbody.innerHTML=assets.map((a,i)=>{
-    const m=assetMeta(a.asset_type);
-    const bg=i%2===0?'bg-white':'bg-surface-container-low/50';
-    return `<tr class="${bg} border-b border-outline-variant/20 last:border-0">
+    // ── Render assets ─────────────────────────────────────────────────
+    function renderAssets(assets) {
+      if (!assets || !assets.length) { hide('assets-card'); return; }
+      show('assets-card');
+      setText('d-asset-count', assets.length + ' Asset' + (assets.length !== 1 ? 's' : ''));
+      const tbody = document.getElementById('assets-tbody');
+      tbody.innerHTML = assets.map((a, i) => {
+        const m = assetMeta(a.asset_type);
+        const bg = i % 2 === 0 ? 'bg-white' : 'bg-surface-container-low/50';
+        return `<tr class="${bg} border-b border-outline-variant/20 last:border-0">
       <td class="px-5 py-4">
         <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-bold ${m.color}">
           <span class="material-symbols-outlined text-sm ms-fill">${m.icon}</span>${m.label}
         </span>
       </td>
       <td class="px-5 py-4 text-primary/80 text-sm leading-relaxed max-w-xs">${esc(a.description)}</td>
-      <td class="px-5 py-4 text-right font-bold text-primary text-sm">${a.estimated_value?fmt(a.estimated_value):'—'}</td>
+      <td class="px-5 py-4 text-right font-bold text-primary text-sm">${a.estimated_value ? fmt(a.estimated_value) : '—'}</td>
     </tr>`;
-  }).join('');
-}
+      }).join('');
+    }
 
-// ── Render special instructions ───────────────────────────────────
-function renderSpecial(si){
-  if(!si||!si.id){hide('special-card');return;}
-  // Check if there's anything non-trivial to show
-  const hasData=si.funeral_preference||si.funeral_notes||si.organ_donation||si.charity_notes||si.other_instructions;
-  if(!hasData){hide('special-card');return;}
-  show('special-card');
-  const grid=document.getElementById('special-grid');
-  const rows=[];
-  if(si.funeral_preference) rows.push({icon:'spa',        label:'Funeral Preference', val:si.funeral_preference, full:false});
-  if(si.organ_donation!=null) rows.push({icon:'favorite',  label:'Organ Donation',     val:si.organ_donation?'Yes':'No', full:false});
-  if(si.funeral_notes)  rows.push({icon:'notes',          label:'Funeral Notes',       val:si.funeral_notes,       full:true});
-  if(si.charity_notes)  rows.push({icon:'volunteer_activism',label:'Charity / Donations',val:si.charity_notes,    full:true});
-  if(si.other_instructions) rows.push({icon:'edit_note',  label:'Other Instructions',  val:si.other_instructions,  full:true});
-  grid.innerHTML=rows.map(r=>`
-    <div class="${r.full?'col-span-2 sm:col-span-3':''} flex gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
+    // ── Render special instructions ───────────────────────────────────
+    function renderSpecial(si) {
+      if (!si || !si.id) { hide('special-card'); return; }
+      // Check if there's anything non-trivial to show
+      const hasData = si.funeral_preference || si.funeral_notes || si.organ_donation || si.charity_notes || si.other_instructions;
+      if (!hasData) { hide('special-card'); return; }
+      show('special-card');
+      const grid = document.getElementById('special-grid');
+      const rows = [];
+      if (si.funeral_preference) rows.push({ icon: 'spa', label: 'Funeral Preference', val: si.funeral_preference, full: false });
+      if (si.organ_donation != null) rows.push({ icon: 'favorite', label: 'Organ Donation', val: si.organ_donation ? 'Yes' : 'No', full: false });
+      if (si.funeral_notes) rows.push({ icon: 'notes', label: 'Funeral Notes', val: si.funeral_notes, full: true });
+      if (si.charity_notes) rows.push({ icon: 'volunteer_activism', label: 'Charity / Donations', val: si.charity_notes, full: true });
+      if (si.other_instructions) rows.push({ icon: 'edit_note', label: 'Other Instructions', val: si.other_instructions, full: true });
+      grid.innerHTML = rows.map(r => `
+    <div class="${r.full ? 'col-span-2 sm:col-span-3' : ''} flex gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant/20">
       <div class="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
         <span class="material-symbols-outlined text-secondary text-base ms-fill">${r.icon}</span>
       </div>
@@ -822,41 +1096,41 @@ function renderSpecial(si){
         <p class="text-primary font-semibold text-sm mt-1 leading-relaxed">${esc(r.val)}</p>
       </div>
     </div>`).join('');
-}
-
-// ── Render dispatch ───────────────────────────────────────────────
-function renderDispatch(dispatch, plan){
-  if(!dispatch || plan==='basic'){hide('dispatch-card');return;}
-  show('dispatch-card');
-  setText('d-plan-badge', plan.toUpperCase());
-  const isDispatched=dispatch.dispatched==1;
-  if(isDispatched){
-    show('dispatch-done-msg');
-    hide('dispatch-pending-msg');
-    setText('d-dispatched-on','Dispatched on '+fmtDate(dispatch.dispatched_at));
-    if(dispatch.tracking_number){
-      show('d-track-chip');
-      setText('d-tracking-no', dispatch.tracking_number);
     }
-  } else {
-    show('dispatch-pending-msg');
-    hide('dispatch-done-msg');
-  }
-  setText('d-dispatch-tracking', dispatch.tracking_number||'—');
-  setText('d-dispatch-date', fmtDate(dispatch.dispatch_datetime));
-  setText('d-dispatch-notes', dispatch.admin_notes||'—');
-}
 
-// ── Render admin notes (from payment_log where event='admin_note') ─
-function renderAdminNotes(log){
-  const notes=log.filter(l=>l.event==='admin_note');
-  if(!notes.length){hide('admin-notes-card');return;}
-  show('admin-notes-card');
-  const list=document.getElementById('admin-notes-list');
-  list.innerHTML=notes.map(n=>{
-    let note='';
-    try{note=JSON.parse(n.payload||'{}').note||'';}catch(e){}
-    return `<div class="flex gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/20">
+    // ── Render dispatch ───────────────────────────────────────────────
+    function renderDispatch(dispatch, plan) {
+      if (!dispatch || plan === 'basic') { hide('dispatch-card'); return; }
+      show('dispatch-card');
+      setText('d-plan-badge', plan.toUpperCase());
+      const isDispatched = dispatch.dispatched == 1;
+      if (isDispatched) {
+        show('dispatch-done-msg');
+        hide('dispatch-pending-msg');
+        setText('d-dispatched-on', 'Dispatched on ' + fmtDate(dispatch.dispatched_at));
+        if (dispatch.tracking_number) {
+          show('d-track-chip');
+          setText('d-tracking-no', dispatch.tracking_number);
+        }
+      } else {
+        show('dispatch-pending-msg');
+        hide('dispatch-done-msg');
+      }
+      setText('d-dispatch-tracking', dispatch.tracking_number || '—');
+      setText('d-dispatch-date', fmtDate(dispatch.dispatch_datetime));
+      setText('d-dispatch-notes', dispatch.admin_notes || '—');
+    }
+
+    // ── Render admin notes (from payment_log where event='admin_note') ─
+    function renderAdminNotes(log) {
+      const notes = log.filter(l => l.event === 'admin_note');
+      if (!notes.length) { hide('admin-notes-card'); return; }
+      show('admin-notes-card');
+      const list = document.getElementById('admin-notes-list');
+      list.innerHTML = notes.map(n => {
+        let note = '';
+        try { note = JSON.parse(n.payload || '{}').note || ''; } catch (e) { }
+        return `<div class="flex gap-4 p-5 rounded-xl bg-surface-container-low border border-outline-variant/20">
       <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
         <span class="material-symbols-outlined text-primary text-base ms-fill">support_agent</span>
       </div>
@@ -865,43 +1139,43 @@ function renderAdminNotes(log){
         <p class="text-primary/35 text-xs mt-1">${fmtDateTime(n.created_at)}</p>
       </div>
     </div>`;
-  }).join('');
-}
-
-// ── Render activity log ───────────────────────────────────────────
-function logDotClass(event){
-  if(event.includes('fail')||event.includes('mismatch')||event.includes('cancel')) return 'ldot-red';
-  if(event.includes('paid')||event.includes('verified')||event.includes('completed')) return 'ldot-green';
-  if(event.includes('dispatch')) return 'ldot-purple';
-  if(event.includes('admin_note')) return 'ldot-amber';
-  return 'ldot-blue';
-}
-function logLabel(event){
-  const map={
-    order_created:'Order Created',
-    payment_initiated:'Payment Initiated',
-    payment_verified:'Payment Verified',
-    payment_failed:'Payment Failed',
-    status_changed:'Status Updated',
-    admin_note:'Note from Team',
-    dispatch_saved:'Dispatch Details Saved',
-    dispatch_marked:'Marked as Dispatched',
-    final_will_uploaded:'Final Will Uploaded',
-    razorpay_webhook:'Payment Gateway Event',
-  };
-  return map[event]||event.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-}
-function renderLog(log){
-  if(!log||!log.length){hide('log-card');return;}
-  show('log-card');
-  const list=document.getElementById('log-list');
-  // Show all; admin_note rows shown separately but still listed here without note text
-  list.innerHTML=log.map(l=>{
-    let extra='';
-    if(l.event==='status_changed'){
-      try{const p=JSON.parse(l.payload||'{}');if(p.from&&p.to) extra=`<span class="text-primary/40 text-xs">${p.from} → ${p.to}</span>`;}catch(e){}
+      }).join('');
     }
-    return `<div class="flex gap-4 pb-5 relative">
+
+    // ── Render activity log ───────────────────────────────────────────
+    function logDotClass(event) {
+      if (event.includes('fail') || event.includes('mismatch') || event.includes('cancel')) return 'ldot-red';
+      if (event.includes('paid') || event.includes('verified') || event.includes('completed')) return 'ldot-green';
+      if (event.includes('dispatch')) return 'ldot-purple';
+      if (event.includes('admin_note')) return 'ldot-amber';
+      return 'ldot-blue';
+    }
+    function logLabel(event) {
+      const map = {
+        order_created: 'Order Created',
+        payment_initiated: 'Payment Initiated',
+        payment_verified: 'Payment Verified',
+        payment_failed: 'Payment Failed',
+        status_changed: 'Status Updated',
+        admin_note: 'Note from Team',
+        dispatch_saved: 'Dispatch Details Saved',
+        dispatch_marked: 'Marked as Dispatched',
+        final_will_uploaded: 'Final Will Uploaded',
+        razorpay_webhook: 'Payment Gateway Event',
+      };
+      return map[event] || event.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    }
+    function renderLog(log) {
+      if (!log || !log.length) { hide('log-card'); return; }
+      show('log-card');
+      const list = document.getElementById('log-list');
+      // Show all; admin_note rows shown separately but still listed here without note text
+      list.innerHTML = log.map(l => {
+        let extra = '';
+        if (l.event === 'status_changed') {
+          try { const p = JSON.parse(l.payload || '{}'); if (p.from && p.to) extra = `<span class="text-primary/40 text-xs">${p.from} → ${p.to}</span>`; } catch (e) { }
+        }
+        return `<div class="flex gap-4 pb-5 relative">
       <div class="w-3.5 h-3.5 rounded-full ${logDotClass(l.event)} border-2 border-white flex-shrink-0 mt-1 z-10"></div>
       <div class="flex-1 min-w-0">
         <p class="font-semibold text-primary text-sm">${logLabel(l.event)}</p>
@@ -909,132 +1183,133 @@ function renderLog(log){
         <p class="text-primary/35 text-xs mt-0.5">${fmtDateTime(l.created_at)}</p>
       </div>
     </div>`;
-  }).join('');
-}
-
-// ── Safe HTML escape ──────────────────────────────────────────────
-function esc(s){ const d=document.createElement('div');d.textContent=s||'';return d.innerHTML; }
-
-// ── Populate all sections ─────────────────────────────────────────
-function populate(data){
-  const o=data.order, p=data.personal_details||{};
-
-  // Header
-  setText('d-ref', o.order_ref);
-  const sb=document.getElementById('d-status-badge');
-  sb.textContent={draft:'Draft',submitted:'Submitted',under_review:'Under Review',completed:'Completed',cancelled:'Cancelled'}[o.status]||o.status;
-  sb.className='px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest sb-'+o.status;
-  const pb=document.getElementById('d-pay-badge');
-  pb.textContent=o.payment_status;
-  pb.className='px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest pb-'+o.payment_status;
-  setText('d-will-type',o.will_type);
-  setText('d-plan',o.plan);
-  setText('d-date',fmtDate(o.created_at));
-  setText('d-plan-amt',fmt(o.plan_amount));
-  setText('d-gst',fmt(o.gst_amount));
-  setText('d-total',fmt(o.total_amount));
-
-  // Personal
-  setText('d-name',p.full_name);
-  setText('d-mobile',p.mobile);
-  setText('d-email',p.email);
-  setText('d-dob',fmtDate(p.dob));
-  setText('d-gender',p.gender);
-  setText('d-location',[p.city,p.state,p.pin].filter(Boolean).join(', ')||'—');
-  if(p.executor_name){
-    show('d-executor-wrap');
-    setText('d-executor',p.executor_name+(p.executor_phone?' · '+p.executor_phone:''));
-  }
-
-  // Progress
-  renderProgress(o.status);
-  // Final will
-  renderFinalWill(data.documents||[]);
-  // Customer docs
-  renderDocs(data.documents||[]);
-  // Benes
-  renderBenes(data.beneficiaries);
-  // Assets
-  renderAssets(data.assets);
-  // Special instructions
-  renderSpecial(data.special_instructions);
-  // Dispatch
-  renderDispatch(data.dispatch, o.plan);
-  // Admin notes
-  renderAdminNotes(data.log||[]);
-  // Activity log
-  renderLog(data.log||[]);
-}
-
-// ── Search ────────────────────────────────────────────────────────
-async function handleSearch(e){
-  e.preventDefault();
-  const ref=document.getElementById('ref-input').value.trim().toUpperCase();
-  if(!ref) return;
-
-  // Loading state
-  const btn=document.getElementById('search-btn');
-  const searchIcon=document.getElementById('search-icon');
-  searchIcon.textContent='progress_activity';
-  gsap.to(searchIcon, { rotate: 360, duration: 1, repeat: -1, ease: 'linear' });
-  document.getElementById('search-label').textContent='Searching…';
-  btn.disabled=true;
-
-  hide('results-root');
-  hide('results-panel');
-  hide('err-panel');
-
-  try{
-    const res=await fetch(`./php/track_order.php?ref=${encodeURIComponent(ref)}`);
-    const data=await res.json();
-
-    document.getElementById('results-root').style.display='block';
-
-    if(!data.success){
-      setText('err-msg', data.message||'No order found for that reference.');
-      show('err-panel');
-      gsap.fromTo('#err-panel', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
-    } else {
-      populate(data);
-      const rp=document.getElementById('results-panel');
-      rp.style.display='block';
-      gsap.fromTo(rp, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
-      // Reveal sections with a coordinated GSAP stagger (replaces the
-      // old manual classList/setTimeout loop)
-      gsap.fromTo('.reveal', { opacity: 0, y: 24 }, {
-          opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out', delay: 0.1,
-          overwrite: true
-      });
+      }).join('');
     }
-    smoother.scrollTo(document.getElementById('results-root'), true, 'top 100');
-  }catch(err){
-    document.getElementById('results-root').style.display='block';
-    setText('err-msg','A network error occurred. Please try again.');
-    show('err-panel');
-    gsap.fromTo('#err-panel', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
-  }finally{
-    gsap.killTweensOf(searchIcon);
-    gsap.set(searchIcon, { rotate: 0 });
-    searchIcon.textContent='search';
-    document.getElementById('search-label').textContent='Track Order';
-    btn.disabled=false;
-  }
-}
 
-function resetSearch(){
-  hide('results-root'); hide('results-panel'); hide('err-panel');
-  document.getElementById('ref-input').value='';
-  gsap.set('.reveal', { opacity: 0, y: 24 });
-  smoother.scrollTo(0, true);
-  document.getElementById('ref-input').focus();
-}
+    // ── Safe HTML escape ──────────────────────────────────────────────
+    function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
-// ── Auto-fill from ?ref= URL param ───────────────────────────────
-(function(){
-  const p=new URLSearchParams(window.location.search);
-  const r=p.get('ref');
-  if(r){ document.getElementById('ref-input').value=r; document.getElementById('search-form').dispatchEvent(new Event('submit')); }
-})();
-</script>
+    // ── Populate all sections ─────────────────────────────────────────
+    function populate(data) {
+      const o = data.order, p = data.personal_details || {};
+
+      // Header
+      setText('d-ref', o.order_ref);
+      const sb = document.getElementById('d-status-badge');
+      sb.textContent = { draft: 'Draft', submitted: 'Submitted', under_review: 'Under Review', completed: 'Completed', cancelled: 'Cancelled' }[o.status] || o.status;
+      sb.className = 'px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest sb-' + o.status;
+      const pb = document.getElementById('d-pay-badge');
+      pb.textContent = o.payment_status;
+      pb.className = 'px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest pb-' + o.payment_status;
+      setText('d-will-type', o.will_type);
+      setText('d-plan', o.plan);
+      setText('d-date', fmtDate(o.created_at));
+      setText('d-plan-amt', fmt(o.plan_amount));
+      setText('d-gst', fmt(o.gst_amount));
+      setText('d-total', fmt(o.total_amount));
+
+      // Personal
+      setText('d-name', p.full_name);
+      setText('d-mobile', p.mobile);
+      setText('d-email', p.email);
+      setText('d-dob', fmtDate(p.dob));
+      setText('d-gender', p.gender);
+      setText('d-location', [p.city, p.state, p.pin].filter(Boolean).join(', ') || '—');
+      if (p.executor_name) {
+        show('d-executor-wrap');
+        setText('d-executor', p.executor_name + (p.executor_phone ? ' · ' + p.executor_phone : ''));
+      }
+
+      // Progress
+      renderProgress(o.status);
+      // Final will
+      renderFinalWill(data.documents || []);
+      // Customer docs
+      renderDocs(data.documents || []);
+      // Benes
+      renderBenes(data.beneficiaries);
+      // Assets
+      renderAssets(data.assets);
+      // Special instructions
+      renderSpecial(data.special_instructions);
+      // Dispatch
+      renderDispatch(data.dispatch, o.plan);
+      // Admin notes
+      renderAdminNotes(data.log || []);
+      // Activity log
+      renderLog(data.log || []);
+    }
+
+    // ── Search ────────────────────────────────────────────────────────
+    async function handleSearch(e) {
+      e.preventDefault();
+      const ref = document.getElementById('ref-input').value.trim().toUpperCase();
+      if (!ref) return;
+
+      // Loading state
+      const btn = document.getElementById('search-btn');
+      const searchIcon = document.getElementById('search-icon');
+      searchIcon.textContent = 'progress_activity';
+      gsap.to(searchIcon, { rotate: 360, duration: 1, repeat: -1, ease: 'linear' });
+      document.getElementById('search-label').textContent = 'Searching…';
+      btn.disabled = true;
+
+      hide('results-root');
+      hide('results-panel');
+      hide('err-panel');
+
+      try {
+        const res = await fetch(`./php/track_order.php?ref=${encodeURIComponent(ref)}`);
+        const data = await res.json();
+
+        document.getElementById('results-root').style.display = 'block';
+
+        if (!data.success) {
+          setText('err-msg', data.message || 'No order found for that reference.');
+          show('err-panel');
+          gsap.fromTo('#err-panel', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+        } else {
+          populate(data);
+          const rp = document.getElementById('results-panel');
+          rp.style.display = 'block';
+          gsap.fromTo(rp, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+          // Reveal sections with a coordinated GSAP stagger (replaces the
+          // old manual classList/setTimeout loop)
+          gsap.fromTo('.reveal', { opacity: 0, y: 24 }, {
+            opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power3.out', delay: 0.1,
+            overwrite: true
+          });
+        }
+        smoother.scrollTo(document.getElementById('results-root'), true, 'top 100');
+      } catch (err) {
+        document.getElementById('results-root').style.display = 'block';
+        setText('err-msg', 'A network error occurred. Please try again.');
+        show('err-panel');
+        gsap.fromTo('#err-panel', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+      } finally {
+        gsap.killTweensOf(searchIcon);
+        gsap.set(searchIcon, { rotate: 0 });
+        searchIcon.textContent = 'search';
+        document.getElementById('search-label').textContent = 'Track Order';
+        btn.disabled = false;
+      }
+    }
+
+    function resetSearch() {
+      hide('results-root'); hide('results-panel'); hide('err-panel');
+      document.getElementById('ref-input').value = '';
+      gsap.set('.reveal', { opacity: 0, y: 24 });
+      smoother.scrollTo(0, true);
+      document.getElementById('ref-input').focus();
+    }
+
+    // ── Auto-fill from ?ref= URL param ───────────────────────────────
+    (function () {
+      const p = new URLSearchParams(window.location.search);
+      const r = p.get('ref');
+      if (r) { document.getElementById('ref-input').value = r; document.getElementById('search-form').dispatchEvent(new Event('submit')); }
+    })();
+  </script>
 </body>
+
 </html>

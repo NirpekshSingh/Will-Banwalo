@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+
+/* Theme configuration */
+@theme {
+  /* Colors */
+  --color-ink: #0b2016;
+  --color-ink-2: #081712;
+  --color-ink-3: #122c1f;
+
+  --color-parchment: #f7f3e8;
+  --color-parchment-2: #efe7d1;
+  --color-cream: #fbf9f2;
+
+  --color-sage: #4d6350;
+  --color-sage-light: #a9b8a4;
+
+  --color-gold: #c9a227;
+  --color-gold-light: #e3c766;
+
+  --color-rust: #7a3b2e;
+
+  
+  /* Additional semantic colors */
+  --color-primary: #0b2016;
+  --color-secondary: #c9a227;
+  --color-on-primary: #f7f3e8;
+  --color-surface: #f7f3e8;
+  --color-surface-variant: #efe7d1;
+  --color-outline: #0b2016;
+  --color-outline-variant: #0b2016;
+  --color-accent-gold: #c9a227;
+  --color-surface-bright: #fbf9f2;
+  --color-on-primary-fixed: #f7f3e8;
+  --color-on-surface-variant: #0b2016;
+  --color-tertiary: #7a3b2e;
+  --color-surface-tint: #0b2016;
+  --color-error-container: #f3ddd8;
+  --color-surface-dim: #efe7d1;
+  --color-on-primary-fixed-variant: #e3c766;
+  --color-on-background: #0b2016;
+  --color-error: #93000a;
+  --color-on-error: #ffffff;
+  --color-tertiary-container: #7a3b2e;
+  --color-inverse-surface: #0b2016;
+  --color-background: #f7f3e8;
+  --color-primary-fixed: #122c1f;
+  --color-on-tertiary: #ffffff;
+  --color-surface-container: #efe7d1;
+  --color-on-surface: #0b2016;
+  --color-on-secondary-fixed: #0b2016;
+  --color-on-secondary-container: #0b2016;
+  --color-primary-fixed-dim: #081712;
+  --color-on-error-container: #93000a;
+  --color-inverse-primary: #c9a227;
+  --color-primary-container: #122c1f;
+  --color-inverse-on-surface: #f7f3e8;
+  --color-surface-container-low: #fbf9f2;
+  --color-on-primary-container: #e3c766;
+  --color-surface-container-highest: #efe7d1;
+  --color-surface-container-high: #efe7d1;
+  --color-secondary-container: #f3e9c9;
+  --color-surface-container-lowest: #ffffff;
+  --color-secondary-fixed: #f3e9c9;
+  --color-on-secondary: #0b2016;
+
+  
+/* Additional colors */
+--color-on-tertiary-container: #f7f3e8;
+--color-on-tertiary-fixed: #f7f3e8;
+--color-tertiary-fixed: #e3c9c2;
+--color-on-secondary-fixed-variant: #0b2016;
+--color-secondary-fixed-dim: #e3c766;
+--color-on-tertiary-fixed-variant: #f7f3e8;
+--color-tertiary-fixed-dim: #e3c9c2;
+
+/* Additional border radius */
+--radius-2xl: 1.5rem;
+
+/* Spacing */
+--spacing-container-max-width: 1200px;
+--spacing-section-gap: 80px;
+--spacing-unit: 8px;
+
+/* Font families */
+--font-body-lg: "Plus Jakarta Sans", sans-serif;
+--font-headline-lg-mobile: "Fraunces", serif;
+--font-label-sm: "Plus Jakarta Sans", sans-serif;
+
+/* Custom font sizes */
+--text-headline-lg: 32px;
+--text-headline-lg--line-height: 40px;
+--text-headline-lg--font-weight: 700;
+
+--text-body-lg: 18px;
+--text-body-lg--line-height: 28px;
+--text-body-lg--font-weight: 400;
+
+--text-label-md: 14px;
+--text-label-md--line-height: 20px;
+--text-label-md--letter-spacing: 0.02em;
+--text-label-md--font-weight: 600;
+
+--text-headline-lg-mobile: 28px;
+--text-headline-lg-mobile--line-height: 36px;
+--text-headline-lg-mobile--font-weight: 700;
+
+--text-headline-xl: 48px;
+--text-headline-xl--line-height: 60px;
+--text-headline-xl--font-weight: 700;
+
+--text-headline-md: 24px;
+--text-headline-md--line-height: 32px;
+--text-headline-md--font-weight: 600;
+
+--text-label-sm: 12px;
+--text-label-sm--line-height: 16px;
+--text-label-sm--letter-spacing: 0.05em;
+--text-label-sm--font-weight: 700;
+
+--text-body-md: 16px;
+--text-body-md--line-height: 24px;
+--text-body-md--font-weight: 400;
+
+
+  /* Additional border-radius tokens */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Additional spacing tokens */
+  --spacing-margin-mobile: 16px;
+  --spacing-unit: 8px;
+  --spacing-margin-desktop: 40px;
+  --spacing-section-gap: 140px;
+  --spacing-gutter: 24px;
+  --spacing-container-max-width: 1280px;
+
+  /* Additional font aliases */
+  --font-body-md: "Plus Jakarta Sans", sans-serif;
+  --font-label-md: "Plus Jakarta Sans", sans-serif;
+  --font-headline-xl: "Fraunces", serif;
+  --font-headline-lg: "Fraunces", serif;
+  --font-headline-md: "Fraunces", serif;
+  --font-headline: "Fraunces", serif;
+  --font-label: "Plus Jakarta Sans", sans-serif;
+
+
+  /* Fonts */
+  --font-display: "Fraunces", serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+
+  /* Custom max-width */
+  --max-width-site: 1280px;
+}

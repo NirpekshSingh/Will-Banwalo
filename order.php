@@ -4,59 +4,16 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="./img/favicon.png" rel="icon" type="image/png">
+    <link href="./img/favicon.png" rel="shortcut icon">
     <title>Will Banwalo - Create Your Will</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="./css/output.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "on-tertiary-container": "#f7f3e8", "error": "#93000a", "surface-container-low": "#fbf9f2",
-                        "on-primary": "#f7f3e8", "outline-variant": "#0b2016", "surface-tint": "#0b2016",
-                        "surface-container": "#efe7d1", "on-background": "#0b2016", "surface-container-highest": "#efe7d1",
-                        "surface-container-lowest": "#ffffff", "surface": "#f7f3e8", "on-primary-container": "#e3c766",
-                        "outline": "#0b2016", "on-tertiary-fixed": "#f7f3e8", "on-error": "#ffffff", "surface-dim": "#efe7d1",
-                        "secondary-container": "#f3e9c9", "tertiary-fixed": "#e3c9c2", "tertiary": "#7a3b2e",
-                        "on-surface-variant": "#0b2016", "on-secondary-fixed-variant": "#0b2016", "on-error-container": "#93000a",
-                        "on-secondary-container": "#0b2016", "surface-bright": "#fbf9f2", "background": "#f7f3e8",
-                        "surface-variant": "#efe7d1", "primary-fixed-dim": "#122c1f", "on-primary-fixed-variant": "#e3c766",
-                        "secondary": "#c9a227", "secondary-fixed-dim": "#e3c766", "primary-fixed": "#122c1f",
-                        "inverse-primary": "#c9a227", "on-tertiary-fixed-variant": "#f7f3e8", "tertiary-container": "#7a3b2e",
-                        "inverse-on-surface": "#f7f3e8", "surface-container-high": "#efe7d1", "secondary-fixed": "#f3e9c9",
-                        "primary-container": "#122c1f", "on-secondary": "#0b2016", "on-primary-fixed": "#f7f3e8",
-                        "on-surface": "#0b2016", "on-secondary-fixed": "#0b2016", "on-tertiary": "#ffffff", "primary": "#0b2016",
-                        "error-container": "#f3ddd8", "tertiary-fixed-dim": "#e3c9c2", "inverse-surface": "#0b2016"
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1.5rem", "full": "9999px" },
-                    spacing: {
-                        "margin-desktop": "40px", "gutter": "24px", "margin-mobile": "16px",
-                        "container-max-width": "1200px", "section-gap": "80px", "unit": "8"
-                    },
-                    fontFamily: {
-                        "headline-lg": ["Fraunces"], "body-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"],
-                        "headline-lg-mobile": ["Fraunces"], "headline-xl": ["Fraunces"],
-                        "headline-md": ["Fraunces"], "label-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"]
-                    },
-                    fontSize: {
-                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
-                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
-                        "headline-xl": ["48px", { "lineHeight": "60px", "fontWeight": "700" }],
-                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
-                    }
-                }
-            }
-        }
-    </script>
+    
     <style>
         * { cursor: none; }
         input, textarea, select { cursor: auto !important; }
@@ -1164,17 +1121,17 @@
                                     <p class="text-label-sm text-outline uppercase tracking-wider mb-2">Essential
                                         Protection</p>
                                     <div class="flex justify-between items-start mb-4">
-                                        <h4 class="font-headline-md text-primary">Basic</h4>
-                                        <div class="text-right"><span class="text-lg mr-1">‹</span><span
-                                                class="font-headline-md text-primary">999</span></div>
+                                        <h4 class="font-headline-md text-primary">Essential</h4>
+                                        <div class="text-right"><span class="text-lg mr-1">₹</span><span
+                                                class="font-headline-md text-primary">2,499</span></div>
                                     </div>
                                     <ul class="space-y-3 mb-6">
                                         <li class="flex items-center gap-2 text-on-surface-variant font-label-md"><span
-                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Single
-                                            Legal Will</li>
+                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Single Legal Will</li>
                                         <li class="flex items-center gap-2 text-on-surface-variant font-label-md"><span
-                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Instant
-                                            Download</li>
+                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Instant Digital Download (PDF)</li>
+                                        <li class="flex items-center gap-2 text-on-surface-variant font-label-md"><span
+                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>1-Year Access for Edits</li>
                                     </ul><input class="hidden" name="plan_choice" type="radio" />
                                 </div>
                                 <div id="plan-card-standard"
@@ -1185,20 +1142,19 @@
                                     <p class="text-label-sm text-on-primary/70 uppercase tracking-wider mb-2">Most
                                         Popular Choice</p>
                                     <div class="flex justify-between items-start mb-4">
-                                        <h4 class="font-headline-md text-on-primary">Standard</h4>
-                                        <div class="text-right"><span class="text-lg mr-1">‹</span><span
-                                                class="font-headline-md text-on-primary">4,499</span></div>
+                                        <h4 class="font-headline-md text-on-primary">Family</h4>
+                                        <div class="text-right"><span class="text-lg mr-1">₹</span><span
+                                                class="font-headline-md text-on-primary">5,999</span></div>
                                     </div>
                                     <ul class="space-y-3 mb-6">
                                         <li class="flex items-center gap-2 font-label-md"><span
-                                                class="material-symbols-outlined text-sm">check_circle</span>Professional
-                                            Review</li>
+                                                class="material-symbols-outlined text-sm">check_circle</span>Single Will with Professional Review</li>
                                         <li class="flex items-center gap-2 font-label-md"><span
-                                                class="material-symbols-outlined text-sm">check_circle</span>Lawyer
-                                            Verification</li>
+                                                class="material-symbols-outlined text-sm">check_circle</span>Expert Lawyer Verification</li>
                                         <li class="flex items-center gap-2 font-label-md"><span
-                                                class="material-symbols-outlined text-sm">check_circle</span>Hardcopy
-                                            Delivery</li>
+                                                class="material-symbols-outlined text-sm">check_circle</span>Physical Will Delivery (Hardcopy)</li>
+                                        <li class="flex items-center gap-2 font-label-md"><span
+                                                class="material-symbols-outlined text-sm">check_circle</span>Step-by-Step Signing Guide</li>
                                     </ul><input checked="" class="hidden" name="plan_choice" type="radio" />
                                 </div>
                                 <div id="plan-card-premium"
@@ -1206,25 +1162,26 @@
                                     <p class="text-label-sm text-outline uppercase tracking-wider mb-2">Maximum Security
                                     </p>
                                     <div class="flex justify-between items-start mb-4">
-                                        <h4 class="font-headline-md text-primary">Premium</h4>
-                                        <div class="text-right"><span class="text-lg mr-1">‹</span><span
-                                                class="font-headline-md text-primary">9,999</span></div>
+                                        <h4 class="font-headline-md text-primary">Legacy Concierge</h4>
+                                        <div class="text-right"><span class="text-lg mr-1">₹</span><span
+                                                class="font-headline-md text-primary">14,999</span></div>
                                     </div>
                                     <ul class="space-y-3 mb-6">
                                         <li class="flex items-center gap-2 text-on-surface-variant font-label-md"><span
-                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Joint
-                                            Will Option</li>
+                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Joint Will for Spouses</li>
                                         <li class="flex items-center gap-2 text-on-surface-variant font-label-md"><span
-                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Priority
-                                            Support</li>
+                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Comprehensive Asset Audit</li>
+                                        <li class="flex items-center gap-2 text-on-surface-variant font-label-md"><span
+                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Priority Lawyer Support</li>
+                                        <li class="flex items-center gap-2 text-on-surface-variant font-label-md"><span
+                                                class="material-symbols-outlined text-primary text-sm">check_circle</span>Printed, Framed &amp; Doorstep Delivery</li>
                                     </ul><input class="hidden" name="plan_choice" type="radio" />
                                 </div>
                             </div>
                         </div>
                         <div class="space-y-3 pt-6 border-t border-outline-variant/20">
-                            <div class="flex justify-between items-center text-sm text-on-surface-variant"><span>Subtotal</span><span id="subtotal-display">₹4,499.00</span></div>
-                            <div class="flex justify-between items-center text-sm text-on-surface-variant"><span>GST (18%)</span><span id="gst-display">₹809.82</span></div>
-                            <div class="flex justify-between items-center"><span class="font-headline-md">Total Amount</span><span class="font-headline-md text-primary" id="total-display">₹5,308.82</span></div>
+                            <div class="flex justify-between items-center"><span class="font-headline-md">Total Amount</span><span class="font-headline-md text-primary" id="total-display">₹5,999.00</span></div>
+                            <p class="text-xs text-on-surface-variant/70 text-right">One-time, GST included</p>
                         </div>
                         <div class="space-y-4">
                             <button id="proceed-to-payment-btn"
@@ -1382,7 +1339,7 @@
     <button
         class="fixed bottom-24 right-8 lg:bottom-8 lg:right-8 bg-tertiary text-on-tertiary flex items-center gap-3 px-6 py-4 rounded-full shadow-xl hover:scale-105 active:scale-95 transition-all z-40">
         <span class="material-symbols-outlined">support_agent</span>
-        <span class="font-label-md text-label-md hidden sm:inline">Need Help?</span>
+        <span class="font-label-md text-label-md hidden sm:inline">Didn't want to fill form? Directly Message Us</span>
     </button>
 
     <!-- ===== FOOTER ===== -->
@@ -1547,7 +1504,7 @@
     let orderRef        = null;
     const totalSteps    = 8;
 
-    const PLAN_PRICES = { basic: 999, standard: 4499, premium: 9999 };
+    const PLAN_PRICES = { basic: 2499, standard: 5999, premium: 14999 };  // GST included
 
     // ============================================================
     //  TOAST NOTIFICATION
@@ -1994,12 +1951,9 @@
     }
 
     function updateTotal(amount) {
-        const gst   = Math.round(amount * 0.18 * 100) / 100;
-        const total = amount + gst;
-        const fmt   = n => '₹' + n.toLocaleString('en-IN', { minimumFractionDigits: 2 });
-        document.getElementById('subtotal-display').innerText = '₹' + amount.toLocaleString('en-IN') + '.00';
-        document.getElementById('gst-display').innerText      = fmt(gst);
-        document.getElementById('total-display').innerText    = fmt(total);
+        // Prices are GST-inclusive, so the total equals the plan price.
+        const fmt = n => '₹' + n.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+        document.getElementById('total-display').innerText = fmt(amount);
     }
 
     // ============================================================

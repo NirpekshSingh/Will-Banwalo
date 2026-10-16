@@ -44,8 +44,8 @@ function generateOrderRef(): string {
 // ── Plan pricing ─────────────────────────────
 function planPrice(string $plan): float {
     return match ($plan) {
-        'basic'   => 999.00,
-        'premium' => 9999.00,
-        default   => 4499.00,  // standard
+        'basic'   => 2499.00,
+        'premium' => 14999.00,
+        default   => 5999.00,  // standard
     };
 }
